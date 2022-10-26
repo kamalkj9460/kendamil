@@ -25,7 +25,7 @@
 <div class="homepage_slideshow">
   <div class="filmcontainer">
     {%- assign videopath = section.settings.video_name -%}        
-    <video loop="loop" autoplay="autoplay" muted="muted" playsinline="true" preload="auto" class="image-new-content-block__video_3">
+    <video loop="loop" playsinline="true" preload="none" class="image-new-content-block__video_3" poster="{{ 'video.jpg' | asset_url }}">
       <source src="{{ videopath }}" type="video/mp4">
     </video>
     

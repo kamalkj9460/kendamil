@@ -578,15 +578,13 @@
 </style>
 
 
-<script src="{{ 'jquery_accordion.js' | asset_url }}" defer="defer"></script>
-
-{{ '//cdn.jsdelivr.net/momentjs/latest/moment.min.js' | script_tag }}
-{{ '//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js' | script_tag }}
-
+<script type="lazyload2" data-src="{{ 'jquery_accordion.js' | asset_url }}"></script>
+<script type="lazyload2" data-src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="lazyload2" data-src="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 {{ '//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css' | stylesheet_tag }}
 
-<script type="text/javascript">
-$(document).ready(function(){
+<script type="lazyload2">
+setTimeout(function(){
 
  /* $("#RegisterForm input").keyup(function() {
 
@@ -652,7 +650,8 @@ else
 
 
 
-<script type="text/javascript">
+<script type="lazyload2">
+
   function eventFire(el, etype){
   if (el.fireEvent) {
     el.fireEvent('on' + etype);
@@ -897,7 +896,8 @@ $("#"+product_type).prop("checked", true);
 
 
 
-  $(document).ready(function() {
+  
+setTimeout(function() {
      $("#SingleOptionSelector-0").val("Classic");
     $(".milk_select").text($("#SingleOptionSelector-0").val());
     $("#Classic").prop("checked", true);

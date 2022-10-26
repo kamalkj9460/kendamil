@@ -15,7 +15,7 @@
             <a href="{{ block.settings.link }}" class="logo-bar__link">
           {% endif %}
           {% if block.settings.image != blank %}
-            {{ block.settings.image | img_url: 'x100', scale: 2 | img_tag: block.settings.image.alt, 'award_logo__image' }}
+            <img class="award_logo__image lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ block.settings.image | img_url: 'x100', scale: 2 }}" alt="{{ block.settings.image.alt | escape }}">
           {% else %}
             {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
           {% endif %}
@@ -63,8 +63,8 @@
   }
 </style>
 
-<script>
-$(document).ready(function() {
+<script type="lazyload2">
+setTimeout(function() {
 $('.abt_mo_logo_slider').slick({
   slidesToShow: 5,
   slidesToScroll: 1,     

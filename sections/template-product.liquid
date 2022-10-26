@@ -1,5 +1,5 @@
-{{ 'home_2.css' | asset_url | stylesheet_tag }}
-{{ 'product.scss' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'home_2.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'product.scss' | asset_url }}">
 
 {% comment %}
 
@@ -25,9 +25,9 @@
 </script>
 
 
-<script type="text/javascript" src="{{ 'vendornew.js' | asset_url }}" defer="defer"></script>
-<script type="text/javascript" src="{{ 'commonnew.js' | asset_url }}" defer="defer"></script>
-<script type="text/javascript" src="{{ 'pagesnew.js' | asset_url }}" defer="defer"></script>
+<script defer src="{{ 'vendornew.js' | asset_url }}"></script>
+<script defer src="{{ 'commonnew.js' | asset_url }}"></script>
+<script defer src="{{ 'pagesnew.js' | asset_url }}"></script>
 
 
 {% assign current_variant = product.selected_or_first_available_variant %}
@@ -76,8 +76,3 @@
   }
 {% endschema %}
 
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

@@ -459,10 +459,8 @@
 
 </div>
 
-<script>
-
-  
-$(document).ready(function(){
+<script type="lazyload2">
+setTimeout(function() {
   
   $('.announcement-slide').slick({
   dots: false,
@@ -483,7 +481,8 @@ $(document).ready(function(){
  
   {% if section.settings.header-transparent != blank %} 
   
-  $(window).load(function(){
+  
+setTimeout(function() {
  
   $(window).scroll(function(){
    if ($(window).scrollTop() > 10) {	 
@@ -534,16 +533,15 @@ $(document).ready(function(){
   
   
 </script>
-<script src="//unpkg.com/swiper/swiper-bundle.min.js"></script>
-<link rel="stylesheet" href="//unpkg.com/swiper/swiper-bundle.min.css" />
-<script>
+<script type="lazyload2" data-src="//unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" data-href="//unpkg.com/swiper/swiper-bundle.min.css" />
+<script type="lazyload2">
   const swiper = new Swiper('.swiper-container', {
     {%- if section.settings.autoplay %}
     autoplay: {delay: {{section.settings.delay}} },
     {%- endif -%}
     loop: true,
-    },
-  });
+    });
 </script>
 
 

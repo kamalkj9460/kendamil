@@ -7473,7 +7473,7 @@ theme.FooterSection = (function() {
 })();
 
 
-$(document).ready(function() {
+setTimeout(function() {
   var sections = new theme.Sections();
 
   sections.register('cart-template', theme.Cart);
@@ -7609,7 +7609,7 @@ $(".site-header__cart").click(function() {
 
 $(".bottle-product-title_hide").addClass('hide_bottal');
 
-$(theme.init);
+setTimeout(theme.init, 2000);
 
 $('.qtybox .btnqty').on('click', function(){
           var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());

@@ -68,7 +68,7 @@
                       <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
                         <img 
                              class="article__grid-image lazyload"
-                             src="{{ article.image | img_url: '300x300' }}"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                              data-src="{{ img_url }}"
                              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                              data-aspectratio="{{ article.image.aspect_ratio }}"

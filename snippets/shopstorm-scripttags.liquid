@@ -3,6 +3,6 @@
 
 {%- for key_value in shop.metafields.shopstorm -%}
   {%- if key_value.first contains 'script_' -%}
-    <script async src="{{ key_value.last }}" type="text/javascript"></script>
+    <script data-src="{{ key_value.last }}" type="lazyload2"></script>
   {%- endif -%}
 {%- endfor -%}

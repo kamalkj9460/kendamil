@@ -1,6 +1,5 @@
-{{ 'home_2.css' | asset_url | stylesheet_tag }}
-{{ 'product.scss' | asset_url | stylesheet_tag }}
-
+<link rel="stylesheet" data-href="{{ 'home_2.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'product.scss' | asset_url }}">
 <div class="product-template__container page-width"
   id="ProductSection-{{ section.id }}"
   data-section-id="{{ section.id }}"
@@ -461,14 +460,14 @@
 </style>
 
 
-<script src="{{ 'jquery-ui.js' | asset_url }}" defer="defer"></script>
+<script type="lazyload2" data-src="{{ 'jquery-ui.js' | asset_url }}"></script>
 
 {% comment %}
 <script src="{{ 'jquery_accordion.js' | asset_url }}" defer="defer"></script>
 {% endcomment %}
 
-<script type="text/javascript">
-  $(document).ready(function() {
+<script type="lazyload2">
+  setTimeout(function() {
     /*$('.accordion').accordion({
       cookieName: 'accordion_nav',
       defaultOpen: 'section1',  
@@ -497,7 +496,8 @@
 </script>
 
 
-<script type="text/javascript">
+<script type="lazyload2">
+
  
    $(".step-list:first-child").css('opacity', '1');
    $(".count_no:first-child").addClass('active_li');
@@ -635,7 +635,8 @@ else {
   
   
   
-$(document).ready(function() {  
+
+setTimeout(function() {
   $('.slider-for').slick({
   dots: false,
   infinite: false,

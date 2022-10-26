@@ -15,9 +15,9 @@
       {%- if product.metafields.select_image_or_vide.select_image_or_video == "Image" -%}
       
       {% if product.metafields.accentuate.image_acc != blank %}
-        <img src="{{ product.metafields.accentuate.image_acc }}" alt="" />  
+        <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ product.metafields.accentuate.image_acc }}" alt="" />  
       {% else %}
-      <img src="{{ section.settings.image | img_url: '800x800' }}" alt="" />  
+      <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ section.settings.image | img_url: '800x800' }}" alt="" />  
       {% endif %}
       
       {%- else product.metafields.select_image_or_vide.select_image_or_video == "Video" -%}
@@ -48,8 +48,8 @@
       {% if product.metafields.accentuate.title_module[forloop.index0] != blank %}
       <div class="accordion_title 000">
        <div class="accordion_icon">
-         <img class="default_img" src="{{ product.metafields.accentuate.default_image_icon[forloop.index0] }}" alt="" />
-         <img class="active_img" src="{{ product.metafields.accentuate.active_image_icon[forloop.index0] }}" alt="" />
+         <img class="default_img lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ product.metafields.accentuate.default_image_icon[forloop.index0] }}" alt="" />
+         <img class="active_img lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ product.metafields.accentuate.active_image_icon[forloop.index0] }}" alt="" />
         </div>  
          {{ product.metafields.accentuate.title_module[forloop.index0] }} <span></span>
       </div>
@@ -69,8 +69,8 @@
 {% endif %}
 
 
-<script>
-  $(document).ready(function() {
+<script type="lazyload2">
+  setTimeout(function() {
     
     $(".video-play").on('click', function(e) {
 	e.preventDefault();

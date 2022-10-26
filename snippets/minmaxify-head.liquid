@@ -10,7 +10,8 @@ minMaxifyContext={
 };
 {% if template contains 'product' %}
 minMaxifyContext.product = { "product_id": {{ product.id }}, "collection": {{ product.collections | map: 'id' | json }}, "tag": {{ product.tags | json }} };
-{% endif%}</script><script src="https://shopifyorderlimits.s3.amazonaws.com/limits/kendamil-store.myshopify.com?v=92e&r=20221006163142&shop=kendamil-store.myshopify.com"></script>
+{% endif%}</script>
+<script type="lazyload2" data-src="https://shopifyorderlimits.s3.amazonaws.com/limits/kendamil-store.myshopify.com?v=92&r=20220725162411&shop=kendamil-store.myshopify.com"></script>
 {% endif %}
 {% else %}
 <script type="text/javascript">console.error("MinMaxify is deactivated for this website. Please don't forget to remove minmaxify-head.liquid still being referenced by theme.liquid")</script>

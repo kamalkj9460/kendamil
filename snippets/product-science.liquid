@@ -1,6 +1,6 @@
 <div id="product_science" style="background:{{product.metafields.background_color_sc.background_color_sc}};">
 
-  <div class="product_science_img img_{{product.metafields.image_alignment.image_alignment}}" style="background-image:url({{product.metafields.image_sc.image_sc}});"></div>
+  <div class="product_science_img img_{{product.metafields.image_alignment.image_alignment}} lazybg" data-style="background-image:url({{product.metafields.image_sc.image_sc}});"></div>
   
   
   <div class="product_science_info">
@@ -27,7 +27,7 @@
           <div class="proicon_box">
             <div class="iconfirst_box {{ product.metafields.title_icon_sc.title_icon_sc[forloop.index0] }}_nameicon">
               {% comment %}<img class="icon_first" src="{{ product.metafields.icon_sc.icon_sc[forloop.index0] }}" alt="" />{% endcomment %}
-              <img class="icon_second" src="{{ product.metafields.hover_icon_sc.hover_icon_sc[forloop.index0] }}" alt="" />
+              <img class="icon_second lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ product.metafields.hover_icon_sc.hover_icon_sc[forloop.index0] }}" alt="" />
             </div>
             <span>{{ product.metafields.title_icon_sc.title_icon_sc[forloop.index0] }}</span>
           </div>

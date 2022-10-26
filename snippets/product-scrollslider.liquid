@@ -164,41 +164,10 @@
 {% endfor %}   
 
 
-<script>
-/* $(document).ready(function(){
-const slider = $(".slider-item");
-slider
-  .slick({
-    dots: true,
-  customPaging : function(slider, i) {
-    var thumb = $(slider.$slides[i]).data();
-    
-    return '<button type="button" data-role="none" role="button" tabindex="0">0'+ (i+1) +'</button>';
-            },
-  arrows:false,
-	infinite: false,
-	fade: true,
-	speed: 700,
-	vertical: true
-  });
+<script type="lazyload2">
 
-slider.on('wheel', (function(e) {
-  e.preventDefault();
-
-  if (e.originalEvent.deltaY < 0) {
-    $(this).slick('slickPrev');
-  } else {
-    $(this).slick('slickNext');
-  }
-}));
-   
-  //will append to beginning
- 
-   
-   
-});*/
   
-  $(document).ready(function() {
+  setTimeout(function() {
   $('#scrollslider .page-width').bind('mousewheel DOMMouseScroll', function(e) {
     const slider = $(".slider-item");
     var slideCount = $(slider)[0].slick["slideCount"];
