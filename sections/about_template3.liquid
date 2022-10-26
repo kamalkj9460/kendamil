@@ -1,0 +1,217 @@
+<div class="about_parallax-section">
+<script type="text/javascript" src="{{ 'vendornew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'commonnew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'pagesnew.js' | asset_url }}"></script>
+
+
+{{ 'home_2.css' | asset_url | stylesheet_tag }}
+
+<div class="about_experienceDiv">
+
+<div class="page-width p-0">
+  {% if section.settings.title != blank %}
+    <header class="section-header text-center">
+      {%- if section.settings.subtitle != blank -%}
+           <h5 class="heading_h5">
+             {{ section.settings.subtitle | escape }}</h5>
+          {%- endif -%}          
+          
+          {%- if section.settings.title != blank -%}
+            <h3 class="heading_h3">
+              {{ section.settings.title | escape }}</h3>
+          {%- endif -%}
+    </header>
+  {% endif %}
+
+  
+  
+          
+        
+   <div class="experience_Slider">
+      
+   {% if section.blocks.size > 0 %}      
+             
+
+       <div class="homeblog_box grid wrapper" id="relblog">
+         
+         
+         <section class="MCItemCarousel MCItemCarousel--hasIntro MCItemCarousel--hasMinimumSpacing" data-component="MCItemCarousel" data-global-ref="ScrollRevealer-reveal">
+    <div class="MCItemCarousel-scrollable">
+      <div class="MCCarouselNav MCCarouselNav--prev" data-ref="carouselNavPrev">
+        <button class="MCCarouselNav-btn lt-navigateleft" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCCarouselNav MCCarouselNav--next" data-ref="carouselNavNext">
+        <button class="MCCarouselNav-btn lt-navigateright" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCItemCarousel-viewport">
+        <div class="MCItemCarousel-productWrapper" data-ref="productWrapper">
+          
+          {% for block in section.blocks %}
+          
+          <div class="MCItemCarousel-Item">
+            <div class="grid__item pro_box">
+              <div class="grid__item medium-up--one-third box_box">
+                <article aria-labelledby="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                   {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}" class="logo-bar__link">
+              {% endif %}
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | img_url: '300x300', scale: 2 | img_tag: block.settings.image.alt, 'history__image' }}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+               {% if block.settings.text != blank %}
+                <div>  {{ block.settings.text }}</div>
+              {% endif %}    
+              {% if block.settings.link != blank %}
+               </a>
+              {% endif %}
+
+                  
+
+                </article>
+              </div>
+            </div>
+          </div>
+        
+         {% endfor %}
+          
+        </div>
+        <div class="MCCarouselScrollbar" data-ref="scrollbar-track">
+          <div class="MCCarouselScrollbar-bar" data-ref="scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+         
+         
+         
+         
+         
+         
+
+       </div>
+     
+    {% endif %}
+     
+  </div>  
+  
+</div>
+
+
+</div>
+</div>
+  {% comment %}
+
+  <script>
+$(document).ready(function() {
+$('.test_align').slick({
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  arrows: true,
+  fade: false,
+  dots: false,
+  infinite: false,
+  centerMode: false,
+  draggable: false,
+  responsive: [
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        arrows: true
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  
+
+});
+</script>
+{% endcomment %}
+
+<style>
+  .about-section.about_history{
+    background-color:{{section.settings.blog_bg_color}};
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": {
+    
+    "en": "Experience and History"
+    
+  },
+  "class": "about-section about_history",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub heading",
+      "default": "Sub heading"
+    },    
+    
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text overlay"
+    },
+        
+	{
+      "type": "color",
+      "id": "blog_bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": {
+        
+        "en": "Image with Description"
+        
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "pt-BR": "Imagem"
+          },
+		"info": "size: 284 x 321px"
+        },
+       {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Sample text</p>"
+       },
+	   {
+      "type": "text",
+      "id": "link",
+      "label": "Link",
+      "default": "#"
+       }
+		
+      ]
+} 
+
+]
+
+}
+{% endschema %}

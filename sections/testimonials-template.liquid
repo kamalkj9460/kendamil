@@ -1,0 +1,192 @@
+<div class="testimonial-div">
+  <div class="testimonial_heading_div">
+  <h3 class="heading_h3 testimonial_heading">{{ section.settings.text-heading }}</h3>
+  </div>
+	<div class="testimonial-grid">
+       {% for block in section.blocks %} 
+	  <div class="testimonial-box">
+        
+        {%- assign img_url = block.settings.testmo_img | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: block.settings.testmo_img, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+        
+        <img 
+           class="feature-row__image lazyload abt_feature-row__image testimonial-img"
+           src="{{ block.settings.testmo_img | img_url: '540x540' }}"
+           data-src="{{ img_url }}"
+           data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ block.settings.testmo_img.aspect_ratio }}"
+           data-sizes="auto"
+           alt="{{ block.settings.testmo_img.alt | escape }}">
+        <div class="testimonial-hover-box">
+          <p>  {{ block.settings.text | strip_html | truncate: 203}} ”</p> 
+          <a href="#" class="readmore-link readmore_link_{{ forloop.index }}">Read More</a>
+		</div>	
+        <div class="pop-up-bk pop-up-bk_{{ forloop.index }}">
+              <!--Creates the popup body-->
+              <div class="popup-overlay-testimo popup-overlay-testimo_{{ forloop.index }}">
+                 <a href="javascript:void(0)" class="close-modal close-modal_{{ forloop.index }}" aria-describedby="a11y-external-message"><img src={{ 'close.png' | asset_url }}></a>
+                  <div class="popup-content-tetimonia">
+                   <div class="testimo_content">
+                    <div class="testimonial-img-modal small--hide">                      
+        
+                     <img 
+                           class="feature-row__image lazyload abt_feature-row__image"
+                           src="{{ block.settings.testmo_img | img_url: '720x720' }}"
+                           data-src="{{ img_url }}"
+                           data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                           data-aspectratio="{{ block.settings.testmo_img.aspect_ratio }}"
+                           data-sizes="auto"
+                           alt="{{ block.settings.testmo_img.alt | escape }}">
+                     </div>
+                     
+                    <div class="popup-desc-testimo {% if block.settings.product_link != blank %} no_left_padd{% endif %}">
+                      <div class="popup_wrap">
+                      {%- if block.settings.product_link != blank -%}
+                      <a href="{{ block.settings.product_link }}" class="product-card-link">
+                        <div class="product-card_div">
+                          <div class="product_image_div">
+                            {%- assign img_url2 = block.settings.product_img | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: block.settings.product_img, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+                            <img 
+                             class="feature-row__image lazyload abt_feature-row__image"
+                             src="{{ block.settings.product_img | img_url: '90x120' }}"
+                             data-src="{{ img_url2 }}"
+                             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                             data-aspectratio="{{ block.settings.product_img.aspect_ratio }}"
+                             data-sizes="auto"
+                             alt="{{ block.settings.product_img.alt | escape }}">
+                          </div>
+						  <div class="product_desc_div">	
+                            <div class="h4 grid-view-item__title product-card__title">{{ block.settings.product_title }}</div>	
+                            <div class="product_price">{{ block.settings.product_price }}</div>
+                            <a href="{{ block.settings.product_link }}" class="shopnow-link">Shop now</a>
+                          </div>
+
+                        </div>
+                      </a>
+                      {%- endif -%}
+                      <div class="test_desc_div {% if block.settings.product_link != blank %} mob_width_50{% endif %}">
+                      <div class="test_desc ">
+                     {{ block.settings.text }}
+                        
+                        
+                      </div>
+                     <span class="testimonia_name_city">{{ block.settings.name_city }}</span>
+                      </div>
+                      </div>
+                     </div>
+                    <!--popup's close button-->
+                    </div>
+                  </div>
+              </div>
+          </div>
+        
+        <script>
+           $(document).ready(function(){ 
+              $(".close-modal_{{ forloop.index }},.pop-up-bk_{{ forloop.index }}").on("click", function() {
+                $(".popup-overlay-testimo_{{ forloop.index }}").fadeOut();
+                $(".pop-up-bk_{{ forloop.index }}").fadeOut();
+              });
+
+              $('.readmore_link_{{ forloop.index }}').on("click", function() {
+                 $(".popup-overlay-testimo_{{ forloop.index }}").fadeIn();
+                $(".pop-up-bk_{{ forloop.index }}").fadeIn();
+              });
+           });
+		</script>
+        
+        
+	  </div>
+      
+      {% endfor %} 
+     </div>
+</div>
+
+<script>
+  $(window).load(function() {
+    popupSize();
+  });
+  
+  $(window).on("resize", function () {
+    popupSize();
+  });
+  
+  function popupSize(){
+   if (window.innerWidth < 600) {
+        //console.log(window.innerWidth);
+        $('.popup-overlay-testimo').css( "maxWidth", ( window.innerWidth-40 + "px" ));
+      }
+    if (window.innerWidth > 1500) {
+      $('.testimonial-hover-box').css( "maxWidth", ( $('.testimonial-box').width()-79 + "px" ));
+      $('.testimonial-hover-box p').css("font-size","1vw"); 
+      $('.testimonial-hover-box p').css("line-height","1.3vw");
+      $(' a.readmore-link').css("font-size","1vw"); 
+    }
+  }
+</script>
+{% schema %}
+  {
+   "name": "Testimonials",
+    "settings": [
+      {
+        "id": "text-heading",
+        "type": "text",
+        "label": "Heading",
+        "default": "Title"
+      }
+    ],
+    
+    "blocks":
+	[{
+        "type":"text",
+        "name":"Testimonials Content",
+        "settings": [
+        {
+          "type": "image_picker",
+          "id": "testmo_img",
+          "label": "Image",
+          "info": "Size: 556 x 556px"
+        },
+        {
+          "type":"richtext",
+          "label":"Description",
+          "id":"text"
+         
+        },
+        {
+          "type":"text",
+          "label":"Name & City",
+          "id":"name_city",
+          "default":"Name, City"
+        },
+        {
+          "type": "header",
+          "content": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_img",
+          "label": "Product Image",
+          "info": "Size: 90 x 120px"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Name"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price"
+        }, 
+        {
+          "type": "url",
+          "id": "product_link",
+          "label":"Product Link"
+		}
+
+        ]
+    }]
+  }
+{% endschema %}
+

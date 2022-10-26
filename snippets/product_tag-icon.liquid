@@ -1,0 +1,35 @@
+{% if product.tags contains 'Wake' %} 
+<div class="tag_box">
+  <div class="svg_box wake_box">
+    {% include 'wake-svg-icon' %} 
+  </div>
+  <i>Wake</i> 
+</div>
+{% endif %}
+
+{% if product.tags contains 'Work' %} 
+<div class="tag_box">
+  <div class="svg_box work_box">
+    {% include 'mind-svg-icon' %} 
+  </div>
+  <i>Work</i> 
+</div>
+{% endif %}
+
+{% if product.tags contains 'Exercise' %} 
+<div class="tag_box">
+  <div class="svg_box exercise_box">
+    {% include 'exercise-svg-icon' %} 
+  </div>
+  <i>Exercise</i> 
+</div>
+{% endif %}
+
+{% if product.tags contains 'Sleep' %} 
+<div class="tag_box">
+  <div class="svg_box sleep_box">
+    {% include 'sleep-svg-icon' %} 
+  </div>
+  <i>sleep</i> 
+</div>
+{% endif %}

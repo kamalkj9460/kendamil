@@ -1,0 +1,230 @@
+{% if section.settings.title != blank %}
+<div id="product_module" class="module_section" style="background-color:{{ section.settings.i_bg }};">
+  <div class="page-width">
+    {% if section.settings.sub-title != blank %}
+    <h5 class="heading_h5 text-center">{{ section.settings.sub-title }}</h5>
+    {% endif %}
+    {% if section.settings.title != blank %}
+    <h3 class="heading_h3">{{ section.settings.title }}</h3>
+    {% endif %}
+    
+    <div class="module_flex">
+    
+
+    <div class="accordion_module_image">
+      
+      {%- if section.settings.select_option == "image" -%}
+      
+        {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      {% include 'image-style', image: section.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}   
+      <img id=""
+           class="feature-row__image lazyload"
+           src="{{ section.settings.image | img_url: '340x340' }}"
+           data-src="{{ img_url }}"
+           data-widths="[180, 340, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+           data-sizes="auto"
+           alt="{{ section.settings.image.alt | escape }}">
+      
+      {%- else -%}
+      
+      <div class="video-testimonial-block">
+
+			<div class="acc_video">
+				<video poster="{{ section.settings.video_poster_img | img_url: '560x' }}" autoplay muted controls="">
+					<source src="{{ section.settings.video_link }}" type="video/mp4">
+				</video>
+			</div>
+			<a href="#" class="video-play"> </a>
+        
+		</div>
+      
+      {%- endif -%}
+      
+
+      </div>
+      
+      
+      
+      
+      
+    
+    <div class="accordion_module_text">
+    <div id="accordion_module" class="information_tab">
+      {% for block in section.blocks %}
+      {% if block.settings.title != blank %}
+      <div class="accordion_title">
+       <div class="accordion_icon">
+         <img class="default_img" src="{{ block.settings.image | img_url: 'master' }}" alt="" />
+         <img class="active_img" src="{{ block.settings.image-active | img_url: 'master ' }}" alt="" />
+        </div>  
+         {{ block.settings.title }} <span></span>
+      </div>
+      <div class="content_info">
+        {{ block.settings.info }}
+      </div>   
+      {% endif %}
+      {% endfor %}   
+    </div>
+    </div>
+    </div>
+    
+    
+    
+  </div>
+</div>
+{% endif %}
+
+<script src="{{ 'jquery-ui.js' | asset_url }}" defer="defer"></script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $( "#accordion_module" ).accordion({
+      collapsible:"true",
+      //active : "none",
+      heightStyle: "content"
+          
+    });
+    
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Home image Text Accordion",
+	"class": "why_kendamil",
+    "settings": [
+{
+      "type": "select",
+      "id": "select_option",
+      "options": [
+        
+        {
+          "value": "image",
+          "label": "Image (JPG or GIF)"
+        },
+	{
+          "value": "video",
+          "label": "Video"
+        }
+      ],
+      "default": "image",
+      "label": "Select image or video"
+    },
+	{
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+	      "info": "Size: 800 x 800px"
+        },
+	{
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay"
+    },
+	{
+      "type": "image_picker",
+      "id": "video_poster_img",
+      "label": "Poster Image",
+	  "info" : "Size:800 x 1000px"
+    },
+	{
+        "type": "text",
+        "id": "video_link",
+        "label": "Video url",
+		"info" : "Settings > Files > upload files(MP4) Video Size: 560 X 720"
+     },
+	{
+      "type": "header",
+      "content": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub-title",
+      "label": "Sub Title"
+    },
+{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "color",
+      "id": "i_bg",
+      "label": "Background-color",
+	   "default": "#fdfbf9"
+    }
+	
+],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion Text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Default Image Icon",
+	      "info": "Size: 80 x 80px"
+        },
+		{
+          "type": "image_picker",
+          "id": "image-active",
+          "label": "Active Image Icon",
+	      "info": "Size: 80 x 80px"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+	   {
+          "type": "richtext",
+          "id": "info",
+          "label": "Info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Text Accordion",
+      "category": "Text"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<script>
+  $(document).ready(function() {
+    
+    $(".video-play").on('click', function(e) {
+	e.preventDefault();
+	let vidWrap = $(this).parent();
+	
+	vidWrap.children('.video-thumbnail').fadeOut();
+	vidWrap.children('.video-play').fadeOut();
+	vidWrap.find("video")[0].play();
+    //vidWrap.find("video")[0].pause();
+	
+	// var vidWrap = $(this).parent(),
+			// iframe = vidWrap.find('.video iframe'),
+			// iframeSrc = iframe.attr('src'),
+			// iframePlay = iframeSrc += "?autoplay=1";
+	// vidWrap.children('.video-thumbnail').fadeOut();
+	// vidWrap.children('.video-play').fadeOut();
+	// vidWrap.find('.video iframe').attr('src', iframePlay);
+});
+    
+    
+    });
+</script>

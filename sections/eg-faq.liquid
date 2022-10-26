@@ -1,0 +1,429 @@
+{% comment %} 
+    F.A.Q section
+    © 2021 EcomGraduates
+    https://wwww.ecomgraduates.com 
+{% endcomment %}
+
+{% comment %}theme-check-disable{% endcomment %}
+    <script src="https://unpkg.com/accordion-js@3.1.1/dist/accordion.min.js" defer></script>
+{% comment %}theme-check-disable{% endcomment %}
+
+<style>
+    #eg-faq-{{ section.id }} {
+        {% unless section.settings.bg_color == 'rgba(0,0,0,0)' %}
+            background-color: {{ section.settings.bg_color }};
+        {% endunless %}
+        {% unless section.settings.color == 'rgba(0,0,0,0)' %}
+            color: {{ section.settings.color }};
+        {% endunless %}
+        overflow: hidden;
+        padding-top: {{ section.settings.pt }}rem;
+        padding-bottom: {{ section.settings.pb }}rem;
+        margin-top: {{ section.settings.mt }}rem;
+        margin-bottom: {{ section.settings.mb }}rem;
+    }
+
+    #eg-faq-{{ section.id }} header {
+        {% if section.settings.header_center %}
+            text-align: center;
+        {% endif %}
+    }
+
+    #eg-faq-{{ section.id }} header .title .title1 {
+        {% unless section.settings.color == 'rgba(0,0,0,0)' %}
+            color: {{ section.settings.color }};
+        {% endunless %}
+        margin-bottom: .5rem;   
+    }
+
+    #eg-faq-{{ section.id }} .eg-faq-accordion {
+        margin: 3rem 0;
+    }
+
+    /* 
+        Accordion styling 
+    */
+    .ac {
+        margin-top: 1rem;
+        border-width: 1px;
+        /*border-style: solid; */
+        box-sizing: border-box;
+        background-color: {{ section.settings.accordion_bg_color }};
+        border-color: {{ section.settings.accordion_border_color }};
+    }
+    .ac .ac-header {
+        margin: 0;
+        padding: 0;
+        font-size: 22px;
+    }
+    .ac .ac-trigger {
+        width: 100%;
+        padding: 1rem 4rem 1rem 1.25rem;
+        display: block;
+        cursor: pointer;
+        background-color: transparent;
+        position: relative;
+        text-decoration: none;
+        margin: 0;
+        border: 0;
+        transition: color .25s ease;
+        font-weight: bold;
+        text-align: left;
+        font-size: 100%;
+      	border-top: 1px solid #edd9de;
+      	font-family: 'Recoleta-Regular' !important;
+    }
+    .ac .ac-trigger span {
+        transition: all .2s ease-out;
+    }
+    .ac .ac-trigger::after {
+       /* content: '+'; */
+        content: '<';
+    	transform: rotate(-90deg) !important;
+        text-align: center;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 1.5rem;
+        font-weight: normal;
+    }
+    .ac .ac-trigger:focus {
+    }
+    .ac .ac-trigger:focus span {
+        opacity: .6;
+    }
+    .ac .ac-panel {
+        overflow: hidden;
+        transition-property: height, visibility;
+        transition-timing-function: ease;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    .ac.js-enabled .ac-panel {
+        visibility: hidden;
+    }
+    .ac.is-active .ac-panel {
+        visibility: visible;
+    }
+    .ac.is-active > .ac-header .ac-trigger::after {
+        /*content: '\2013';*/
+         content: '<';
+   		 transform: rotate(90deg) !important;
+    }
+</style>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // Init Accordion
+        const initEgAccordion = () => {
+            const el = document.querySelector('#eg-faq-{{ section.id }} .eg-faq-accordion')
+            new Accordion(el, {
+                duration: Number(el.dataset.duration),
+                showMultiple: el.dataset.showMultiple === "true"
+            });    
+        }
+        initEgAccordion()
+
+        // Listen for changes in Shopify Theme editor
+        document.addEventListener('shopify:section:load', (e) => {
+            if (e.target.querySelector('#eg-faq-{{ section.id }} .eg-faq-accordion')) {
+                initEgAccordion()
+            }
+        })
+    })
+</script>
+
+<section 
+    id="eg-faq-{{ section.id }}" 
+    class="eg-faq">
+    <div 
+        class="page-width container" 
+        style="max-width: {{ section.settings.max_width }}px">
+        <header class="">
+            {% unless section.settings.title == blank %}
+                <h2 class="title {{ section.settings.title_size }}">
+                    {{ section.settings.title }}
+                </h2>
+            {% endunless %}
+          	
+            {% unless section.settings.description == blank %}
+                <div class="description rte">
+                    {{ section.settings.description }}
+                </div>
+            {% endunless %}
+        </header>
+      
+
+                <h3 class="title1">
+                    Your questions answered
+                </h3>
+
+        <div 
+            class="eg-faq-accordion"
+            data-duration="{{ section.settings.accordion_duration }}"
+            data-show-multiple="{{ section.settings.accordion_show_multiple }}">
+            {% for block in section.blocks %}
+                <div class="ac">
+                    <h3 class="ac-header {{ section.settings.accordion_title_size }}">
+                        <button class="ac-trigger">
+                            <span>
+                                {{ block.settings.title }}
+                            </span>
+                        </button>
+                    </h3>
+                    <div class="ac-panel">
+                        {{ block.settings.description }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Custom FAQ",
+    "settings": [
+        {
+            "type": "header",
+            "content": "General"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+        },
+        {
+            "type": "color",
+            "id": "color",
+            "label": "Text color"
+        },
+        {
+            "type": "text",
+            "id": "max_width",
+            "label": "Max width (px)",
+            "info": "Adjust container width (in pixels). Leave empty to use your theme's container width.",
+            "default": "720"
+        },
+        {
+            "type": "header",
+            "content": "Header"
+        },
+        {
+            "type": "checkbox",
+            "id": "header_center",
+            "label": "Align center",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "F.A.Q"
+        },
+		{
+            "type": "text",
+            "id": "title1",
+            "label": "Subtitle",
+            "default": "F.A.Q"
+        },
+        {
+            "type": "select",
+            "id": "title_size",
+            "label": "Title Size",
+            "default": "h2",
+            "options": [
+                {  "value": "h1", "label": "H1" },
+                {  "value": "h2", "label": "H2" },
+                {  "value": "h3", "label": "H3" },
+                {  "value": "h4", "label": "H4" },
+                {  "value": "h5", "label": "H5" },
+                {  "value": "h6", "label": "H6" }
+            ]
+        },
+
+		{
+            "type": "select",
+            "id": "subtitle_size",
+            "label": "Subtitle Size",
+            "default": "h2",
+            "options": [
+                {  "value": "h1", "label": "H1" },
+                {  "value": "h2", "label": "H2" },
+                {  "value": "h3", "label": "H3" },
+                {  "value": "h4", "label": "H4" },
+                {  "value": "h5", "label": "H5" },
+                {  "value": "h6", "label": "H6" }
+            ]
+        },
+        {
+            "type": "richtext",
+            "id": "description",
+            "label": "Description",
+            "default": "<p>Please take the time to carefully read our Frequently Asked Questions. <br>Still have questions?! Please contact us</p>"
+        },
+        {
+            "type": "header",
+            "content": "Accordion"
+        },
+        {
+            "type": "range",
+            "id": "accordion_duration",
+            "label": "Duration (ms)",
+            "info": "Accordion items opening/closing speed.",
+            "default": 200,
+            "min": 100,
+            "max": 1000,
+            "step": 100
+        },
+        {
+            "type": "checkbox",
+            "id": "accordion_show_multiple",
+            "label": "Show multiple",
+            "info": "Either to open one accordion item at the same time or multiple",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "accordion_bg_color",
+            "label": "Background color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "accordion_border_color",
+            "label": "Border color",
+            "default": "#E5E6E6"
+        },
+        {
+            "type": "select",
+            "id": "accordion_title_size",
+            "label": "Accordion title size",
+            "default": "h4",
+            "options": [
+                {  "value": "h1", "label": "H1" },
+                {  "value": "h2", "label": "H2" },
+                {  "value": "h3", "label": "H3" },
+                {  "value": "h4", "label": "H4" },
+                {  "value": "h5", "label": "H5" },
+                {  "value": "h6", "label": "H6" }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Spacing",
+            "info": "Based on 'rem' values [Learn more](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units)"
+        },
+        {
+            "type": "range",
+            "id": "pt",
+            "label": "Padding top",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "pb",
+            "label": "Padding bottom",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "mt",
+            "label": "Margin top",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "mb",
+            "label": "Margin bottom",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "default": 0
+        }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "description",
+                    "label": "Description"
+                },
+                {
+                    "type": "html",
+                    "id": "icon",
+                    "label": "Icon code (SVG)"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Custom FAQ",
+            "category": "Text",
+            "blocks": [
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "Where do you ship?",
+                        "description": "<p>We ship all around the world... Please provide here you own shipping information, including times, prices, options etc.</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "How long will it take to receive my order",
+                        "description": "<p>This depends on whether it is an International or a Domestic order. All orders within the U.S. are considered domestic orders and they are shipped and delivered within 2-5 business days. Please see International Orders for more details.</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "What payment methods do you support?",
+                        "description": "<p>We accept PayPal, Visa, MasterCard, Discover, and American Express but feel free to contact us for other payment options.</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "How can I track my order?",
+                        "description": "<p>We will send tracking information to the e-mail address associated with your order once the item has shipped. If you have not received your tracking information and it has been over 2 business day, please contact us at (012) 123 - 4567</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "Can I order as a gift for someone else?",
+                        "description": "<p>When ordering as a gift for someone, be sure to enter in your email address to receive all summary information but enter in the recipient’s name and shipping information. We will be sure to keep all prices and receipts out of the package.</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "settings": {
+                        "title": "How can I get a refund for my order?",
+                        "description": "<p>If for any reason you are not completely satisfied with your purchase, within 30 days of placing your order, we will refund you for your purchase with no questions asked.</p>"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

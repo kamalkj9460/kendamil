@@ -1,0 +1,41 @@
+{% assign mapping = shop.metafields.kendamil.mapping %}
+<input hidden id="interval-frequency" type="text" name="properties[shipping_interval_frequency]" value="30" />
+<input hidden id="interval-unit" type="text" name="properties[shipping_interval_unit_type]" value="Days" />
+<input hidden id="mapping-id" type="text" name="id" value="" />
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    const mapping = {{ mapping | json }};
+
+    let variantId = null
+    $(".singleaddcart_2").click(function(){
+      let current = null
+      let type = 'classic'
+      let stage = 'Stage1'
+
+      $(`.sub_img.sub_images`).each(function(index, elem) {
+        if ($(elem).css('opacity') === '1') {
+          current = elem
+        }
+      })
+
+      if (current) {
+        const id = $(current).prop('id')
+
+        if (id.toLowerCase().includes('classic')) type = 'classic'
+        if (id.toLowerCase().includes('organic')) type = 'organic'
+        if (id.toLowerCase().includes('goat')) type = 'goat'
+        if (id.toLowerCase().includes('stage1')) stage = 'Stage1'
+        if (id.toLowerCase().includes('stage2')) stage = 'Stage2'
+        if (id.toLowerCase().includes('stage3')) stage = 'Stage3'
+        const mappId = mapping[`${type}${stage}`].discountVariantId || mapping[`${type}${stage}`].id
+
+        if (mappId) {
+          const selectId = $(`select[name="id"]`)
+          selectId.prop('disabled', true)
+          $(`#mapping-id`).prop('value', mappId)
+        }
+      }
+    })
+  })
+</script>

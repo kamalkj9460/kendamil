@@ -1,0 +1,46 @@
+<div id="product_science" style="background:{{product.metafields.background_color_sc.background_color_sc}};">
+
+  <div class="product_science_img img_{{product.metafields.image_alignment.image_alignment}}" style="background-image:url({{product.metafields.image_sc.image_sc}});"></div>
+  
+  
+  <div class="product_science_info">
+    
+    <div class="science_wrap">
+      <div class="science_rte">
+      {% if product.metafields.accentuate.sub_title_sc != blank %}
+      <h5 class="heading_h5">{{ product.metafields.accentuate.sub_title_sc }}</h5>
+      {% endif %}
+
+      {% if product.metafields.title_sc.title_sc != blank %}
+      <h3 class="heading_h3">{{ product.metafields.title_sc.title_sc }}</h3>
+      {% endif %}
+
+      {% if product.metafields.info_sc.info_sc != blank %}
+      {{ product.metafields.info_sc.info_sc }}
+      {% endif %}  
+        </div>
+      
+
+      <div id="science_icons">
+        <div class="pro_row">
+          {% for value in product.metafields.icon_sc.icon_sc %} 
+          <div class="proicon_box">
+            <div class="iconfirst_box {{ product.metafields.title_icon_sc.title_icon_sc[forloop.index0] }}_nameicon">
+              {% comment %}<img class="icon_first" src="{{ product.metafields.icon_sc.icon_sc[forloop.index0] }}" alt="" />{% endcomment %}
+              <img class="icon_second" src="{{ product.metafields.hover_icon_sc.hover_icon_sc[forloop.index0] }}" alt="" />
+            </div>
+            <span>{{ product.metafields.title_icon_sc.title_icon_sc[forloop.index0] }}</span>
+          </div>
+          {% endfor %} 
+        </div>  
+      </div>
+      
+      
+       {% if product.metafields.button_label_sc.button_label_sc != blank %}      
+      <a class="btn" href="{{ product.metafields.button_link_sc.button_link_sc }}">{{ product.metafields.button_label_sc.button_label_sc }}</a>
+      {% endif %}      
+      
+    </div>
+  </div>
+
+</div>

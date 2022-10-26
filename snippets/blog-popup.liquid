@@ -1,0 +1,47 @@
+ 
+<div class="pop-up-bk">
+
+<!--Creates the popup body-->
+<div class="popup-overlay">
+   <a href="javascript:void(0)" class="close-modal"><img src={{ 'close.png' | asset_url }}></a>
+      {%- if settings.cloud_image_icon1 != blank -%}
+          <div class="popup_icon cloud_icon">
+           <img src="{{ settings.cloud_image_icon1 | img_url:'135x' }}" alt="" />
+          </div>
+           {%- endif -%}  
+  <div class="popup-content" style="display: block;">
+    <h2>{{ settings.popup_title1 }}</h2>
+    <div class="popup-desc">
+      {{ settings.popup_desc1 }}
+    </div>
+    <!--popup's close button-->
+    <div class="text-center full_btn">
+      
+      {% if settings.pop_up_yes_link =='#' %}
+      <a href="javascript:void(0)" class="close btn btn--has-icon-after close-modal_2">{{ settings.pop_up_yes_title }}</a>
+      {% else %}
+      <a href="{{ settings.pop_up_yes_link}}" class="close btn btn--has-icon-after">{{ settings.pop_up_yes_title }}</a>
+      {% endif %}
+      
+       <a href="{{ settings.pop_up_no_link}}" class="close btn btn--has-icon-after">{{ settings.pop_up_no_title }}</a>
+    </div>    
+    
+  </div>
+</div>
+</div>
+<!--Content shown when popup is not displayed-->
+
+   
+<script>
+$(document).ready(function(){
+      $('.pop-up-bk').css('display','block');  
+        //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+$(".close-modal, .close-modal_2").on("click", function() {
+   
+  $(".popup-overlay, .popup-content").fadeOut();
+  $(".pop-up-bk").fadeOut();
+});
+   
+  
+ }); 
+</script>

@@ -1,0 +1,170 @@
+{{ 'home_2.css' | asset_url | stylesheet_tag }}
+<style>
+
+  .ats_position_relative {
+    position: relative;
+  }
+  .ats_trending_week{padding-top:0px;}
+  .ats_heading_h3{margin-bottom: 5px;}
+  .ats_desktop_width_fix {
+    text-align: center;
+  }
+  .cart_add_to_cart {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto !important;
+  }
+  .ats_grid_pro_box .h4.product-card__title {
+    /*                 max-height: 31px; */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+
+  }
+
+  @media all and (max-width: 991px){
+    .ats_grid_pro_box .h4.product-card__title {
+      /*                   max-height: 48px; */
+      overflow: hidden;
+    }
+  }
+  @media all and (min-width: 768px){
+
+    /*.ats_grid_pro_box .h4.product-card__title {
+    height: 36px;
+  } */
+
+    .cart_add_to_cart { padding: 10px 20px !important; }
+    .ats_suggested_mobile {
+        display: none;
+    }
+  }
+  @media all and (max-width: 767px){
+  	.ats_suggested_desktop {
+        display: none;
+    }
+    .ats_trending_week {
+      padding-top: 0px !important;
+    }
+    
+  }
+  @media all and (max-width: 768px) and (min-width:450px){
+    .ats_tab_viewport_fix { max-height:100%;}
+    .ats_tab_viewport_fix .grid-view-item.product-card {
+      margin-bottom: 10px;
+    }
+
+  }
+  @media all and (max-width: 691px){
+    
+    .ats_suggested_cart_grid {
+      margin-bottom: 10px;
+    }
+  }
+  @media all and (max-width: 420px){
+    .ats_grid_pro_box .h4.product-card__title {
+      height: 37px;
+    }
+  }
+  @media all and (max-width: 333px){
+    .ats_grid_pro_box .h4.product-card__title {
+      height: 28px;
+    }
+  }
+
+</style>
+<div class="grid__item medium-up--one-half ats_suggested_cart_grid {{ ats_class }}" >
+  <div class="trending_week ats_trending_week">
+    <div class="page-width p-0">
+      <div class="section-header text-center">
+
+        {% if section.settings.ats_suggested_text != blank %}
+        <h1 class="cart-header__title ats_heading_h3">{{ section.settings.ats_suggested_text }}</h1>
+        {% endif %}
+
+      </div>  
+      <div class="wrapper page-width p-0">
+        <section class="MCItemCarousel MCItemCarousel--hasIntro MCItemCarousel--hasMinimumSpacing ats_position_relative" data-component="MCItemCarousel" data-global-ref="ScrollRevealer-reveal">
+          <div class="MCItemCarousel-scrollable">
+            <div class="MCCarouselNav MCCarouselNav--prev" data-ref="carouselNavPrev">
+              <button class="MCCarouselNav-btn lt-left" data-ref="carouselNavBtn"></button>
+            </div>
+            <div class="MCCarouselNav MCCarouselNav--next" data-ref="carouselNavNext">
+              <button class="MCCarouselNav-btn lt-right" data-ref="carouselNavBtn"></button>
+            </div>
+            <div class="MCItemCarousel-viewport ats_tab_viewport_fix">
+              <div class="MCItemCarousel-productWrapper" data-ref="productWrapper">
+
+
+                {% for block in section.blocks %}
+
+                {%- assign product = all_products[block.settings.ats_product] -%}
+
+
+                <div class="MCItemCarousel-Item ats_desktop_width_fix">
+                  <div class="grid__item pro_box ats_grid_pro_box">
+                    {% include 'home-product-card-grid', max_height: max_height %}
+                    {%- if product.available != true -%}
+                    {%- assign ats_not_available = true -%}
+                    {%- else -%}
+                    {%- assign ats_not_available = false -%}
+                    {%- endif -%}
+                    <button type="submit" name="add" {% if ats_not_available %} disabled {% endif %} aria-label="Add to bag" class="btn btn--secondary-accent cart_add_to_cart{%- if ats_not_available -%}_unavailable disabled{%- endif -%}" data-product-id="{{ product.variants[0].id }}">
+                      <span>
+
+                        {%- if ats_not_available -%} Out of stock {%- else -%} Add to bag {%- endif -%}
+
+                      </span>
+
+                    </button>
+                  </div>
+                </div>
+                {% endfor %} 
+
+
+
+              </div>
+              <div class="MCCarouselScrollbar" data-ref="scrollbar-track">
+                <div class="MCCarouselScrollbar-bar" data-ref="scrollbar"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<script type="text/javascript" src="{{ 'vendornew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'commonnew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'pagesnew.js' | asset_url }}"></script>
+<script> 
+  $(".MCCarouselNav-btn").on("click", function() {
+    return false;
+  });               
+
+  $(".cart_add_to_cart").on("click", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      data: {
+        quantity: 1,
+        id: $(this).data('product-id')
+      },
+      dataType: 'json', 
+      success: function (data) { 
+
+        location.reload(true);
+
+      } 
+    });
+
+  });
+
+
+
+</script>

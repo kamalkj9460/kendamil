@@ -1,0 +1,112 @@
+{%- if settings.sidebar_bkg != blank -%}
+<style>
+.care_page .sidebar{
+  background:{{ settings.sidebar_bkg }};
+}
+</style> 
+{%- endif -%}
+{%- if settings.page_bkg != blank -%}
+<style>
+  .care_page_content{
+  background:{{ settings.page_bkg }};
+}
+  input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 35px {{ settings.page_bkg }} inset !important;
+}
+
+</style> 
+{%- endif -%}
+
+
+
+<div class="care_page">
+  
+  <div class="sidebar sidebar-fix">
+    <div class="side-menu">
+    <h2 class="hide--mobile">Customer Care</h2>
+       <h2 class="mobile-show" style="display:none;">Customer Care {% include 'arrow-down' %}</h2>
+      <ul>
+       {% for link in linklists.customer-care-sidebar.links %}
+            <li class="{% if link.active %}active{% endif %}">
+              <span></span>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>            	
+       {% endfor %}
+      </ul>
+      <div class="addssDiv hide--mobile">
+        <div class="cmp_name">{% if settings.cmp_nm != blank %} {{ settings.cmp_nm }} {% endif %}</div>
+                    {% if settings.address1 != blank %} {{ settings.address1 }},{% endif %}<br/>
+                    {% if settings.city != blank %} {{ settings.city }},{% endif %}
+                    {% if settings.country != blank %}  {{ settings.country }},{% endif %}<br/>
+                    {% if settings.zip != blank %}  {{ settings.zip }},{% endif %}<br/>
+                    {% if settings.phone != blank %} {{ settings.phone }}{% endif %}
+      </div>
+    </div>
+ </div>
+
+<div class="care_page_content contact"> 
+  <div class="page-width w_690">  
+       <h2 class="h3">{{ page.title }}</h2>
+       <div class="rte">
+          {{ page.content }}
+       </div>
+  </div>
+   <div class="care_page_logo content_icon">
+         {%- if settings.page_image_icon4 != blank -%}
+        <div class="icon_div">
+       
+          {% comment %}
+          <img src="{{ settings.page_image_icon4 | img_url:'215x' }}" alt="" />
+          {% endcomment %}
+          
+        {%- assign img_url_3 = settings.page_image_icon4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: settings.page_image_icon4, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="" class="feature-row__image-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: settings.page_image_icon4.aspect_ratio | times: 100}}%;">
+            <img id=""
+                 class="feature-row__image lazyload"
+                 src="{{ settings.page_image_icon4 | img_url: '200x200' }}"
+                 data-src="{{ img_url_3 }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ settings.page_image_icon4.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ settings.page_image_icon4.alt | escape }}">
+          </div>
+        </div>
+        </div>
+         {%- endif -%} 
+  </div>    
+</div>
+  
+</div>
+
+<style>
+.page-container {
+    overflow: inherit;
+}
+</style>
+
+<script type="text/javascript">
+ 
+$(window).on('load resize', function () {
+    var topsections = $('.headder_box').height();
+  	var wheight = $(window).height();
+  	console.log(topsections);
+  	$(".sidebar-fix").css({'height': wheight});
+  	$(".sidebar-fix").css({'top': topsections});
+  
+});
+  
+ $(document).ready(function(){
+	
+ 
+  $(".sidebar h2.mobile-show").click(function(){
+    $(".sidebar ul").slideToggle('show');
+  });
+    
+    });
+  
+</script>  

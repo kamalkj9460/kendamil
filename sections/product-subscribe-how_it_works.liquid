@@ -1,0 +1,266 @@
+<div class="parallax-section">
+<div class="how_it_work_div" style="background-color:{{section.settings.bg_color}};">
+   <div class="page-width">
+		<div class="how_to_work">
+		    <div class="left_icon ">
+              
+              <div class="insta_icon parallax__element">
+        
+		 {%- if section.settings.insta_icon_bird != blank -%}
+          <div class="flower_img3 parallax__element birds_icon birds_icon1">
+            {% comment %}
+           <img src="{{ section.settings.insta_icon_bird | img_url:'40x' }}" alt="" />
+             {% endcomment %}
+            
+            <img src="{{ section.settings.insta_icon_bird | img_url:'master' }}" alt="" />
+          </div>
+           {%- endif -%}        
+        
+          {%- if section.settings.insta_icon_cloud != blank -%}
+          <div class="flower_img2 parallax__element cloud_icon">
+            {% comment %}
+           <img src="{{ section.settings.insta_icon_cloud | img_url:'135x' }}" alt="" />
+            {% endcomment %}
+            
+            <img src="{{ section.settings.insta_icon_cloud | img_url:'master' }}" alt="" />
+            
+          </div>
+           {%- endif -%} 
+          
+          {%- if section.settings.insta_icon_bird != blank -%}
+          <div class="flower_img3 parallax__element birds_icon birds_icon2">
+            {% comment %}
+           <img src="{{ section.settings.insta_icon_bird | img_url:'40x' }}" alt="" />
+            {% endcomment %}
+            
+            <img src="{{ section.settings.insta_icon_bird | img_url:'master' }}" alt="" />
+            
+          </div>
+           {%- endif -%}
+          
+        </div>
+              
+                 
+				
+			</div>
+          
+			<h3 class="heading_h3">{{ section.settings.title | escape }}</h3>
+          
+			<div class="right_icon ">
+              
+				{%- if section.settings.insta_icon_cloud != blank -%}
+              <div class="flower_img parallax__element cloud_icon">
+               <img src="{{ section.settings.insta_icon_cloud | img_url:'135x' }}" alt="" />
+              </div>
+               {%- endif -%} 
+              {%- if section.settings.insta_icon_sun != blank -%}
+              <div class="flower_img1 parallax__element sun_icon">
+               <img src="{{ section.settings.insta_icon_sun | img_url:'74x' }}" alt="" />
+              </div>
+               {%- endif -%} 
+              
+			</div>
+          
+          
+          
+		</div>
+     
+     		<div class="steps_div">
+		 <div class="steps_div_content subscribe_rowslider">
+           {% for value in product.metafields.icon_step.icon_step %} 
+           <div>
+			<div class="s-col s{{ forloop.index }}">
+              <style>
+                .s-col.s{{ forloop.index }}:hover .step_img_2{
+                    -webkit-transition: opacity 0.3s ease-out;
+                    -moz-transition: opacity 0.3s ease-out;
+                    -o-transition: opacity 0.3s ease-out;
+                    transition: opacity 0.3s ease-out;
+                    opacity: 1;
+                }
+              </style>
+              
+              
+              
+              <div class="step_icon_grid">
+                
+          {% if forloop.first %}
+        <div class="new_icon4_img ukicon">
+          <div class="step_img_1"><img src="{{ product.metafields.icon_step.icon_step[forloop.index0] }}" alt="" /></div>
+          <div class="step_img_2"><img src="{{ product.metafields.icon_stephover.icon_stephover[forloop.index0] }}" alt="" /></div>
+        </div>
+        {% endif %}
+                
+          
+        {% if forloop.index == 2 %}
+        <div class="new_icon4_img fullcream">
+          <div class="step_img_1"><img src="{{ product.metafields.icon_step.icon_step[forloop.index0] }}" alt="" /></div>
+          <div class="step_img_2"><img src="{{ product.metafields.icon_stephover.icon_stephover[forloop.index0] }}" alt="" /></div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 3 %}
+        <div class="new_icon4_img dna">
+         <div class="step_img_1"><img src="{{ product.metafields.icon_step.icon_step[forloop.index0] }}" alt="" /></div>
+          <div class="step_img_2"><img src="{{ product.metafields.icon_stephover.icon_stephover[forloop.index0] }}" alt="" /></div>
+        </div>
+        {% endif %}
+                
+               </div>
+              
+              
+              
+			    {% if product.metafields.title_step.title_step[forloop.index0] != blank  %}
+                <h5 class="heading_h5">{{ product.metafields.title_step.title_step[forloop.index0] }}</h5>
+                {% endif %}
+
+                {% if product.metafields.info_step.info_step[forloop.index0] != blank  %}
+                {{ product.metafields.info_step.info_step[forloop.index0] }}
+                {% endif %}
+              
+			</div>
+           </div>
+            {% endfor %}
+					
+		 </div>
+		</div>
+     
+     
+     
+     
+     {%- comment -%} 
+		<div class="steps_div">
+		 <div class="steps_div_content subscribe_rowslider">
+            {% for block in section.blocks %}
+           <div>
+			<div class="s-col s{{ forloop.index }}">
+              <style>
+                .s-col.s{{ forloop.index }}:hover .step_img_2{
+                    -webkit-transition: opacity 0.3s ease-out;
+                    -moz-transition: opacity 0.3s ease-out;
+                    -o-transition: opacity 0.3s ease-out;
+                    transition: opacity 0.3s ease-out;
+                    opacity: 1;
+                }
+              </style>
+              
+              
+              
+              <div class="step_icon_grid">
+                
+          {% if forloop.first %}
+        <div class="new_icon4_img ukicon">
+          <div class="step_img_1">{% include 'icon_organic' %}</div>
+          <div class="step_img_2">{% include 'icon_organic_hover' %}</div>
+        </div>
+        {% endif %}
+          
+        {% if forloop.index == 2 %}
+        <div class="new_icon4_img fullcream">
+          <div class="step_img_1">{% include 'icon_fullcream' %}</div>
+          <div class="step_img_2">{% include 'icon_fullcream_hover' %}</div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 3 %}
+        <div class="new_icon4_img dna">
+          <div class="step_img_1">{% include 'icon_DNA' %}</div>
+          <div class="step_img_2">{% include 'icon_DNA_hover' %}</div>
+        </div>
+        {% endif %}
+                
+               </div>
+              
+              
+              
+			    {% if block.settings.title != blank  %}
+                <h5 class="heading_h5">{{ block.settings.title }}</h5>
+                {% endif %}
+
+                {% if block.settings.info != blank  %}
+                <p>{{ block.settings.info }}</p>
+                {% endif %}
+              
+			</div>
+           </div>
+            {% endfor %}
+					
+		 </div>
+		</div>
+     {%- endcomment -%} 
+  </div>
+		<div class="bottom_design" style="background-color:{{section.settings.bg_border_color}};">
+		  <div class="tree_icon">
+		        {%- if section.settings.tree_image_icon != blank -%}
+             
+               <img src="{{ section.settings.tree_image_icon | img_url:'168x' }}" alt="" />
+              
+               {%- endif -%} 
+		 </div>
+		</div>
+		<div class="bottom_arrow">
+			<div class="down_arrow section-2"></div>
+		</div>
+</div>
+</div>
+{% schema %}
+{
+  "name": "How it works",
+  "class": "how-it-work-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default":"Heading" 
+    },
+
+	{
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f6faff"
+    },
+    {
+        "type": "image_picker",
+        "id": "insta_icon_cloud",
+        "label": "Cloud image",
+	    "info": "Size: 505 x 158px"
+      },
+      {
+        "type": "image_picker",
+        "id": "insta_icon_bird",
+        "label": "Birds image",
+	    "info" : "Size: 300 x 76px"
+      },
+	  {
+        "type": "image_picker",
+        "id": "insta_icon_sun",
+        "label": "Sun image",
+        "info": "Size: 274 x 274px"
+      },
+      {
+      "type": "color",
+      "id": "bg_border_color",
+      "label": "border color",
+      "default": "#f5f8f0"
+      },
+       {
+        "type": "image_picker",
+        "id": "tree_image_icon",
+        "label": "Tree icon image",
+        "info": "Size: 168 x 140px"
+      }
+ 
+  ]
+    
+}
+{% endschema %}

@@ -1,0 +1,273 @@
+<div class="about_parallax-section">
+<div class="aboutDiv_section_2">
+
+    
+<div class="page-width feature-row maxwidth_none p-0" style="background-color:{{ section.settings.bg_color }};">
+  {% capture image_layout %}
+    <div class="feature-row__item img_item about_featureimg" style="background-image:url({{ section.settings.image | img_url: '600x' }});">
+      {% if section.settings.image != blank %}
+        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+        {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+       {% comment %}
+      <div id="" class="feature-row__image-wrapper js mobile_about_hide">
+          <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
+            <img id=""
+                 class="feature-row__image lazyload"
+                 src="{{ section.settings.image | img_url: '200x200' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.image.alt | escape }}">
+          </div>
+        </div>
+       {% endcomment %}
+      
+
+        
+    
+      {% endif %}
+      
+      {% if section.settings.image_mobile != blank %}
+        {%- assign img_url = section.settings.image_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.image_mobile, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="" class="feature-row__image-wrapper js mobile_about_hide">
+          <div style="padding-top:{{ 1 | divided_by: section.settings.image_mobile.aspect_ratio | times: 100}}%;">
+            <img id=""
+                 class="feature-row__image lazyload"
+                 src="{{ section.settings.image_mobile | img_url: '200x200' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.image_mobile.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.image_mobile.alt | escape }}">
+          </div>
+        </div>
+      
+
+        
+    
+      {% endif %}
+      
+    </div>
+  {% endcapture %}
+
+  <div class="feature-row feature-row--{{ section.settings.layout }}">
+    {% if section.settings.layout == 'left' %}
+      {{ image_layout }}
+    {% endif %}
+
+    <div class="feature-row__item feature-row__text about_text_section2 feature-row__text--{{ section.settings.layout }} text_item">
+      <div class="rte_box">
+        
+        
+        
+     
+       
+        
+
+      {%- if section.settings.sub_title != blank -%}
+           <h5 class="heading_h5 text-left">
+             {{ section.settings.sub_title | escape }}
+        </h5>
+          {%- endif -%}          
+          
+          {%- if section.settings.title != blank -%}
+            <h3 class="heading_h3 text-left">
+              {{ section.settings.title | escape }}
+        </h3>
+          {%- endif -%}
+        
+      {% if section.settings.text != blank %}
+        <div class="rte rte-setting featured-row__subtext">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        {%- capture ariaLabel -%}
+          {{- section.settings.button_label -}}
+          {%- if section.settings.button_link.type == 'frontpage_link' -%}
+            : {{ 'homepage.general.title' | t -}}
+          {%- elsif section.settings.button_link.type == 'catalog_link' -%}
+            : {{ 'collections.catalog.title' | t -}}
+          {%- elsif section.settings.button_link.object.title -%}
+            : {{ section.settings.button_link.object.title -}}
+          {%- endif -%}
+        {%- endcapture -%}
+
+        <a href="{{ section.settings.button_link }}"
+          class="btn"
+          aria-label="{{ ariaLabel }}">
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {% endif %}
+           
+        
+      
+        </div>     
+      
+      
+       
+      
+      
+      </div>
+   
+
+    {% if section.settings.layout == 'right' %}
+      {{ image_layout }}
+    {% endif %}
+  </div>
+  </div>
+
+
+ <div class="about_bottom_icon" style="{{ section.settings.layout1 }};">
+            {%- if section.settings.image_icon != blank -%}
+            <div class="icon_about">
+              <img src="{{ section.settings.image_icon | img_url:'600x' }}" alt="" />
+              
+            	{% comment %}
+              <img src="{{ section.settings.image_icon | img_url:'304x94' }}" alt="" />
+                
+              
+              {% if section.settings.image_icon != blank %}
+        {%- assign img_url_3 = section.settings.image_icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.image_icon, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="" class="feature-row__image-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: section.settings.image_icon.aspect_ratio | times: 100}}%;">
+            <img id=""
+                 class="feature-row__image lazyload"
+                 src="{{ section.settings.image_icon | img_url: '200x200' }}"
+                 data-src="{{ img_url_3 }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.image_icon.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.image_icon.alt | escape }}">
+          </div>
+        </div>
+      
+
+        
+      {% endif %}
+              {% endcomment %}
+              
+            </div>
+             {%- endif -%} 
+    
+ </div>
+
+</div>
+</div>
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Billede med tekst",
+    "de": "Foto mit Text",
+    "en": "Image with text",
+    "es": "Imagen con texto",
+    "fi": "Kuva tekstillä",
+    "fr": "Image avec texte",
+    "hi": "टेक्स्ट वाली इमेज",
+    "it": "Immagine con testo",
+    "ja": "テキスト付き画像",
+    "ko": "텍스트 포함 이미지",
+    "nb": "Bilde med tekst",
+    "nl": "Afbeelding met tekst",
+    "pt-BR": "Imagem com texto",
+    "pt-PT": "Imagem com texto",
+    "sv": "Bild med text",
+    "th": "รูปภาพพร้อมข้อความ",
+    "zh-CN": "带文本的图片",
+    "zh-TW": "附文字的圖片"
+  },
+  "class": "about-section local_supply",
+
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+	"info": "Size: 800 x 1317px"
+    },
+{
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image",
+	"info": "Size: 600 x 600px"
+    },
+	
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+	 {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub heading"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_icon",
+     "label": "Bottom image icon",
+	"info": "Size: 304 x 94px"
+    },
+    {
+      "type": "select",
+      "id": "layout1",
+      "label": "Icon alignment",
+      "default": "right:0",
+      "options": [
+        {
+          "value": "left:0",
+          "label": "Left"
+        },
+        {
+          "value": "right:0",
+          "label": "Right"
+        }
+      ]
+    },
+	{
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+	  "default": "#f5f8f0"
+    }
+  ]
+}
+{% endschema %}

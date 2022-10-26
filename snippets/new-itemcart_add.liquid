@@ -1,0 +1,74 @@
+<div id="cart_addpro" class="bottle-product-title_hide"  {% if cart.item_count == 0 %}style="display:none;"{% endif %}> 
+{% for item in collections.all.products  %}
+   {% if item.tags contains 'bottle' %}
+  <div class="cart_box">  
+    <div class="cartitem_img">
+      {% for image in item.images %}
+      {% if forloop.index == 1 %}
+      <img class="product_img product_img--first" src="{{ image.src | img_url: 'x1200' }}" alt="{{ item.title | escape }}">
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="cart_infobox">  
+     <div class="test">{{ item.title }}</div>
+      
+      <form action="/cart/add" method="post" id="add-to-cart" class="no_bold_options product-form">   
+        {% unless item.has_only_default_variant %}
+        {% for option in item.options_with_values %}
+        <div class="selector-wrapper js product-form__item">
+          <label {% if option.name == 'default' %}class="label--hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+            {% for value in option.values %}
+            <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endfor %}
+        {% endunless %}
+
+
+        <select name="id" id="productSelect" class="product-single__variants" style="display:none;">
+          <option selected="selected">Select size</option>
+          {% for variant in item.variants %}
+
+          <option {% unless variant.available %} disabled="disabled" {% endunless %} 
+                  {% if forloop.length <= 1 %}
+                  {% if variant == item.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          data-sku="{{ variant.sku }}" 
+          value="{{ variant.id }}">
+          {{ variant.title }} 
+          </option>
+        {% endfor %}
+        </select>
+
+
+      <select name="id" id="ProductSelect-{{ section.id }}" class="product-form__variants no-js">
+        {% for variant in item.variants %}
+        {% if variant.available %}
+        <option {% if variant == item.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+          {{ variant.title }}
+        </option>
+        {% else %}
+        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+
+      
+
+
+      <div class="two_btn ">           
+        <button type="submit" class="btn singleaddcart" name="add">Add to bag / {{ item.price | money }} </button>
+      </div>
+
+      </form>
+  </div>
+</div>
+{% endif %}
+{% endfor %} 
+
+
+</div>

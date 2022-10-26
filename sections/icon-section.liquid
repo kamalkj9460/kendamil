@@ -1,0 +1,381 @@
+<!-- TrustBox widget - Micro Combo -->
+<div class="trustpilot-home">
+<div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="5dcd8cbd54590600012888c9" data-style-height="20px" data-style-width="100%" data-theme="light">
+<a href="https://uk.trustpilot.com/review/kendamil.com" target="_blank" rel="noopener">Trustpilot</a>
+</div>
+</div>  
+<!-- End TrustBox widget -->
+
+
+<div class="icon4_section" style="background-color:{{ section.settings.i_bg }};">
+  <div class="page-width page-width-1102">    
+    {% if section.settings.i_title != blank  %}
+    <h3 class="heading_h3">{{ section.settings.i_title }}</h3>
+    {% endif %}
+    
+    
+    <div class="row row_slider">
+      {% for block in section.blocks %}
+     
+      <div class="icon4_box icon4_{{ forloop.index }}">
+        
+        {% if forloop.first %}
+        <div class="icon4_img ukicon">
+         
+      
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_uk' %}
+             {% endcomment %}
+            
+             <img class="icon_uk" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+            
+          </div>
+          {% endcomment %}
+          
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_uk_hover' %}
+           {% endcomment %}
+            <img class="icon_uk" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+          
+        {% if forloop.index == 2 %}
+        <div class="icon4_img fullcream">
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_fullcream' %}
+            {% endcomment %}
+            <img class="icon_fullcream" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+            {% comment %}
+            {% include 'icon_fullcream_hover' %}
+            {% endcomment %}
+            <img class="icon_fullcream" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+            
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 3 %}
+        <div class="icon4_img EUorganic">
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_EUorganic' %}
+          {% endcomment %}
+            <img class="icon_EUorganic" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+            {% comment %}
+            {% include 'icon_EUorganic_hover' %}
+          	{% endcomment %}
+            <img class="icon_EUorganic" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 4 %}
+        <div class="icon4_img nopalmoil">
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_nopalmoil' %}
+             {% endcomment %}
+            <img class="icon_nopalmoil" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+            
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+            {% comment %}
+            {% include 'icon_nopalmoil_hover' %}
+            {% endcomment %}
+            <img class="icon_nopalmoil" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 5 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 6 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 7 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 8 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 9 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if forloop.index == 10 %}
+        <div class="icon4_img veg">
+          
+          {% comment %}
+          <div class="first-icon">
+            {% comment %}
+            {% include 'icon_veg' %}
+          	 {% endcomment %}
+            <img class="icon_veg" src="{{ block.settings.image | img_url: 'x300' }}" alt="" />
+          </div>
+          {% endcomment %}
+          <div class="second-icon">
+             {% comment %}
+            {% include 'icon_veg_hover' %}
+          {% endcomment %}
+          <img class="icon_veg" src="{{ block.settings.image_hover | img_url: 'x300' }}" alt="" />
+          </div>
+        </div>
+        {% endif %}
+          
+          
+          
+          {% comment %}
+        <div class="icon4_img">
+          <img src="{{ block.settings.image | img_url:'200x' }}" alt="" class="first-icon" />          
+          <img src="{{ block.settings.image_hover | img_url:'200x' }}" alt="" class="second-icon" />    
+          </div>
+          {% endcomment %}
+        
+        
+        <div class="icon4_info">          
+          {% if block.settings.title != blank  %}
+          <span>{{ block.settings.title }}</span>
+          {% endif %}
+          
+           {% if block.settings.info != blank  %}
+          <p>{{ block.settings.info | newline_to_br }}</p>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>  
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+$('.row_slider').slick({
+  slidesToShow: 10,
+  slidesToScroll: 1,     
+  arrows: false,
+  fade: false,
+  dots: false,
+  draggable: false,
+  infinite: false,
+  responsive: [
+    {
+      breakpoint: 1199,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+         draggable: true,	
+        autoplay: true,
+        arrows: false,
+        infinite: true,
+        autoplaySpeed: 2000
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+         draggable: true,	
+        autoplay: true,
+        arrows: false,
+        infinite: true,
+        autoplaySpeed: 2000
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+         draggable: true,
+        arrows: false,
+        autoplay: true,
+        infinite: true,
+        autoplaySpeed: 2000	
+      }
+    }
+    
+  ]
+});
+
+
+  
+});
+</script>
+
+
+{% schema %}
+  {
+    "name": "Home page icon",
+    "class": "index-section homeicon",
+	"settings": [
+	{
+      "type": "text",
+      "id": "i_title",
+      "label": "Heading",
+      "default": "Heading"
+    },
+	{
+      "type": "color",
+      "id": "i_bg",
+      "label": "Background-color",
+	   "default": "#fdfbf9"
+    }
+],
+"blocks": [
+    {
+      "type": "icon_image",
+      "name": "icon",
+      "settings": [
+
+	    {
+          "type": "image_picker",
+          "id": "image_hover",
+          "label": "Icon image",
+	  	"info": "size: 300 x 225px"
+        },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "info",
+      "label": "info",
+      "default": "Lorem ipsum dolor sit amet consectetur adipiscing elit."
+    }
+		
+      ]
+    }
+  ],
+ "presets": [
+    {
+      "name": "Icon image",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

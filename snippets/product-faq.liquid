@@ -1,0 +1,27 @@
+<div id="product_faq" style="background:{{product.metafields.faq_background_color.faq_background_color}};">
+  <div class="page-width">
+    {% if product.metafields.sub_title_faq.sub_title_faq != blank %}
+    <h5 class="heading_h5 text-center">{{ product.metafields.sub_title_faq.sub_title_faq }}</h5>
+    {% endif %}
+    {% if product.metafields.title_faq.title_faq != blank %}
+    <h3 class="heading_h3">{{ product.metafields.title_faq.title_faq }}</h3>
+    {% endif %}
+    <div id="accordion_faq" class="information_tab">
+      {% for value in product.metafields.faq_question.faq_question %} 
+      {% if product.metafields.faq_question.faq_question[forloop.index0] != blank %}
+      <div class="accordion_title">
+        {{ product.metafields.faq_question.faq_question[forloop.index0] }} <span></span>
+      </div>
+      <div class="content_info">
+        {{ product.metafields.faq_answer.faq_answer[forloop.index0] }}
+      </div>   
+      {% endif %}
+      {% endfor %}   
+    </div>
+    
+    
+    
+    
+  </div>
+</div>
+

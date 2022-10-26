@@ -1,0 +1,139 @@
+#shopify-section-footer #news_form div {
+    padding: 0!important;    
+    margin: 0!important;
+}
+#element_to_pop_up #inline-form div {
+    padding: 0!important;    
+    margin: 0!important;
+}
+#shopify-section-footer #news_form input[type='email'],
+#foo_email input[type='email']{
+    font-family: Futura!important;
+    font-weight: 400!important;
+    border:2px solid #0f1d48!important;
+    padding:22px 27px!important;
+    line-height: normal!important;
+    border-radius: 0!important;
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    height: auto!important;
+  box-shadow:none!important;
+  color: #192850!important;
+font-size: 14px!important;
+opacity: 1!important;
+font-family: 'FaktPro-Normal'!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+#element_to_pop_up #inline-form input[type='email'],
+#pop_email input[type='email']{
+    font-family: Futura!important;
+    font-weight: 400!important;
+    border:2px solid #0f1d48!important;
+    padding:22px 27px!important;
+    line-height: normal!important;
+    border-radius: 0!important;
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    height: auto!important;
+  box-shadow:none!important!important;
+  color: #192850!important;
+font-size: 14px!important;
+opacity: 1!important;
+font-family: 'FaktPro-Normal'!important;
+   outline:none!important;
+  box-shadow:none!important;
+}
+#shopify-section-footer #news_form input::placeholder,
+#element_to_pop_up #inline-form input::placeholder{  
+  opacity:1!important;
+  color: #192850!important;
+  font-size: 14px!important;
+  opacity: 1!important;
+  font-family: 'FaktPro-Normal'!important;
+}
+#shopify-section-footer #news_form input::-moz-placeholder,
+#element_to_pop_up #inline-form input::-moz-placeholder{
+   opacity:1!important;
+  color: #192850!important;
+  font-size: 14px!important;
+  opacity: 1!important;
+  font-family: 'FaktPro-Normal'!important;
+}
+#shopify-section-footer #news_form input::-webkit-input-placeholder,
+#element_to_pop_up #newsform_pop input::-webkit-input-placeholder{
+   opacity:1!important;
+  color: #192850!important;
+  font-size: 14px!important;
+  opacity: 1!important;
+  font-family: 'FaktPro-Normal'!important;
+}
+
+#shopify-section-footer #news_form  button,
+#foo_email button{
+    border: none!important;
+    background: none!important;
+    position: absolute!important;
+    right: 0!important;
+    top: 0!important;
+    width: 70px!important;
+    padding: 0!important;
+  height: 66px!important;
+  font-size:0!important;
+  background:url(https://cdn.shopify.com/s/files/1/0443/3729/9614/files/arr.svg?v=1633672912) no-repeat center center!important;
+  background-size:14px auto!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+
+
+#element_to_pop_up #inline-form button,
+#pop_email button{
+    border: none!important;
+    background: none!important;
+    position: absolute!important;
+    right: 0!important;
+    top: 0!important;
+    width: 70px!important;
+    padding: 0!important;
+  height: 66px!important;
+  font-size:0!important;
+  background:url(https://cdn.shopify.com/s/files/1/0443/3729/9614/files/arr.svg?v=1633672912) no-repeat center center!important;
+  background-size:14px auto!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+
+
+#shopify-section-footer #news_form form,
+#element_to_pop_up #inline-form form{
+  overflow:inherit!important;
+}
+#shopify-section-footer #news_form span,
+#element_to_pop_up #inline-form span{
+  letter-spacing: normal!important;
+  font-family: 'FaktPro-Normal'!important;
+  font-size: 14px!important;
+}
+#shopify-section-footer #news_form p,
+#element_to_pop_up #inline-form p{
+  letter-spacing: normal!important;
+   font-family: 'FaktPro-Normal'!important;
+  font-size: 14px!important;
+   text-align: left !important;
+}
+#shopify-section-footer #news_form input[type="email"] + div > div,
+#element_to_pop_up #inline-form input[type="email"] + div > div{
+  left:0!important;
+  right:inherit!important;
+}
+
+#shopify-section-footer #news_form p strong,
+#element_to_pop_up #inline-form p strong{
+  letter-spacing: normal!important;
+  font-size: 14px!important;
+  font-family: 'FaktPro-Normal'!important;
+}
+#element_to_pop_up #inline-form p{
+  margin-bottom:10px!important;
+}

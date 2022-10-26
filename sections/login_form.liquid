@@ -1,0 +1,29 @@
+<div class="icon_div form_logo_element">
+          {%- if settings.cloud_image_icon != blank -%}
+          <div class="flower_img parallax__element cloud_icon">
+           <img src="{{ settings.cloud_image_icon | img_url:'135x' }}" alt="" />
+          </div>
+           {%- endif -%} 
+          
+          {%- if settings.sun_image_1 != blank -%}
+          <div class="flower_img1 parallax__element sun_icon">
+           <img src="{{ settings.sun_image_1 | img_url:'74x' }}" alt="" />
+          </div>
+           {%- endif -%}
+          
+</div>
+
+{%- if settings.login_form_bkg != blank -%}
+<style>
+.login_form_div{
+  background-color:{{ settings.login_form_bkg }};
+}
+    input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 35px {{ settings.login_form_bkg }} inset !important;
+}
+</style> 
+{%- endif -%}
+

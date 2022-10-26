@@ -1,0 +1,445 @@
+ <script type="text/javascript">
+var cartCount = {{ cart.item_count }};
+$(document).ready(function(){
+  {% if cart.item_count != 0 %}  
+     $('#cart-number').replaceWith("<a href='javascript:void(0);' id='cart-number' class='cart-button itemincart'>" + cartCount + "</a>");
+  {% endif %}
+});
+
+
+/*============================================================================
+Start of cart-related functionality
+==============================================================================*/
+function ajaxSubmitCart() { 
+$cart = $("#cart");
+$.ajax({
+  url: '/cart.js',
+  dataType: 'json',
+  type: 'post',
+  data: $cart.serialize(),
+  success: function (data) { 
+	refreshCart(data);
+  }
+});}
+
+function refreshCart(cart) { 
+  if(typeof window.BOLD !== 'undefined'
+     && typeof window.BOLD.common !== 'undefined'
+     && typeof window.BOLD.common.cartDoctor !== 'undefined') {
+    // NOTE: "cart" should be the variable containing the cart json data
+    cart = window.BOLD.common.cartDoctor.fix(cart);
+  }
+
+ // alert("hii");
+    $cartBtn = $("#CartCount");
+   
+    if ($cartBtn && $cartBtn.size()) {  
+      var value = $cartBtn.text() || '0';
+      var cart_items_html = "";
+      var $cart = $("#cart ul");
+       var inv_qty = {};
+     
+      
+      //alert(shopCurrency);
+      
+      $cartBtn.text(value.replace(/[0-9]+/,cart.item_count));
+      $cart.find('li:not(:first)').remove();
+      
+      if (cart.item_count <= 0) { 
+        
+        $cart.html('');
+        
+        $("#cart_addpro").hide(); 
+        
+        
+
+        
+        
+        $("#added-box #cart").addClass('hide_gift');
+        
+        $cart.append("<li class='empty_cart'>Your bag is empty</li>");                                         
+                             
+        $(".cart-button").removeClass('itemincart');             
+                     
+        $(".cart-button").html('<a href="javascript:void(0);" id="cart-number" class="cart-button itemincart">' + cart.item_count + '</a>');
+          
+        $('.new-total-price').html(Shopify.formatMoney(cart.total_price, $cart.data('money-format')));    
+        
+        // $(".addbag_count").hide();
+        
+        $("#CartCount").addClass('count_0');
+        $(".site-header__cart").addClass('count_empty');
+        
+      } else { 
+        
+        
+
+     
+      console.log(cart.items);
+ 
+       
+         cart_items_html += '<div class="scroll_cart">';
+        $.each(cart.items, function(index, item) {
+         
+
+          
+         // console.log(cart.item_count);
+           //console.log(item.product_id);
+         /* var check_related_added = item.product_id;
+          if(!$(".cart_box").hasClass( "product_"+ check_related_added))
+          {
+              $("#cart_addpro").removeClass('hide_boxs');
+              
+              // $("#cart_addpro").hide('hide_boxs');
+              //   console.log("added");
+            
+          }
+         else
+          {
+             
+            //$("#cart_addpro").show();
+             // console.log("not added");
+
+            
+          } */
+
+           
+         if(item.properties!=null)
+          {
+          var item_prop= (JSON.stringify(item.properties));
+         // alert(item_prop);
+         // alert(JSON.stringify(item.properties['Babiesname']));
+          }
+          var recurring_desc = "";
+          if(item.properties_all  && item.properties_all .frequency_num){
+           recurring_desc = "<span> Delivered Every " + item.properties_all.frequency_num + " " + item.properties_all.frequency_type_text + " " + item.properties_all.discounted_price + " each" + "</span>"; 
+          }
+        // alert("i m else part");
+         
+          cart_items_html += '<li class="' + item.handle +'_hide cart_item last_cart_item ajax_show">' +
+		     
+			 '<div class="cart_image" style="background-color:' + item.vendor + '">' +
+             '<img src="' + item.image.replace(/(\.[^.]*)$/, "_large$1").replace('http:', '') + '" alt="' + htmlEncode(item.title) + '" style="width:100%" />' +
+             '</div>' +
+			 '<div class="cart_item_right">' +
+            '<div class="item_leftinfo">' +
+            '<div class="item_title"> <span>' + item.product_title + recurring_desc + '</span>' + 
+            '<div class="price font-price-0">' + Shopify.formatMoney(item.price, $cart.data('money-format')) + '</div>' +             
+            '</div>' + 
+            '<div class="cartmeta_text">' +            
+            '<div class="Size_sec">Kendamil Milk '+ item.variant_options[0] + '</div>' +
+            '<div class="Size_sec Size_sec_two hide">'+ item.variant_options[1] + '</div>' +
+            '</div>' +  
+            
+            '</div>';
+          
+       /* if(item_prop!=null && item_prop!="{}")
+          {
+            if((JSON.stringify(item.properties['Item']))!=null)
+            {
+        var pre= (JSON.stringify(item.properties['Item']));
+         var myStr = pre.replace(/"/g, "");
+           cart_items_html += '<div class="pre_order">'+ myStr +'</div>';
+          }
+          } */
+          
+     /*  if(item.properties!=null)
+          {
+          var item_prop= (JSON.stringify(item.properties));
+               var myStr = item_prop.replace(/"/g, "");
+            var test = myStr.replace(/,/g, "<br>");
+          cart_items_html += '<div class="pre_order">'+ test +'</div>';
+            
+          } */
+          
+           if(item_prop!=null && item_prop!="{}")
+          {
+           
+            if((JSON.stringify(item.properties['Prices for Kendamil Milk option']))!=null)
+            {
+               var pre= (JSON.stringify(item.properties['Prices for Kendamil Milk option']));
+               var myStr = pre.replace(/"/g, "");
+               console.log(myStr);
+          //  cart_items_html + = '<div class="item_label"><b>Prices for Kendamil Milk option</b>:'+ myStr +'</div>';
+              cart_items_html += '<div class="item__prop_label">Prices for Kendamil Milk option: '+ myStr +'</div>';
+            }
+             if((JSON.stringify(item.properties['How many cans per month']))!=null)
+            {
+               var no_can= (JSON.stringify(item.properties['How many cans per month']));
+               var cans = no_can.replace(/"/g, "");
+               console.log(cans);
+          //  cart_items_html + = '<div class="item_label"><b>Prices for Kendamil Milk option</b>:'+ myStr +'</div>';
+              cart_items_html += '<div class="item_prop_can">How many cans per month: '+ cans +'</div>';
+            }
+               if((JSON.stringify(item.properties['Babys name']))!=null && (JSON.stringify(item.properties['Babys name']))!='""')
+            {
+               var baby_name= (JSON.stringify(item.properties['Babys name']));
+               var baby = baby_name.replace(/"/g, "");
+               console.log(baby);
+          //  cart_items_html + = '<div class="item_label"><b>Prices for Kendamil Milk option</b>:'+ myStr +'</div>';
+              cart_items_html += '<div class="item_prop_baby_name">Baby’s name: '+ baby +'</div>';
+            }
+           if((JSON.stringify(item.properties['Birth Date']))!=null && (JSON.stringify(item.properties['Birth Date']))!='""')
+            {
+               var birth_date= (JSON.stringify(item.properties['Birth Date']));
+               var birth = birth_date.replace(/"/g, "");
+               console.log(birth);
+          //  cart_items_html + = '<div class="item_label"><b>Prices for Kendamil Milk option</b>:'+ myStr +'</div>';
+              cart_items_html += '<div class="item_prop_baby_name">Birth Date: '+ birth +'</div>';
+            }
+            
+            
+        
+          } 
+          
+          
+            cart_items_html +='<div class="price">' + Shopify.formatMoney(item.line_price, $cart.data('money-format')) + '</div>' +
+            '<div class="mm-counter ' + item.product_title +'">' +
+             ' <i>Qty</i>'+
+             '<div class="mm-counterbox">'+
+             '<span class="quantity-count minus ss-icon">&#x002D;</span>' +
+             '<input type="number" class="quantity" name="updates[]" id="updates_' + item.id + '" value="' + item.quantity +'" />' +
+             '<span class="quantity-count plus ss-icon">&#x002B;</span>' +
+             '</div>' +
+             '</div>' +
+             
+               
+            '<div class="removelink items_{% for var in product.variants %}{{ var.inventory_quantity }}{% endfor %}">' +
+			 '<a href="javascript:void(0)" class="removelink_del lt lt-close" onclick="remove_item(' + item.variant_id + '); return false;">remove</a>' +
+			 '</div>' +
+            
+			 '</div>' +
+			 '</li>' ; 
+          	
+		
+        });
+         cart_items_html += 
+          
+	             
+           
+           '</div>';
+		
+		
+		cart_items_html += 
+          
+          '<div class="subtotal_box"><div id="cart_count"><span class="CartCount">'+ cart.item_count +'</span> <span id="item_name"></span></div> Subtotal: <div class="subtotal">' + Shopify.formatMoney(cart.total_price, $cart.data('money-format')) + '</div>' +
+		   {% if settings.del_msg != blank %}
+          '<div class="delivery_msg delivery_msgajx">{{ settings.del_msg }}</div>'+
+            {% endif %}	
+           '</div>'+
+          
+			 '<div class="input_submit"><input type="submit" name="checkout" value="Secure Checkout" class="btn blk_btn"></div>'+
+             '<a href="/collections/shop-all" class="btn right continues white_btn continue_btn">Continue Shopping</a>'+
+        
+        		'<div class="pay_img"></div>';
+		
+        $(".cart-button").addClass('itemincart');
+        
+		$("#CartCount").removeClass('count_0');
+        $(".site-header__cart").removeClass('count_empty');
+        
+        $(".cart_sec .icondiv").css('opacity', '1');
+        $(".site-header__cart-count").css('opacity', '0');
+        
+      //  $("#cart_addpro").show(); 
+        
+        
+        
+        
+        
+        
+        setTimeout(function(){
+         $(".cart_sec .icondiv").css('opacity', '0');
+         $(".site-header__cart-count").css('opacity', '1');
+   		 }, 2000);
+        
+        $("#added-box #cart").removeClass('hide_gift');
+        
+        $(".cart-button").html('<a href="javascript:void(0);" id="cart-number" class="cart-button itemincart">' +cart.item_count+ '</a>');
+          
+        $('.new-total-price').html(Shopify.formatMoney(cart.total_price, $cart.data('money-format')));  
+
+        $cart.html(cart_items_html);
+        //$cart.append(cart_items_html);
+        $cart.find('li.cart_item:last').addClass('last_cart_item');
+     
+          if($('.currencies:visible option:selected').val()) {
+            Currency.convertAll($cart.data('shop-currency'), $('.currencies:visible option:selected').val()); 
+          }
+		
+		$("#PageContainer").addClass('slideleft_body');
+        
+        
+       
+		$(".bottle-product-title_hide.ajax_show").addClass('hide_bottal');
+        
+        $("#added-box-wrapper").addClass('showcart');  
+        
+        $(".blk_tras").addClass('ac_blk_tras');
+      
+       // setTimeout(function(){
+         // $("#added-box-wrapper").removeClass('showcart');
+          // $("#added-box-wrapper").slideUp(); 
+          // $(".blk_tras").removeClass('ac_blk_tras');
+   		 //}, 5000);
+        
+     //   $("#added-box-wrapper").slideDown(); 
+
+		
+		$("#Prod_added_suc").html('Product added to cart');  
+        
+        $("#Prod_added_suc").fadeIn(6000);
+		
+        $("#Prod_added_suc").fadeOut(6000);
+        
+        $(".addbag_count").show(); 
+        $("body").addClass('body_noscroll');
+        
+        
+        if($("li.cart_item").hasClass("hide_bottal"))
+          {
+             $("#cart_addpro").hide();
+             //  console.log("added");
+          }
+        else{
+          
+         $("#cart_addpro").show();
+          //  console.log("not added");
+          
+        }
+        
+      
+    $("div.Size_sec:contains(Default)").hide();
+    $("div.Color_sec:contains(undefined)").hide();
+        if(cart.item_count==1){        
+		$("#item_name").html('ITEM');  
+
+        }
+        else{
+          	$("#item_name").html('ITEMS');  
+        }
+        
+        
+
+     
+        
+        
+        
+      }
+    }
+  }  
+function htmlEncode(value){ 
+    if (value) {
+        return $('<div/>').text(value).html(); 
+    } else {
+        return '';
+    }}  
+	
+	
+function remove_item(id) {
+      document.getElementById('updates_'+id).value = 0;
+      ajaxSubmitCart();
+  }	
+	
+  
+$(document).on("change", "#cart input[type='number']", function() { 
+    ajaxSubmitCart();
+  });  
+  
+$(document).on("click", ".minus", function() { 
+    var quantity = parseInt($(this).next("input").val()); 
+    var qty = quantity ;
+    
+    quantity -= 1;
+    $(this).next("input").attr("value", quantity);
+    
+    if (qty <= 0) {
+
+
+
+      $(this).closest('li.cart_item').addClass('animated fadeOutUp')
+      setTimeout(ajaxSubmitCart, 500);
+    } else {
+      ajaxSubmitCart();
+    }
+
+  
+  
+  });  
+
+$(document).on("click", ".plus", function() { 
+    var quantity = parseInt($(this).prev("input").val()); 
+    quantity += 1;
+    $(this).prev("input").attr("value", quantity);
+    ajaxSubmitCart();
+  
+
+  
+  });
+  
+
+$(document).on("submit",".product-form", function(e) { 
+      e.preventDefault();
+      var $addToCartForm = $(this);  
+      var $addToCartBtn = $addToCartForm.find('.singleaddcart');
+
+      $.ajax({
+        url: '/cart/add.js',
+        dataType: 'json',
+        type: 'post',
+        data: $addToCartForm.serialize(),
+        success: function(itemData) { 
+    	  $.getJSON("/cart.js", function(cart) { 
+            refreshCart(cart);
+            window.setTimeout(function(){ $('.cart-button').click(); }, 500);
+          });    
+        },
+        
+        error: function(XMLHttpRequest) {
+          var response = eval('(' + XMLHttpRequest.responseText + ')');
+          response = response.description;
+          $('.warning').remove();
+
+          //var warning = '<p class="warning animated bounceIn">' + response.replace('All 1 ', 'All ') + '</p>';
+          var warning = '<p class="warning animated bounceIn">' + response.replace('All ', 'All ') + '</p>';
+          $addToCartBtn.after(warning);
+          $addToCartBtn.removeAttr('disabled').removeClass('disabled');
+          $addToCartBtn.find('span').text("Sold out").removeClass('zoomOut').addClass('zoomIn');
+          
+         // var str = $( ".warning" ).text('array contains unpermitted members: id');
+          $( ".warning:contains('array contains unpermitted members: id')" ).css( "display", "none" );
+          
+        }
+        
+        
+      });
+
+      return false;
+    });
+
+  $(document).on("click", ".slideleft_body, .continue_btn", function(){
+   $("#added-box-wrapper").removeClass('showcart');
+     $("body").removeClass('body_noscroll');
+    $(".blk_tras").removeClass('ac_blk_tras');
+  //  $("#added-box-wrapper").slideUp(); 
+
+  });
+
+  $(document).on("click", "#close_bag", function(){
+    $("#added-box-wrapper").removeClass('showcart');
+     $("body").removeClass('body_noscroll');
+    $(".blk_tras").removeClass('ac_blk_tras');
+   // $("#added-box-wrapper").slideUp(); 
+
+  });
+  
+  $(document).on("click", ".blk_tras", function(){ 
+    $("#added-box-wrapper").removeClass('showcart');
+     $("body").removeClass('body_noscroll');
+    $(this).removeClass('ac_blk_tras');
+  //  $("#added-box-wrapper").slideUp(); 
+    
+  });  
+  
+</script>
+

@@ -1,0 +1,181 @@
+{%- if comment.status == 'pending' -%}
+  {%- assign number_of_comments = article.comments_count | plus: 1 -%}
+{%- else -%}
+  {%- assign number_of_comments = article.comments_count -%}
+{%- endif -%}
+<script type="text/javascript" src="{{ 'vendornew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'commonnew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'pagesnew.js' | asset_url }}"></script>
+
+
+{{ 'home_2.css' | asset_url | stylesheet_tag }}
+
+<div id="rel_blog" class="home_blog">
+<div class="page-width p-0">
+
+ <div class="relatedblog"> 
+   
+   <div class="section-header">
+    {% if section.settings.ex_title != blank %}
+    <h3>{{ section.settings.ex_title }}</h3>
+    {% endif %}
+    {% if section.settings.ex_info != blank %}
+    <div class="section-headerinfo text-center">
+      {{ section.settings.ex_info }} 
+    </div>
+     {% endif %}
+  </div>
+   
+       {% for tag in article.tags limit:1 %}
+          
+       {% assign curr_blog = tag %}
+       {% endfor %}
+   
+   
+       {% assign current = article.id %}
+        
+             
+
+       <div class="homeblog_box grid wrapper" id="relblog">
+         
+         
+         <section class="MCItemCarousel MCItemCarousel--hasIntro MCItemCarousel--hasMinimumSpacing" data-component="MCItemCarousel" data-global-ref="ScrollRevealer-reveal">
+    <div class="MCItemCarousel-scrollable">
+      <div class="MCCarouselNav MCCarouselNav--prev" data-ref="carouselNavPrev">
+        <button class="MCCarouselNav-btn lt-navigateleft" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCCarouselNav MCCarouselNav--next" data-ref="carouselNavNext">
+        <button class="MCCarouselNav-btn lt-navigateright" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCItemCarousel-viewport">
+        <div class="MCItemCarousel-productWrapper" data-ref="productWrapper">
+          
+          {% for article in blog.articles %}
+          {% if article.tags contains curr_blog %}
+         {% unless article.id == current %}
+          <div class="MCItemCarousel-Item">
+            <div class="grid__item pro_box">
+              <div class="grid__item medium-up--one-third box_box">
+                <article aria-labelledby="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  <a href="{{ article.url }}" class="article__link">
+                    {% if article.image %}
+                    {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+                    {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+                    {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                    {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+                    <div class="article__grid-image-wrapper js">
+                      <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+                        <img 
+                             class="article__grid-image lazyload"
+                             src="{{ article.image | img_url: '300x300' }}"
+                             data-src="{{ img_url }}"
+                             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                             data-aspectratio="{{ article.image.aspect_ratio }}"
+                             data-sizes="auto"
+                             alt="">
+                      </div>
+                    </div>
+                    <noscript>
+                      <div class="article__grid-image-wrapper">
+                        {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+                      </div>
+                    </noscript>
+                    {% endif %}
+
+                    {% if section.settings.blog_show_date %}
+                    <span class="article__date">
+                      {{ article.published_at | date: "%d %b %Y" }}
+                    </span>
+                    {% endif %}
+
+                    {% if article.tags.size > 0 %} 
+                    {{ article.tags }} 
+                 {% else %}
+                    category
+                 {% endif %}
+
+                    <h3 class="article_title heading_h3" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                      {{ article.title }}
+                    </h3>
+                  </a>
+
+                  {% if section.settings.blog_show_author %}
+                  <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+                  {% endif %}
+
+
+                  <div class="article__grid-meta">
+                    <div class="rte article__grid-excerpt">
+                      {% if article.excerpt.size > 0 %}
+                      {{ article.excerpt | strip_html | truncate: 150 }}
+                      {% else %}
+                      {{ article.content | strip_html | truncate: 150 }}
+                      {% endif %}
+                    </div>
+
+
+
+
+                  </div>
+
+
+                </article>
+              </div>
+            </div>
+          </div>
+          {% endunless %}
+         {% endif %}
+          {% endfor %}
+          
+        </div>
+        <div class="MCCarouselScrollbar" data-ref="scrollbar-track">
+          <div class="MCCarouselScrollbar-bar" data-ref="scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+         
+         
+         
+         
+         
+         
+
+       </div>
+     
+  </div>
+
+     
+
+
+  
+</div>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Article Similar",
+    "settings": [
+		{
+      "type": "text",
+      "id": "ex_title",
+      "label": "Heading"
+    },
+	{
+      "type": "richtext",
+      "id": "ex_info",
+      "label": "Info"
+    }
+	
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

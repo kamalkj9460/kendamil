@@ -1,0 +1,402 @@
+<div class="pagewidth">
+  {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </div>
+  {% endif %}
+
+  {%- assign collection = collections[section.settings.collection] -%}
+
+  {% case section.settings.grid %}
+    {% when 2 %}
+      {%- assign max_height = 530 -%}
+      {%- assign grid_item_width = 'medium-up--one-half' -%}
+    {% when 3 %}
+      {%- assign max_height = 345 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+    {% when 4 %}
+      {%- assign max_height = 250 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+    {% when 5 %}
+      {%- assign max_height = 195 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+  {% endcase %}
+
+  {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+  
+  <div class="tablink">
+    <div class="tabslider">
+      
+      {% if section.settings.tab_tilte_1 != blank %} 
+      <div>
+      <div class="large_icon">
+        <a href="#zero_{{ section.settings.tab_tilte_1 }}_0">
+        <div class="svg_box wake_box">{% include 'wake-svg-icon' %}</div>
+        <span>{{ section.settings.tab_tilte_1 }}</span>
+        </a>
+      </div>
+        </div>
+      {% endif %}
+      
+      {% if section.settings.tab_tilte_2 != blank %}
+      <div>
+      <div class="large_icon">
+        <a href="#zero_{{ section.settings.tab_tilte_2 }}_1">
+        <div class="svg_box mind_box">{% include 'mind-svg-icon' %}</div>
+        <span>{{ section.settings.tab_tilte_2 }}</span>
+        </a>
+      </div>
+        </div>
+      {% endif %}
+      
+      {% if section.settings.tab_tilte_3 != blank %}
+      <div>
+      <div class="large_icon">
+        <a href="#zero_{{ section.settings.tab_tilte_3 }}_2">
+        <div class="svg_box exercise_box">{% include 'exercise-svg-icon' %}</div>
+        <span>{{ section.settings.tab_tilte_3 }}</span>
+        </a>
+      </div>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.tab_tilte_4 != blank %}
+      <div>
+      <div class="large_icon">
+        <a href="#zero_{{ section.settings.tab_tilte_4 }}_4">
+        <div class="svg_box sleep_box">{% include 'sleep-svg-icon' %}</div>
+        <span>{{ section.settings.tab_tilte_4 }}</span>
+        </a>
+      </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  
+   {% comment%}
+ <div class="tab_box"> 
+  <div class="grid grid--uniform grid--view-items product_loop homepro_slider">
+    <div id="homepro_slider">
+      
+      {% if section.settings.tab_tilte_1 != blank %}
+    <div>  
+      <div class="img_box wakepro_slider">
+    {% for product in collection.products  %}    
+    {% if product.tags contains 'Wake' %}       
+        <div class="grid__item product_box">
+          {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+        </div>    
+    {% endif %}
+      {% endfor%}
+      </div>
+      </div>
+      {% endif %}
+     
+      {% if section.settings.tab_tilte_2 != blank %}
+    <div>
+      <div class="img_box Workpro_slider">
+      {% for product in collection.products  %} 
+    {% if product.tags contains 'Work' %}          
+        <div class="grid__item product_box ">
+          {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+        </div>    
+    {% endif %}
+      {% endfor%}
+      </div>
+      </div>
+      {% endif %}
+    
+      {% if section.settings.tab_tilte_3 != blank %}
+    <div>
+      <div class="img_box exepro_slider">
+      {% for product in collection.products  %} 
+      {% if product.tags contains 'Exercise' %}
+
+      <div class="grid__item product_box">
+        {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+      </div>
+
+      {% endif %}
+      {% endfor%}
+      </div>
+    </div>
+      {% endif %}
+    
+      {% if section.settings.tab_tilte_4 != blank %}
+    <div>
+      <div class="img_box slepro_slider">
+      {% for product in collection.products  %} 
+      {% if product.tags contains 'Sleep' %}
+
+      <div class="grid__item product_box">
+        {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+      </div>
+
+      {% endif %}
+      {% endfor%}
+      </div>
+    </div>
+      {% endif %}
+    
+    </div>
+
+  </div>
+  </div>
+   {% endcomment%}
+  
+ <section id="demos"> 
+   <div class="loop owl-carousel owl-theme">
+     {% for product in collection.products  %}    
+   <div class="item" data-hash="zero_{{ product.tags }}_{{ forloop.index0 }}">
+        <div class="grid__item product_box">
+          
+          {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+          
+     </div>    
+     </div>
+      {% endfor%}
+     <div class="item"></div>
+          </div>
+  </section> 
+  
+  
+
+  
+  {% if section.settings.show_view_all %}
+    <hr class="hr--invisible" aria-hidden="true" />
+    <div class="text-center">
+      <a href="{{ collection.url }}" class="btn" aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+        {{ 'collections.general.view_all' | t }}
+      </a>
+    </div>
+  {% endif %} 
+
+</div>
+
+  <script>
+$(document).ready(function() {
+$('#homepro_slider').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  fade: false,
+  dots: false,
+  infinite: false,
+  centerMode: false,
+  draggable: false,
+  variableWidth: true,
+  asNavFor: '.tabslider',
+  responsive: [
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: false,
+         centerMode: true
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  
+$('.tabslider').slick({
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  asNavFor: '#homepro_slider',
+  dots: true,
+  centerMode: false,
+  focusOnSelect: true,
+  infinite: true
+});
+  
+  
+ $('.Wake_ac').addClass("active_border"); 
+  
+  $(".tabslider .wake_box, .tabslider .wake_box + span ").click(function(){
+    $('.Wake_ac').addClass("active_border");
+    $('.Work_ac').removeClass("active_border");
+    $('.Exercise_ac').removeClass("active_border");
+    $('.Sleep_ac').removeClass("active_border");
+  });
+  
+  $(".tabslider .mind_box, .tabslider .mind_box + span").click(function(){
+    $('.Wake_ac').removeClass("active_border");
+    $('.Work_ac').addClass("active_border");
+    $('.Exercise_ac').removeClass("active_border");
+    $('.Sleep_ac').removeClass("active_border");
+  });
+  
+  $(".tabslider .exercise_box, .tabslider .exercise_box + span").click(function(){
+    $('.Wake_ac').removeClass("active_border");
+    $('.Work_ac').removeClass("active_border");
+    $('.Exercise_ac').addClass("active_border");
+    $('.Sleep_ac').removeClass("active_border");
+  });
+  
+  $(".tabslider .sleep_box, .tabslider .sleep_box + span").click(function(){
+    $('.Wake_ac').removeClass("active_border");
+    $('.Work_ac').removeClass("active_border");
+    $('.Exercise_ac').removeClass("active_border");
+    $('.Sleep_ac').addClass("active_border");
+  });
+  
+  
+  
+});
+</script>
+
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Udvalgt kollektion",
+    "de": "Vorgestellte Kategorie",
+    "en": "Featured collection",
+    "es": "Colección destacada",
+    "fi": "Esittelyssä oleva kokoelma",
+    "fr": "Collection en vedette",
+    "hi": "फ़ीचर्ड कलेक्शन",
+    "it": "Collezione in evidenza",
+    "ja": "特集コレクション",
+    "ko": "추천 컬렉션",
+    "nb": "Utvalgt samling",
+    "nl": "Uitgelichte collectie",
+    "pt-BR": "Coleção em destaque",
+    "pt-PT": "Coleção em destaque",
+    "sv": "Utvald kollektion",
+    "th": "คอลเลกชันแนะนำ",
+    "zh-CN": "特色产品系列",
+    "zh-TW": "精選商品系列"
+  },
+  "class": "index-section home_product",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Collection"
+    },
+
+{
+      "type": "text",
+      "id": "title",
+      "label": "Titel",
+      "default": "Featured collection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },  
+    {
+      "type": "header",
+      "content": "Tab first"
+    },
+	{
+	"type": "text",
+      "id": "tab_tilte_1",      
+      "label": "Title"
+    }, 
+   {
+	  "type": "color",
+      "id": "tab_color_1",
+      "label": "Active color",
+	  "default": "#e4d5d3"
+    },
+	{
+      "type": "header",
+      "content": "Tab second"
+    },
+	{
+	"type": "text",
+      "id": "tab_tilte_2",      
+      "label": "Title"
+    }, 
+   {
+	  "type": "color",
+      "id": "tab_color_2",
+      "label": "Active color",
+      "default": "#9abeaa"
+    },
+	{
+      "type": "header",
+      "content": "Tab third"
+    },
+	{
+	"type": "text",
+      "id": "tab_tilte_3",      
+      "label": "Title"
+    }, 
+   {
+	  "type": "color",
+      "id": "tab_color_3",
+      "label": "Active color",
+	  "default": "#efbe7d"
+    },
+	{
+      "type": "header",
+      "content": "Tab fourth"
+    },
+	{
+	"type": "text",
+      "id": "tab_tilte_4",      
+      "label": "Title"
+    }, 
+   {
+	  "type": "color",
+      "id": "tab_color_4",
+      "label": "Active color",
+	  "default": "#cbd3ea"
+    }
+    
+    
+  ],
+  "presets": [
+    {
+      "name": {
+        "da": "Udvalgt kollektion",
+        "de": "Vorgestellte Kategorie",
+        "en": "Featured collection",
+        "es": "Colección destacada",
+        "fi": "Esittelyssä oleva kokoelma",
+        "fr": "Collection en vedette",
+        "hi": "फ़ीचर्ड कलेक्शन",
+        "it": "Collezione in evidenza",
+        "ja": "特集コレクション",
+        "ko": "추천 컬렉션",
+        "nb": "Utvalgt samling",
+        "nl": "Uitgelichte collectie",
+        "pt-BR": "Coleção em destaque",
+        "pt-PT": "Coleção em destaque",
+        "sv": "Utvald kollektion",
+        "th": "คอลเลกชันแนะนำ",
+        "zh-CN": "特色产品系列",
+        "zh-TW": "精選商品系列"
+      },
+      "category": {
+        "da": "Kollektion",
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fi": "Kokoelma",
+        "fr": "Collection",
+        "hi": "कलेक्शन",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "ko": "컬렉션",
+        "nb": "Samling",
+        "nl": "Collectie",
+        "pt-BR": "Coleção",
+        "pt-PT": "Coleção",
+        "sv": "Produktserie",
+        "th": "คอลเลกชัน",
+        "zh-CN": "收藏",
+        "zh-TW": "商品系列"
+      }
+    }
+  ]
+}
+{% endschema %}

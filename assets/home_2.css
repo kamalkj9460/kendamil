@@ -1,0 +1,314 @@
+.MCItemCarousel {
+    overflow: hidden;
+    padding-bottom: 82px;
+    padding-top: 14px;
+    position: static;
+    width: 100%;
+}
+.MCItemCarousel-scrollable {
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-height: 470px;
+}
+.MCItemCarousel-scrollable {
+    display: -ms-flexbox;
+    display: flex;
+    max-height: 600px;
+    min-height: 450px;
+}
+.MCItemCarousel-scrollable {
+    position: static;
+}
+.MCCarouselNav {
+    width: 150px;
+}
+.MCCarouselNav--next {
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    right: 0;
+}
+.MCCarouselNav {
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .001);
+    display: -ms-flexbox;
+    display: flex;
+    height: 50.5%;
+    overflow: hidden;
+    position: absolute;
+    width: 80px;
+    z-index: 100;
+}
+.MCCarouselNav--next .MCCarouselNav-btn {
+   transform: translateX(80px);
+}
+.MCCarouselNav--next .MCCarouselNav-btn {
+    transform: translateX(60px);
+}
+.MCCarouselNav-btn {
+    height: 80px;
+    width: 80px;
+}
+.MCCarouselNav-btn {
+    background-color: #333;
+    height: 60px;
+    transition: all .3s cubic-bezier(.215, .61, .355, 1);
+    width: 60px;
+}
+.MCCarouselNav--prev {
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    left: 0;
+  	display: inherit !important;
+}
+
+.MCItemCarousel-viewport {
+    margin-bottom: 10px;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+	flex-grow: 1;
+height: 100%;
+max-height: 450px;
+}
+.flickity-enabled.is-draggable {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.flickity-enabled {
+    position: relative;
+}
+.flickity-enabled.is-draggable .flickity-viewport {
+    cursor: default;
+}
+.MCItemCarousel .flickity-viewport {
+    overflow: visible;
+}
+.flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.MCCarouselScrollbar {
+    background-color: #f7f5f2;
+    bottom: -10px;
+    height: 2px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+}
+.MCCarouselScrollbar-bar {
+    background-color: #00103c;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    will-change: left;
+}
+.MCCarouselNav--next .MCCarouselNav-btnIcon {
+    transform: rotate(-90deg);
+}
+.MCCarouselNav-btnIcon {
+    fill: #fffef2;
+    height: 15px;
+    width: 15px;
+}
+.MCItemCarousel-Item {
+    max-width:none;
+    width: 25%;
+}
+.MCItemCarousel .flickity-viewport {
+    overflow: visible;
+}
+.flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.flickity-enabled.is-draggable {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.flickity-enabled {
+    position: relative;
+}
+.MCCarouselNav--next {
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    right: 0;
+}
+.MCCarouselNav--next .MCCarouselNav-btn {
+    transform: translateX(80px);
+}
+.MCCarouselNav--next .MCCarouselNav-btnIcon {
+    transform: rotate(-90deg);
+}
+.MCCarouselNav--prev .MCCarouselNav-btn {
+    transform: translateX(-80px);
+}
+.MCFullCarousel-wrapper:hover .MCCarouselNav-btn:not(:disabled), .MCInsetCarousel-wrapper:hover .MCCarouselNav-btn:not(:disabled), .MCItemCarousel-scrollable:hover .MCCarouselNav-btn:not(:disabled), body.has-tabbed .MCFullCarousel-wrapper:focus, body.has-tabbed .MCInsetCarousel-wrapper:focus, body.has-tabbed .MCItemCarousel-scrollable:focus {
+    transform: translateX(0);
+}
+.MCCarouselNav--prev .MCCarouselNav-btnIcon {
+    transform: rotate(90deg);
+}
+
+.trending_week .grid-view-item__image-wrapper{
+  max-height:none!important;
+  max-width:none!important;
+}
+.trending_week .product-card__image-with-placeholder-wrapper {
+    float: left;
+    width: 100%;
+}
+.trending_week .grid-view-item__image{
+   max-height:none!important;
+  max-width:none!important;
+}
+.trending_week .pro_box {
+    float: left;
+    width: 100%;
+    padding: 0 6px;
+}
+.MCCarouselNav button{
+  width:43px;
+  height:43px;
+  background:#fff;
+  border:none;
+  border-radius:0;
+  background-repeat:no-repeat;
+  background-position:center;
+  font-size:16px;
+  border-radius:100%;
+  border:2px solid #1f2d54;
+  font-family: "LushIcons";
+}
+/*
+.MCCarouselNav--prev .MCCarouselNav-btn{
+  background-image:url(prev.png);
+  background-size:16px auto;
+}
+.MCCarouselNav--next .MCCarouselNav-btn{
+  background-image:url(next.png);
+  background-size:16px auto;
+}*/
+.trending_week {
+    float: left;
+    width: 100%;
+    padding: 0 0 0;
+}
+.grid__item.medium-up--one-third.box_box {
+    width: 100%;
+    padding: 0;
+}
+.div_box2 .slick-arrow{
+  	background: none !important;
+}
+.div_box2 .slick-arrow::before{
+  font-family: "LushIcons";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  display:inherit!important;
+  font-size: 16px;
+  
+}
+.div_box2 .slick-next::before{
+    content: '\f197';
+}
+.div_box2 .slick-prev::before{
+    content: '\f199';
+}
+
+
+.icon_uk{
+  width:63px;
+  /*height:63px;*/
+}
+.icon_fullcream {
+    width: 49px;
+    /*height: 78px;*/
+}
+.icon_EUorganic {
+    width: 88px;
+    /*height: 55px;*/
+}
+.EUorganic .second-icon{
+  position: relative;
+}
+
+.icon_nopalmoil {
+    width: 57px;
+    /*height: 62px;*/
+}
+.icon_veg {
+    width: 65px;
+    /*height: 65px;*/
+}
+.icon_madewithlove{
+  width: 59px;
+    height: 52px;
+}
+.home_story .icon_madewithlove {
+    position: relative;
+    top: 9px;
+}
+.icon_DNA{
+  width: 54px;
+    height: 68px;
+}
+.ex_img_1, .ex_img_2 {
+    text-align: center;
+    width:100%;
+}
+.ex_img_1 svg, .ex_img_2 svg{
+  margin:0 auto;
+}
+.exicon_box {
+    min-height: 93px;
+}
+.icon4_img svg{
+  float:left;
+}
+  .MCCarouselScrollbar {
+    bottom: 0;
+    position: relative;
+    right: 0;
+    clear:both;
+}
+.MCItemCarousel-productWrapper{
+  float:left;
+  width:100%;
+  margin:0 0 50px;
+}
+
+.second-icon{
+  opacity:1!important;
+}
+.first-icon, .ex_img_1{
+  display:none;
+}
+.ex_img_2 {
+    position: static!important;
+    opacity:1!important;
+}

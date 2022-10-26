@@ -1,0 +1,102 @@
+<div id="element_to_pop_up" style="background: {{ settings.news_bg }};">  
+  
+  <div class="cloud image">
+    <img src="{{ settings.news_icon | img_url:'131x' }}" alt="" />
+  </div>
+  
+  <div id="" class="inline_wrapper">
+    <div id='inline' class="inline2" >
+      <div class="mail_chip_form">
+        <div class="close_div">                 
+          <a href="javascript:void(0)" class="cls_pop">
+            <img src="{{ 'close.png' | asset_img_url:'13x' }}" alt="" />
+          </a>                  
+        </div>
+        
+        <div class="popup_newsletter_form">
+              <div class="site-footer__newsletter">
+                <div class="news_text">
+                  {% if settings.news_title != blank %}
+                  <h3>{{ settings.news_title }}</h3>
+                  {% endif %}
+                  {% if settings.news_info != blank %}
+                  {{ settings.news_info }}
+                  {% endif %}                               
+                   
+                </div>
+              </div>
+              
+          {% comment %}        
+          <form id="inline-form">
+                <div class="news-input">
+                  <input id="mc-email" type="email" placeholder="Email address">
+                  <button type="submit" class="Form__Submit Button Button--primary" id="go">{% include 'news-arrow' %}</button>
+                  <label for="mc-email"></label>
+                </div>    
+              </form>
+          
+          
+          
+          
+          <div id="inline-form">
+<div class="site-footer__newsletter
+                          {% if section.blocks.size == 1 %} site-footer__single-block--centered{% endif %}">
+                  {%- assign formId = 'ContactFooter' -%}
+                  {% form 'customer', id: formId, novalidate: 'novalidate' %}
+                    {%- if form.posted_successfully? -%}
+                      <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                        {{ 'general.newsletter_form.confirmation' | t }}
+                      </p>
+                    {%- endif -%}
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <div class="input-group {% if form.errors %} input-group--error{% endif %}">
+                      <input type="email"
+                        name="contact[email]"
+                        id="{{ formId }}-email"
+                        class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}"
+                        value="{{ form.email }}"
+                        placeholder="Email address"
+                        aria-label="Email address"
+                        aria-required="true"
+                        required
+                        autocorrect="off"
+                        autocapitalize="off"
+                        {% if form.errors %}
+                          aria-invalid="true"
+                          aria-describedby="{{ formId }}-email-error"
+                          data-form-status
+                        {% endif %}>
+                     
+                        <button type="submit" class="newsletter__submit" name="commit" id="go">
+                          {% include 'news-arrow' %}
+                        </button>
+                  
+                    </div>
+                    {% if form.errors contains 'email' %}
+                      <span id="{{ formId }}-email-error" class="input-error-message">
+                        <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                        {% include 'icon-error' %}
+                        <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                      </span>
+                    {% endif %}
+                  {% endform %}
+                </div>
+</div>
+          {% endcomment %}       
+          
+          <div id="inline-form">
+            <div class="klaviyo-form-WLvtKB"></div>
+          </div>
+          
+          
+          
+          
+              </div>
+        
+        <!-- End newsletter -->
+      </div>            
+    </div>
+
+  </div>
+</div>
+

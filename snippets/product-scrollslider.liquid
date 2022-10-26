@@ -1,0 +1,295 @@
+
+{% comment %}
+<div class="gu hide--mobile" style="background:{{product.metafields.background_color_sr.background_color_sr}};">
+  
+  <ul class="step-number">
+    {% for value in product.metafields.image_sr.image_sr %} 
+    {% if product.metafields.image_sr.image_sr[forloop.index0] != blank %}
+    <li class="step_count_add"></li>
+     {% endif %}
+    {% endfor %}   
+  </ul>
+<div class="gx"> 
+  
+  
+  
+<div id="scrollslider" class="middle-center-pro" style="background:{{product.metafields.background_color_sr.background_color_sr}};">
+  <div class="page-width">
+    
+    <ul class="number-list">
+    {% for value in product.metafields.image_sr.image_sr %} 
+    {% if product.metafields.image_sr.image_sr[forloop.index0] != blank %}
+    <li class="count_no">
+      <button type="button" data-role="none" role="button" tabindex="0">{% cycle 'group 1': '01', '02', '03', '04', '05', '06', '07', '08' %}</button>
+      </li>
+     {% endif %}
+    {% endfor %}   
+  </ul>
+    
+        
+    
+     <div class="scroll_tab">
+      {% for value in product.metafields.image_sr.image_sr %} 
+       <div class="step-list">
+      {% if product.metafields.image_sr.image_sr[forloop.index0] != blank %}
+         <div class="scroll_box">
+      <div class="scroll_img">
+        <div class="scroll_img_box">
+        <img src="{{ product.metafields.image_sr.image_sr[forloop.index0] }}" alt="" />    
+      </div>
+           </div>
+       
+       <div class="scroll_info">
+         
+         {% if product.metafields.sub_title_sr.sub_title_sr[forloop.index0] != blank %}
+         <h5 class="heading_h5">{{ product.metafields.sub_title_sr.sub_title_sr[forloop.index0] }}</h5>
+         {% endif %}
+
+         {% if product.metafields.title_sr.title_sr[forloop.index0] != blank %}
+         <h3 class="heading_h3">{{ product.metafields.title_sr.title_sr[forloop.index0] }}</h3>
+         {% endif %}
+         
+         {% if product.metafields.info_sr.info_sr[forloop.index0] != blank %}
+         <div class="scroll_rte">
+          <span>{{ product.metafields.info_sr.info_sr[forloop.index0] }}</span>  
+         </div>
+         {% endif %}
+         
+      </div>
+         </div>
+      {% endif %}
+       </div>
+      {% endfor %}   
+    </div>
+  </div>
+</div>
+</div>  
+</div>  
+{% endcomment %}
+
+
+<div id="scrollslider" class="mobile-show" style="background:{{product.metafields.background_color_sr.background_color_sr}};">
+  <div class="page-width">
+     <div class="scroll_tab slider-item">
+      {% for value in product.metafields.image_sr.image_sr %} 
+       <div>
+      {% if product.metafields.image_sr.image_sr[forloop.index0] != blank %}
+         <div class="scroll_box">
+      <div class="scroll_img">
+        <div class="scroll_img_box">
+        <img src="{{ product.metafields.image_sr.image_sr[forloop.index0] }}" alt="" />    
+      </div>
+           </div>
+       
+       <div class="scroll_info">
+         
+         {% if product.metafields.sub_title_sr.sub_title_sr[forloop.index0] != blank %}
+         <h5 class="heading_h5">{{ product.metafields.sub_title_sr.sub_title_sr[forloop.index0] }}</h5>
+         {% endif %}
+
+         {% if product.metafields.title_sr.title_sr[forloop.index0] != blank %}
+         <h3 class="heading_h3">{{ product.metafields.title_sr.title_sr[forloop.index0] }}</h3>
+         {% endif %}
+         
+         {% if product.metafields.info_sr.info_sr[forloop.index0] != blank %}
+         <div class="scroll_rte">
+          <span>{{ product.metafields.info_sr.info_sr[forloop.index0] }}</span>  
+         </div>
+         {% endif %}
+         
+      </div>
+         </div>
+      {% endif %}
+       </div>
+      {% endfor %}   
+    </div>
+  </div>
+</div>
+
+{% for value in product.metafields.image_sr.image_sr %} 
+<style>
+{% if forloop.index == 1 %}  
+.number-list li:nth-child(1)::after, #scrollslider .slick-dots li:nth-child(1)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+{% if forloop.index == 2 %}  
+.number-list li:nth-child(2)::after, #scrollslider .slick-dots li:nth-child(2)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 3 %}  
+.number-list li:nth-child(3)::after, #scrollslider .slick-dots li:nth-child(3)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 4 %}  
+.number-list li:nth-child(4)::after, #scrollslider .slick-dots li:nth-child(4)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 5 %}  
+.number-list li:nth-child(5)::after, #scrollslider .slick-dots li:nth-child(5)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+    {% if forloop.index == 6 %}  
+.number-list li:nth-child(6)::after, #scrollslider .slick-dots li:nth-child(6)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 7 %}  
+.number-list li:nth-child(7)::after, #scrollslider .slick-dots li:nth-child(7)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 8 %}  
+.number-list li:nth-child(8)::after, #scrollslider .slick-dots li:nth-child(8)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 9 %}  
+.number-list li:nth-child(8)::after, #scrollslider .slick-dots li:nth-child(9)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+  {% if forloop.index == 10 %}  
+.number-list li:nth-child(10)::after, #scrollslider .slick-dots li:nth-child(10)::after{
+  content:'{{ product.metafields.left_title.left_title[forloop.index0] }}';
+}
+{% endif %}
+    
+    
+</style>
+{% endfor %}   
+
+
+<script>
+/* $(document).ready(function(){
+const slider = $(".slider-item");
+slider
+  .slick({
+    dots: true,
+  customPaging : function(slider, i) {
+    var thumb = $(slider.$slides[i]).data();
+    
+    return '<button type="button" data-role="none" role="button" tabindex="0">0'+ (i+1) +'</button>';
+            },
+  arrows:false,
+	infinite: false,
+	fade: true,
+	speed: 700,
+	vertical: true
+  });
+
+slider.on('wheel', (function(e) {
+  e.preventDefault();
+
+  if (e.originalEvent.deltaY < 0) {
+    $(this).slick('slickPrev');
+  } else {
+    $(this).slick('slickNext');
+  }
+}));
+   
+  //will append to beginning
+ 
+   
+   
+});*/
+  
+  $(document).ready(function() {
+  $('#scrollslider .page-width').bind('mousewheel DOMMouseScroll', function(e) {
+    const slider = $(".slider-item");
+    var slideCount = $(slider)[0].slick["slideCount"];
+    var currentIndex = $(slider).slick("slickCurrentSlide");
+    var totalSildeToShow = $(slider)[0].slick.options["slidesToShow"];
+
+   if (e.originalEvent.deltaY >= 0) {
+     
+      if ((slideCount - 1) !== currentIndex) {
+         console.log("123");
+        e.preventDefault();
+        var delta = e.wheelDelta || e.detail;
+        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+        $(".slider-item").slick('slickNext')
+      }
+      else {
+         console.log("000"); 
+        
+      }
+      
+    } else {
+      if (currentIndex != 0) {
+          console.log("456");
+      //  console.log(currentIndex);
+        e.preventDefault();
+        var delta = e.wheelDelta || e.detail;
+        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+        $(".slider-item").slick('slickPrev')
+      }
+     if (currentIndex == 0) {
+         console.log("789");
+        if(currentIndex===0)
+        return; 
+       e.preventDefault();
+        
+        $(".slider-item").slick('slickPrev')
+      
+      }
+    }
+
+
+
+  });
+
+  $('.slider-item').slick({
+    vertical: true,
+    infinite: false,
+    arrows: false,
+    fade: true,
+	speed: 700,
+    dots: true
+  });
+
+});
+
+const slider = $(".slider-item");
+
+slider.on('wheel', function(e) {
+
+  var slideCount = $(this)[0].slick["slideCount"];
+  var currentIndex = $(this).slick("slickCurrentSlide");
+  var totalSildeToShow = $(this)[0].slick.options["slidesToShow"];
+  console.log(slideCount);
+  console.log(totalSildeToShow);
+   console.log(currentIndex);
+  
+
+ if (e.originalEvent.deltaY < 0) {
+    if(currentIndex===0)
+        return; 
+    e.preventDefault();
+    $(this).slick('slickPrev');
+  } else {
+   
+    if (slideCount - totalSildeToShow === currentIndex)
+      return;
+    e.preventDefault();
+   $(this).slick('slickNext');
+  }
+});
+
+  
+  
+  $(window).on('resize', function() {
+    var viewportWidth = jQuery(window).width();
+
+    if (viewportWidth < 481) {
+        $('.multiple-items').slick('unslick');
+    } else {
+        // Do some thing
+    }
+});
+  
+</script>

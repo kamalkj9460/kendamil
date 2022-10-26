@@ -1,0 +1,20 @@
+<div id="key_ingredients" style="background:{{product.metafields.background_color_k.background_color_k}};">
+  <div class="page-width">
+    {% if product.metafields.title_k.title_k != blank %}
+    <h3 class="heading_h3">{{ product.metafields.title_k.title_k }}</h3>
+    {% endif %}
+    <div class="key_tab">
+      {% for value in product.metafields.icon_key.icon_key %} 
+      {% if product.metafields.icon_key.icon_key[forloop.index0] != blank %}
+      <div class="key_box">
+      <div class="key_icon">
+        <img class="keyicon_1" src="{{ product.metafields.icon_key.icon_key[forloop.index0] }}" alt="" />
+        <img class="keyicon_2" src="{{ product.metafields.icon_key_hover.icon_key_hover[forloop.index0] }}" alt="" />        
+      </div>
+      <span>{{ product.metafields.title_icon_title.title_icon_title[forloop.index0] }}</span>   
+      </div>
+      {% endif %}
+      {% endfor %}   
+    </div>
+  </div>
+</div>

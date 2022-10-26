@@ -1,0 +1,14 @@
+{% section 'ingredients-template' %}
+
+
+
+<script src="{{ 'jquery_accordion.js' | asset_url }}" defer="defer"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+$('.accordion1').accordion({
+defaultOpen: 'section1',
+cookieName: 'accordion_nav'
+});
+});
+</script>

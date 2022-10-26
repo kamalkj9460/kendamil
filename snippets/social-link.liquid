@@ -1,0 +1,77 @@
+<ul class="site-footer__linklist site-footer__icon-list">
+  
+  {%- if settings.social_facebook_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank"  href="{{ settings.social_facebook_link | escape }}" aria-describedby="a11y-external-message">                 
+                <i class="fa fa-facebook" aria-hidden="true"></i>                  
+                </a>
+              </li>
+            {%- endif -%}
+  
+  {%- if settings.social_twitter_link != blank -%}
+             <li class="site-footer__linklist-item"> 
+                <a target="_blank"  href="{{ settings.social_twitter_link | escape }}" aria-describedby="a11y-external-message">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+  
+   {%- if settings.social_in_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank"  href="{{ settings.social_in_link | escape }}" aria-describedby="a11y-external-message">           
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+  
+  
+  	{%- if settings.social_instagram_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank"  href="{{ settings.social_instagram_link | escape }}" aria-describedby="a11y-external-message">           
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+  
+  
+   {%- if settings.social_youtube_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank" class="social-icons__link" href="{{ settings.social_youtube_link | escape }}" aria-describedby="a11y-external-message">
+                 <i class="fa fa-youtube" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+            
+            
+            {%- if settings.social_pinterest_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank" class="social-icons__link" href="{{ settings.social_pinterest_link | escape }}" aria-describedby="a11y-external-message">
+             <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+            
+            {%- if settings.social_tumblr_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank" class="social-icons__link" href="{{ settings.social_tumblr_link | escape }}" aria-describedby="a11y-external-message">
+          <i class="fa fa-tumblr" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+            {%- if settings.social_snapchat_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank" class="social-icons__link" href="{{ settings.social_snapchat_link | escape }}" aria-describedby="a11y-external-message">
+         <i class="fa fa-snapchat-ghost" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+           
+            {%- if settings.social_vimeo_link != blank -%}
+              <li class="site-footer__linklist-item"> 
+                <a target="_blank" class="social-icons__link" href="{{ settings.social_vimeo_link | escape }}" aria-describedby="a11y-external-message">
+           <i class="fa fa-vimeo" aria-hidden="true"></i>
+                </a>
+              </li>
+            {%- endif -%}
+            
+          </ul>

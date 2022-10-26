@@ -1,0 +1,13 @@
+<div class="product_icons" id="product_icons">
+  <div class="pro_row">
+    {% for value in product.metafields.icon_image_svg.icon_image_svg %} 
+    <div class="proicon_box">
+    <div class="iconfirst_box {{ product.metafields.icon_title.icon_title[forloop.index0] }}_nameicon">
+     {% comment %} <img class="icon_first" src="{{ product.metafields.icon_image_svg.icon_image_svg[forloop.index0] }}" alt="" />{% endcomment %}
+      <img class="icon_second" src="{{ product.metafields.icon_hover_image_svg.icon_hover_image_svg[forloop.index0] }}" alt="" />
+    </div>
+    <span>{{ product.metafields.icon_title.icon_title[forloop.index0] }}</span>
+    </div>
+    {% endfor %} 
+  </div>  
+</div>

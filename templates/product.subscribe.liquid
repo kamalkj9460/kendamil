@@ -1,0 +1,65 @@
+{{ 'product.scss' | asset_url | stylesheet_tag }}
+{{ 'product-subscribe.css' | asset_url | stylesheet_tag }}
+
+{% comment %}{% endcomment %}
+  {% section 'product-subscribe-video' %}
+
+
+  {% section 'product-subscribe-how_it_works' %}
+
+  {% section 'product-subscribe-template' %}
+
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+<script>
+            $(document).ready(function() {	
+              
+         $(".section-1").click(function(){
+				$('html,body').animate({
+					  scrollTop: $(".how_it_work_div").offset().top - 0},
+				  'slow');
+				});
+			$(".section-2").click(function(){
+				$('html,body').animate({
+					  scrollTop: $(".subscription_form_div").offset().top - 90},
+				  'slow');
+				});	
+	
+            });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.featured_media -%}
+    {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  {%- if current_variant.sku != blank -%}
+    "sku": {{ current_variant.sku | json }},
+  {%- endif -%}
+  "brand": {
+    "@type": "Thing",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if variant.sku != blank -%}
+          "sku": {{ variant.sku | json }},
+        {%- endif -%}
+        "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price" : {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency" : {{ cart.currency.iso_code | json }},
+        "url" : {{ shop.url | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>

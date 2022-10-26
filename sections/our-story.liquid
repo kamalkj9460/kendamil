@@ -1,0 +1,231 @@
+<div class="story_section">
+ <div class="page-width">
+<div class="story_wrap">
+  {%- if section.settings.o_subtitle != blank -%}
+           <h5 class="heading_h5 text-center">
+             {{ section.settings.o_subtitle  }}
+        </h5>
+          {%- endif -%}          
+          
+          {%- if section.settings.o_title != blank -%}
+            <h3 class="heading_h3 text-center">
+              {{ section.settings.o_title }} {% include 'icon_madewithlove_hover' %} {{ section.settings.o_title1 }}
+        </h3>
+          {%- endif -%}
+  
+  {% if section.settings.o_info != blank %}
+  <div class="our_rte text-center">{{ section.settings.o_info }}</div>
+  {% endif %}
+  
+  {% if section.settings.button_label != blank %}
+  <a href="{{ section.settings.button_link }}"
+          class="btn"
+          aria-label="{{ ariaLabel }}">
+          {{- section.settings.button_label -}}
+        </a>
+  {% endif %}
+  
+   </div>
+  </div> 
+ 
+{%- if section.settings.select_option_os == 'our_jpg' -%}    
+  <div class="story_bottom_img">
+    {%- assign img_url = section.settings.image_bottom | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}     
+        {% include 'image-style', image: section.settings.image_bottom, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+    {%- assign moimg_url = section.settings.mo_image_bottom | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    {% include 'image-style', image: section.settings.mo_image_bottom, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+    
+    <img id=""
+                 class="small--hide"
+                 src="{{ section.settings.image_bottom | img_url: 'master' }}"
+                 alt="{{ section.settings.image_bottom.alt | escape }}">
+    
+    <img style="display:none;" id=""
+                 class="feature-row_image lazyload mo_show_img"
+                 src="{{ section.settings.mo_image_bottom | img_url: 'master' }}"
+                 alt="{{ section.settings.mo_image_bottom.alt | escape }}">
+  </div>
+ {% endif %}
+  
+  
+{%- if section.settings.select_option_os == 'our_gif' -%}  
+  <div class="story_bottom_img">
+    {%- assign img_url2 = section.settings.image_bottom_gif | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.image_bottom_gif, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+    
+    {%- assign moimg_url2 = section.settings.mo_image_bottom_gif | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.mo_image_bottom_gif, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+    <img id=""
+                 class="feature-row_image lazyload small--hide"
+                 src="{{ section.settings.image_bottom_gif | img_url: '1600x1600' }}"
+                 data-src="{{ img_url2 }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1600, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.image_bottom_gif.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.image_bottom_gif.alt | escape }}">
+    
+    
+    <img style="display:none;" id=""
+                 class="feature-row_image lazyload mo_show_img"
+                 src="{{ section.settings.mo_image_bottom_gif | img_url: '800x800' }}"
+                 data-src="{{ moimg_url2 }}"
+                 data-widths="[180, 360, 540, 720, 800, 900, 1080, 1296, 1512, 1600, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.mo_image_bottom_gif.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.mo_image_bottom_gif.alt | escape }}">
+    
+    
+    
+  </div>
+{% endif %}   
+  
+  
+ {%- if section.settings.select_option_os == 'our_video' -%}  
+  <div class="story_bottom_img">    
+    <div id="story_bottom_vid">
+   {%- assign videopath = section.settings.video_name -%}        
+    <video loop="loop" autoplay="autoplay" muted="muted" playsinline="true" preload="auto" class="image-new-content-block__video_4">
+      <source src="{{ videopath | asset_url }}" type="video/mp4">
+    </video>     
+  </div>
+  </div>
+{% endif %}  
+  
+</div>
+
+{%- if section.settings.ourstory_bg != blank -%}
+<style>
+.index-section.home_story{
+  background-color:{{ section.settings.ourstory_bg }};
+}  
+</style> 
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Our story",
+	"class": "index-section home_story",
+    "settings": [
+	{
+      "type": "text",
+      "id": "o_subtitle",
+      "label": "Sub heading"
+    },
+	
+	{
+      "type": "text",
+      "id": "o_title",
+      "label": "Heading"
+    },
+{
+       "type": "image_picker",
+       "id": "home_storyicon",
+       "label": "Icon image",
+	   "info": "size: 61 x 53px"
+     },
+{
+      "type": "text",
+      "id": "o_title1",
+      "label": "Heading"
+    },
+	{
+      "type": "richtext",
+      "id": "o_info",
+      "label": "Info"
+    },
+	{
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+
+{
+      "type": "select",
+      "id": "select_option_os",
+      "label": "Select option",
+      "default": "our_jpg",
+      "options": [
+        {
+          "label": "JPG",
+          "value": "our_jpg"
+        },
+	    {
+          "label": "GIF",
+          "value": "our_gif"
+        },
+        {
+          "label": "Video",
+          "value": "our_video"
+        }
+      ]
+    },
+   {
+      "type": "header",
+      "content": "JPG image"
+    },
+	
+	{
+       "type": "image_picker",
+       "id": "image_bottom",
+       "label": "JPG image",
+	   "info": "size: 1600 x 291px"
+     },
+	{
+       "type": "image_picker",
+       "id": "mo_image_bottom",
+       "label": "Mobile JPG image",
+	   "info": "size: 800 x 276px"
+     },
+	{
+      "type": "header",
+      "content": "GIF image"
+    },
+	{
+       "type": "image_picker",
+       "id": "image_bottom_gif",
+       "label": "GIF image",
+	   "info": "size: 1600 x 291px"
+     },
+	{
+       "type": "image_picker",
+       "id": "mo_image_bottom_gif",
+       "label": "Mobile GIF image",
+	   "info": "size: 800 x 276px"
+     },
+{
+      "type": "header",
+      "content": "Video"
+    },
+	{
+      "type": "text",
+      "id": "video_name",
+      "label": "Video name [.mp4]",
+      "info": "Size: 10 - 15mb",
+      "default": "video.mp4"
+    },
+{
+      "type": "color",
+      "id": "ourstory_bg",
+      "label": "Background-color",
+	   "default": "#fdfbf9"
+    }
+],
+  "presets": [
+    {
+      "name": "Our story",
+      "category": "Text"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,88 @@
+{% if product.metafields.accentuate.title_acc != blank %}
+<div id="product_module" class="module_section">
+  <div class="page-width">
+    {% if product.metafields.accentuate.sub_title_acc != blank %}
+    <h5 class="heading_h5 text-center">{{ product.metafields.accentuate.sub_title_acc }}</h5>
+    {% endif %}
+    {% if product.metafields.accentuate.title_acc != blank %}
+    <h3 class="heading_h3">{{ product.metafields.accentuate.title_acc }}</h3>
+    {% endif %}
+    
+    <div class="module_flex">
+    
+       
+    <div class="accordion_module_image">
+      {%- if product.metafields.select_image_or_vide.select_image_or_video == "Image" -%}
+      
+      {% if product.metafields.accentuate.image_acc != blank %}
+        <img src="{{ product.metafields.accentuate.image_acc }}" alt="" />  
+      {% else %}
+      <img src="{{ section.settings.image | img_url: '800x800' }}" alt="" />  
+      {% endif %}
+      
+      {%- else product.metafields.select_image_or_vide.select_image_or_video == "Video" -%}
+      
+      <div class="video-testimonial-block">
+
+			<div class="acc_video">
+				<video poster="{{ product.metafields.poster_mage.poster_mage }}" autoplay muted controls="">
+					<source src="{{ product.metafields.video_url.video_url }}" type="video/mp4">
+				</video>
+			</div>
+			<a href="#" class="video-play"> </a>
+        
+		</div>
+      
+      {%- endif -%}
+      
+      </div>
+      
+     
+      
+      
+      
+    
+    <div class="accordion_module_text">
+    <div id="accordion_module" class="information_tab">
+      {% for value in product.metafields.accentuate.title_module %} 
+      {% if product.metafields.accentuate.title_module[forloop.index0] != blank %}
+      <div class="accordion_title 000">
+       <div class="accordion_icon">
+         <img class="default_img" src="{{ product.metafields.accentuate.default_image_icon[forloop.index0] }}" alt="" />
+         <img class="active_img" src="{{ product.metafields.accentuate.active_image_icon[forloop.index0] }}" alt="" />
+        </div>  
+         {{ product.metafields.accentuate.title_module[forloop.index0] }} <span></span>
+      </div>
+      <div class="content_info">
+        {{ product.metafields.accentuate.info_module[forloop.index0] }}
+      </div>   
+      {% endif %}
+      {% endfor %}   
+    </div>
+    </div>
+    </div>
+    
+    
+    
+  </div>
+</div>
+{% endif %}
+
+
+<script>
+  $(document).ready(function() {
+    
+    $(".video-play").on('click', function(e) {
+	e.preventDefault();
+	let vidWrap = $(this).parent();
+	
+	vidWrap.children('.video-thumbnail').fadeOut();
+	vidWrap.children('.video-play').fadeOut();
+	vidWrap.find("video")[0].play();
+});
+    
+    
+    });
+</script>
+
+

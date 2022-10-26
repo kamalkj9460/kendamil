@@ -1,0 +1,105 @@
+.expert-wrap {
+    float: left;
+    width: 100%;
+  padding-bottom: 155px;
+}
+.expert-feed .section-headerinfo p{
+  	font-size:18px;
+}
+.slider_box {
+    width: 65%;
+}
+.cap_box{
+  	width: 100%;
+    /*max-width: 360px;*/
+    max-width: 310px;
+    background: transparent;
+    float: left;
+    height: auto;
+    position: relative;
+	margin-right:0;
+}
+.slider_content {
+    position: absolute;
+    left: 0;
+    width: 100%;
+  	top:0;
+}
+.expert-box {
+    position: relative;
+}
+.cap_10 h4{
+  	font-family: 'FaktPro-Medium';
+}
+.cap_10 h4 {
+    padding: 0 0 0 13px;
+    margin: 0 0 27px;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 28px;
+  	position:relative;
+}
+.cap_10 h4::after {
+    content: " “ ";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.play_icon_span{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    content: '';
+  	z-index: 1;
+}
+.play_icon_span::after{
+    width: 40px;
+    height: 40px;
+    background: url(play.png) no-repeat center center;
+        background-size: auto;
+    background-size: auto;
+    background-size: 100% auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    content: '';
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  	z-index: 1;
+}
+
+.hero_img {
+    height: 100%;
+    display: table;
+}
+.site-nav a.subscribe_link .site-nav__label,
+a.subscribe_link .mobile-nav__label,
+.site-nav a.subscribe_\&_save_link .site-nav__label,
+a.subscribe_\&_save_link .mobile-nav__label{
+    background: #ffeff3;
+    border-radius: 10px;
+    text-align: center;
+  	padding:8px 5px 4px;
+}
+
+.arrow_d{
+  	background: url(arrowdown.svg) no-repeat center center !important;
+    background-size: auto;
+    background-size: 10px auto !important;
+    width: 17px;
+    height: 15px;
+    padding: 0;
+	display: inline-block;
+  	position: relative;
+	top: 2px;
+}
+.mo_wrapper_2 h3.actives .arrow_d{
+  	transform: rotate(90deg);
+}
+.mobile_about_hide {
+    display: none;
+}

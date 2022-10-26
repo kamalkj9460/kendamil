@@ -1,0 +1,128 @@
+{%- if settings.sidebar_bkg != blank -%}
+<style>
+.care_page .sidebar{
+  background:{{ settings.sidebar_bkg }};
+}
+</style> 
+{%- endif -%}
+{%- if settings.page_bkg != blank -%}
+<style>
+  .care_page_content{
+  background:{{ settings.page_bkg }};
+}
+  input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 35px {{ settings.page_bkg }} inset !important;
+}
+
+</style> 
+{%- endif -%}
+
+
+
+<div class="care_page faq_page">
+  
+  <div class="sidebar sidebar-fix">
+    <div class="side-menu">
+    
+      <h2 class="h3 hide--mobile">{{ page.title }}</h2>
+       <h2 class="h3 mobile-show" style="display:none;">{{ page.title }}{% include 'arrow-down' %}</h2>
+      <ul class="faq_ul">
+       {% for link in linklists.faqs.links %}
+            <li class="">
+              <span></span>
+              <a class="section-{{ forloop.index }}">{{ link.title }}</a>
+            </li>            	
+       {% endfor %}
+      </ul>
+    </div>
+ </div>
+  <div class="care_page_content faq_page"> 
+  <div class="page-width w_690"> 
+  {% for link in linklists.faqs.links %}
+    
+   <h3 class="heading_h3 faq_h3 section_Content-{{ forloop.index }}">{{ link.title }}</h3>
+		
+    	{% if link.title == "Preparation / storage" %}
+       {% section 'faq-template7' %}
+     {% endif %}
+    
+     {% if link.title == "Ingredients / products" %}
+       {% section 'faq-template' %}
+     {% endif %}
+    
+     {% if link.title == "Subscriptions" %}
+       {% section 'faq-template2' %}
+     {% endif %}
+     {% if link.title == "Delivery" %}
+       {% section 'faq-template3' %}
+     {% endif %}
+     {% if link.title == "Stockists" %}
+       {% section 'faq-template4' %}
+     {% endif %}
+     {% if link.title == "The environment" %}
+       {% section 'faq-template5' %}
+     {% endif %}
+    {% if link.title == "Dietary / religious requirement" %}
+       {% section 'faq-template6' %}
+     {% endif %}
+    {% if link.title == "Other" %}
+       {% section 'faq-template8' %}
+     {% endif %}
+    
+              
+<script type="text/javascript">
+ $(".section-{{ forloop.index }}").click(function(){
+   $(".faq_ul li").removeClass('active');
+   $(".section-{{ forloop.index }}").parent().addClass('active');
+				$('html,body').animate({
+					  scrollTop: $(".section_Content-{{ forloop.index }}").offset().top - 125},
+				  'slow');
+				});
+</script>
+		
+  
+  {% endfor %}
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+.page-container {
+    overflow: inherit;
+}
+</style>
+
+ 
+
+<script type="text/javascript">
+
+$(window).on('load resize', function () {
+    var topsections = $('.headder_box').height();
+  	var wheight = $(window).height();
+  	console.log(topsections);
+  	$(".sidebar-fix").css({'height': wheight});
+  	$(".sidebar-fix").css({'top': topsections});
+  
+});
+</script> 
+<script src="{{ 'jquery_accordion.js' | asset_url }}" defer="defer"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  
+$(".section-1").parent().addClass('active');  
+  $(".sidebar h2.mobile-show").click(function(){
+    $(".sidebar ul").slideToggle('show');
+  });
+  
+$('.accordion').accordion({
+defaultOpen: 'section1',
+cookieName: 'accordion_nav'
+});
+});
+</script>

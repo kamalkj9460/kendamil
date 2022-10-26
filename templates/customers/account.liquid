@@ -1,0 +1,108 @@
+
+{% comment %}
+<!-- Begin ReCharge code -->
+<p id="rc_link_container">
+    <a href="/tools/recurring/login">Manage Subscriptions</a>
+</p>
+<!-- End ReCharge code -->
+{% endcomment %}
+
+<div class="account-page">
+  
+  <div class="sidebar">
+    <div class="side-menu sidebar-fix">
+    <h2 class="">Welcome, {{ customer.first_name }}</h2>
+      
+      <ul style="display:block;">
+      
+            <li class="active">
+              <span></span>
+              <a href="#">{{ 'customer.orders.title' | t }}</a>
+            </li> 
+        	<li class="">
+              <span></span>
+              <a href="{{ routes.account_addresses_url }}">Address book</a>
+            </li>
+        	<li class="">
+              <span></span>
+              <a href="/tools/recurring/login">Manage Subscriptions</a>
+            </li>
+       
+      </ul>
+      <p>{{ 'Log Out' | customer_logout_link }}</p>
+    </div>
+ </div>
+  
+ <div class="page accountDiv"> 
+
+
+<div class="page-width w_695">
+  
+
+  <div class="grid myaccount">
+    <div class="grid__item myaccount__order-history">
+      <h1 class="account_itle">{{ 'customer.orders.title' | t }}</h1>
+
+      <div class="order_boxtable">
+        <div class="order_scroll">
+      {% paginate customer.orders by 20 %}
+        {% if customer.orders.size != 0 %}
+
+          <table class="responsivetable">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.order_number' | t }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                {% comment %}
+                <th scope="col">{{ 'customer.orders.payment_status' | t }}</th>
+                {% endcomment %}
+                <th scope="col">number of items</th>
+                <th scope="col">price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <td data-label="{{ 'customer.orders.order_number' | t }}" scope="row">
+                    <a href="{{ order.customer_url }}" class="" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">{{ order.name }}</a>
+                  </td>
+                  <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: "%d . %m . %Y" }}</td>
+                  {% comment %}
+                  <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  {% endcomment %}
+                  <td>{{ order.item_count }}</td>
+                  <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+
+          <p>{{ 'customer.orders.none' | t }}</p>
+
+        {% endif %}
+        {%- if paginate.pages > 1 -%}
+          {% include 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {% endpaginate %}
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+ 
+$(window).on('load resize', function () {
+    var topsections = $('.headder_box').height();
+  	var wheight = $(window).height();
+  	//alert(topsections);
+  	$(".sidebar-fix").css({'height': wheight - topsections});
+  	$(".sidebar-fix").css({'top': topsections});
+  
+});
+</script>  

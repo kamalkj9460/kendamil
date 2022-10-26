@@ -1,0 +1,101 @@
+<script src="{{ 'jquery.qtip.js' | asset_url }}" defer="defer"></script>
+
+
+<div class="ingredients-section">
+  
+  {% if product.metafields.ingredients_title.ingredients_title != blank %}
+  <h2 class="h3">{{ product.metafields.ingredients_title.ingredients_title }}</h2>
+   {% endif %}
+  
+ <div class="ingredients_img">
+  <div class="feature-row__items feature-row">
+      {% if product.metafields.ingredients_images.ingredients_images != blank %}
+      {%- assign img_url = product.metafields.ingredients_images.ingredients_images | replace: '_1x1.', '_{width}x.' -%}
+     {% include 'image-style', image: product.metafields.ingredients_images.ingredients_images, height: 545, wrapper_id: wrapper_id, img_id: img_id %} 
+  
+     
+            <img id="" class="feature-row_image lazyload"
+         src="{{ product.metafields.ingredients_images.ingredients_images }}"
+         data-src="{{ img_url }}"
+         data-widths="[180, 360, 540, 720, 900, 1000, 1080, 1296, 1512, 1728, 1920, 2048]"
+         data-aspectratio="{{ product.metafields.ingredients_images.ingredients_images.aspect_ratio }}"
+         data-sizes="auto"
+         alt="{{ product.metafields.ingredients_images.ingredients_images.alt | escape }}">
+     {% endif %}
+    </div>
+  
+  
+   {% if section.settings.ingredients_dots %}
+   <div class="dots_hide_circle" style="left:{{ section.settings.button_x }}%; top:{{ section.settings.button_y }}%;"></div>
+   {% endif %}
+   
+     {% for value in product.metafields.button_x.button_x %} 
+  	{% if product.metafields.button_x.button_x[forloop.index0] != blank %}
+  	<div class="button-container dots_circle" style="left:{{ product.metafields.button_x.button_x[forloop.index0] }}%; top:{{ product.metafields.button_y.button_y[forloop.index0] }}%;">
+   
+      <div class="circle_main">
+      {% if product.metafields.ingredients_info.ingredients_info[forloop.index0] != blank %}
+   <div class="dots_circle-info">
+   <div class="dots_circle_div">  
+  {{ product.metafields.ingredients_info.ingredients_info[forloop.index0] }}
+     </div>
+   </div>
+    {% endif %}
+        
+        
+   </div>
+   </div>
+   
+   
+   {% endif %}
+  {% endfor %}
+   
+  
+   
+   <div class="mobile_show" style="display:none;">
+        {% for value in product.metafields.button_x.button_x %} 
+  	{% if product.metafields.button_x.button_x[forloop.index0] != blank %}
+  	
+      <div class="circle_main_mobile">
+      {% if product.metafields.ingredients_info.ingredients_info[forloop.index0] != blank %}
+   <div class="dots_circle-info">
+   <div class="dots_circle_div">  
+  {{ product.metafields.ingredients_info.ingredients_info[forloop.index0] }}
+     </div>
+   </div>
+    {% endif %}
+        </div> 
+     {% endif %}
+  {% endfor %}
+        
+      </div>
+   
+</div>  
+</div>
+
+{% comment %}
+<script type="text/javascript">
+
+  $(document).ready(function()
+ {
+     $('.dots_circle').each(function() {
+         $(this).qtip({
+     
+         content: {
+                 text: $(this).next('.dots_circle-info')
+             },
+         position: {
+             target: 'mouse' // Track the mouse as the positioning target
+             //adjust: { x: 5, y: 5 } // Offset it slightly from under the mouse
+         }
+     });
+       });
+
+
+    
+    
+ });
+
+  </script>
+
+{% endcomment %}

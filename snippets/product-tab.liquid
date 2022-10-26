@@ -1,0 +1,68 @@
+<div id="acc_rw">
+  <a href="javascript:void(0)">
+ <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+  </a>  
+
+
+<div id="show_acc_rw" style="display:none;">
+<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+</div>
+
+</div>
+
+  {% comment %}
+
+<ul class="product__questions">
+      
+  {% for value in product.metafields.select_background_co.select_background_color %} 
+  	{% if product.metafields.select_background_co.select_background_color[forloop.index0] != blank %}
+  
+ <li class="accordion" style="background:{{ product.metafields.select_background_co.select_background_color[forloop.index0] }}">
+  	{% if product.metafields.according_title.according_title[forloop.index0] != blank %}
+        <h3 class="accordion__title">{{ product.metafields.according_title.according_title[forloop.index0] }}</h3>
+      {% endif %}
+  
+      {% if product.metafields.according_descriptio.according_description[forloop.index0] != blank %}
+      <div class="accordion__content">{{ product.metafields.according_descriptio.according_description[forloop.index0] }}</div>
+      {% endif %}
+  </li>
+  {% endif %}
+  {% endfor %} 
+  
+  
+  {% comment %}
+        <li class="accordion">
+         <h3 class="accordion__title type"> How it works </h3>
+          <p class="accordion__content type"> Immediately, the smell and taste of plant terpenes provide a soothing sensation. The aroma is sweet citrus with spice notes, while the taste is green and floral. <br>A standard 20mg/dose of hemp extract (CBD) supports the body’s endocannabinoid system; its anti-anxiety characteristics help alleviate the stresses of everyday life.<br></p>
+        </li>
+      
+        <li class="accordion">
+          <h3 class="accordion__title type">How to use </h3>
+          <p class="accordion__content type"> Use to find relief from the pressures of normal everyday anxiety and nourish depleted feelings. Take before entering everyday stressful situations, or to enhance mood in any situation. 
+<br>
+Shake well and use dropper to dispense 18 drops in mouth and allow to melt beneath tongue before swallowing. Repeat as needed. <br></p>
+        </li>
+      
+        <li class="accordion">
+          <h3 class="accordion__title type">How it's made </h3>
+          <p class="accordion__content type"> Our certified organic farm works with nature to revitalize the soil and sequester carbon to grow healthier plants, while repairing the damage caused by conventional agriculture. Our hemp is processed onsite using gentle, cold-and-slow extraction. The fullest possible benefits of the plant are maintained, resulting in the highest-quality broad spectrum hemp extract (CBD). <br></p>
+        </li>
+      {% endcomment %}
+    </ul>
+
+<script>
+  $('li h3').click(function(){
+           
+			
+                if($(this).parent().hasClass('active'))
+                {
+                    $(this).parent().removeClass("active");
+                   
+                }else
+                {
+                 $(this).parent().addClass('active');
+                  $(this).parent().addClass('active').siblings().removeClass('active')	
+                }
+		})
+</script>  
+{% endcomment %}

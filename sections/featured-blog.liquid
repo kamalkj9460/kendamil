@@ -1,0 +1,343 @@
+<div class="page-width page-width-1102">
+  {% if section.settings.title != blank %}
+    <header class="section-header text-center">
+      {%- if section.settings.subtitle != blank -%}
+           <h5 class="heading_h5">
+             {{ section.settings.subtitle | escape }}</h5>
+          {%- endif -%}          
+          
+          {%- if section.settings.title != blank -%}
+            <h3 class="heading_h3">
+              {{ section.settings.title | escape }}</h3>
+          {%- endif -%}
+    </header>
+  {% endif %}
+
+  {%- assign blog = blogs[section.settings.blog] -%}
+<div class="wrapper page-width p-0">
+   <section class="MCItemCarousel MCItemCarousel--hasIntro MCItemCarousel--hasMinimumSpacing" data-component="MCItemCarousel" data-global-ref="ScrollRevealer-reveal">
+    <div class="MCItemCarousel-scrollable">
+      <div class="MCCarouselNav MCCarouselNav--prev" data-ref="carouselNavPrev">
+        <button class="MCCarouselNav-btn lt-navigateleft" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCCarouselNav MCCarouselNav--next" data-ref="carouselNavNext">
+        <button class="MCCarouselNav-btn lt-navigateright" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCItemCarousel-viewport">
+        <div class="MCItemCarousel-productWrapper" data-ref="productWrapper">
+          
+          {% for article in blog.articles limit: section.settings.post_limit %}
+          <div class="MCItemCarousel-Item">
+            <div class="grid__item pro_box">
+        <div class="grid__item medium-up--one-third box_box">
+          <article aria-labelledby="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+              <a href="{{ article.url }}" class="article__link">
+                {% if article.image %}
+                  {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+                  {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+                  {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                  {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+                  <div class="article__grid-image-wrapper js">
+                    <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+                      <img 
+                          class="article__grid-image lazyload"
+                          src="{{ article.image | img_url: '300x300' }}"
+                          data-src="{{ img_url }}"
+                          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                          data-aspectratio="{{ article.image.aspect_ratio }}"
+                          data-sizes="auto"
+                          alt="">
+                    </div>
+                  </div>
+                  <noscript>
+                    <div class="article__grid-image-wrapper">
+                      {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+                    </div>
+                  </noscript>
+                {% endif %}
+				
+                {% if section.settings.blog_show_date %}
+                <span class="article__date">
+                {{ article.published_at | date: "%d %b %Y" }}
+              </span>
+              {% endif %}
+                
+                {% if article.tags.size > 0 %} 
+                
+                {% for tag in article.tags %}
+                <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>                
+                {% endfor %}
+                
+                
+                 {% else %}
+                    category
+                 {% endif %}
+                
+                <h3 class="article_title heading_h3" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  {{ article.title }}
+                </h3>
+              </a>
+
+              {% if section.settings.blog_show_author %}
+                <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+              {% endif %}
+
+              
+          
+          
+            <div class="article__grid-meta">
+              <div class="rte article__grid-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncate: 150 }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </div>
+
+              
+
+              
+            </div>
+         
+            
+          </article>
+        </div>
+            </div>
+          </div>
+      {% endfor %}
+          
+        </div>
+        <div class="MCCarouselScrollbar" data-ref="scrollbar-track">
+          <div class="MCCarouselScrollbar-bar" data-ref="scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  
+</div>
+
+
+
+
+  {% comment %}
+
+  <script>
+$(document).ready(function() {
+$('.grid--blog').slick({
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  arrows: false,
+  fade: false,
+  dots: false,
+  infinite: false,
+  centerMode: false,
+  draggable: false,
+  responsive: [
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        arrows: true
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  
+
+});
+</script>
+{% endcomment %}
+
+<style>
+  .index-section.home_blog{
+    background-color:{{section.settings.blog_bg_color}};
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Blogopslag",
+    "de": "Blogposts",
+    "en": "Blog posts",
+    "es": "Entradas del blog",
+    "fi": "Blogijulkaisut",
+    "fr": "Articles de blog",
+    "hi": "ब्लॉग पोस्ट",
+    "it": "Articoli del blog",
+    "ja": "ブログ記事",
+    "ko": "블로그 게시물",
+    "nb": "Blogginnlegg",
+    "nl": "Blogberichten",
+    "pt-BR": "Posts do blog",
+    "pt-PT": "Publicações no blogue",
+    "sv": "Blogginlägg",
+    "th": "โพสต์บล็อก",
+    "zh-CN": "博客文章",
+    "zh-TW": "部落格文章"
+  },
+  "class": "index-section home_blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub heading",
+      "default": "Sub heading"
+    },    
+    
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text overlay"
+    },
+	
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": {
+        "da": "Blog",
+        "de": "Blog",
+        "en": "Blog",
+        "es": "Blog",
+        "fi": "Blogi",
+        "fr": "Blog",
+        "hi": "ब्लॉग",
+        "it": "Blog",
+        "ja": "ブログ",
+        "ko": "블로그",
+        "nb": "Blogg",
+        "nl": "Blog",
+        "pt-BR": "Blog",
+        "pt-PT": "Blogue",
+        "sv": "Blogg",
+        "th": "บล็อก",
+        "zh-CN": "博客",
+        "zh-TW": "部落格"
+      }
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "label": "Posts",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "hi": "लेखक दिखाएं",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "hi": "दिनांक दिखाएं",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": true
+    },
+	{
+      "type": "color",
+      "id": "blog_bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "da": "Blogopslag",
+        "de": "Blogposts",
+        "en": "Blog posts",
+        "es": "Entradas del blog",
+        "fi": "Blogijulkaisut",
+        "fr": "Articles de blog",
+        "hi": "ब्लॉग पोस्ट",
+        "it": "Articoli del blog",
+        "ja": "ブログ記事",
+        "ko": "블로그 게시물",
+        "nb": "Blogginnlegg",
+        "nl": "Blogberichten",
+        "pt-BR": "Posts do blog",
+        "pt-PT": "Publicações no blogue",
+        "sv": "Blogginlägg",
+        "th": "โพสต์บล็อก",
+        "zh-CN": "博客文章",
+        "zh-TW": "部落格文章"
+      },
+      "category": {
+        "da": "Blog",
+        "de": "Blog",
+        "en": "Blog",
+        "es": "Blog",
+        "fi": "Blogi",
+        "fr": "Blog",
+        "hi": "ब्लॉग",
+        "it": "Blog",
+        "ja": "ブログ",
+        "ko": "블로그",
+        "nb": "Blogg",
+        "nl": "Blog",
+        "pt-BR": "Blog",
+        "pt-PT": "Blogue",
+        "sv": "Blogg",
+        "th": "บล็อก",
+        "zh-CN": "博客",
+        "zh-TW": "部落格"
+      },
+      "settings": {
+        "blog": "News",
+        "post_limit": 3
+      }
+	
+    }
+  ]
+}
+{% endschema %}

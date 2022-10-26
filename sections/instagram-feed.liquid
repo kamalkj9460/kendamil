@@ -1,0 +1,225 @@
+<div class="home_insta" style="background:{{ section.settings.large_border }};"> 
+  
+ <header class="section-header text-left">
+    <div class="page-width p-0"> 
+   {% if section.settings.instagram_at_text != blank %}
+   <h5 class="heading_h5 text-left">
+     <a href="{{ section.settings.instagram_link}}" target="_blank">{{ section.settings.instagram_at_text }}</a>
+   </h5>
+   {%- endif -%}  
+   
+   {%- if section.settings.instagram_at_title != blank -%}
+            <h3 class="heading_h3 text-left">
+              {{ section.settings.instagram_at_title | escape }}</h3>
+          {%- endif -%}
+      
+  
+      
+      
+      <div class="insta_icon parallax__element">
+        
+		 {%- if section.settings.insta_icon_1 != blank -%}
+          <div class="flower_img3 parallax__element birds_icon birds_icon1">
+           <img src="{{ section.settings.insta_icon_1 | img_url:'40x' }}" alt="" />
+          </div>
+           {%- endif -%}        
+        
+          {%- if section.settings.insta_icon != blank -%}
+          <div class="flower_img2 parallax__element cloud_icon">
+           <img src="{{ section.settings.insta_icon | img_url:'135x' }}" alt="" />
+          </div>
+           {%- endif -%} 
+          
+          {%- if section.settings.insta_icon_1 != blank -%}
+          <div class="flower_img3 parallax__element birds_icon birds_icon2">
+           <img src="{{ section.settings.insta_icon_1 | img_url:'40x' }}" alt="" />
+          </div>
+           {%- endif -%}
+          
+        </div>
+      
+      
+   </div>
+  </header>
+  
+  
+  
+ <div class="page-width p-0 maxwidth_none"> 
+  <div class="insta_feed_wrap">
+<div class="insta_feed_section">
+  
+  <div id="insta-feed"></div>
+  
+
+  
+
+    </div>
+    
+  </div>
+   
+ <script>  
+   
+$(window).on('load', function () {
+    
+setTimeout(function(){  
+  $('#insta-feed').slick({
+    dots: false,
+    infinite: true,
+    speed: 4000,
+    centerMode: false,
+    slidesToShow:7,
+    slidesToScroll: 1,
+    cssEase: 'linear',
+    autoplay: true,
+    autoplaySpeed: 0,
+    pauseOnHover: true,
+    initialSlide: 1,
+  responsive: [
+    {
+      breakpoint: 1199,
+      settings: {
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        infinite: true
+
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 5,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    }
+    
+  ]
+});
+  
+  
+
+ 
+  $(".instafeed-container img").each(function(){
+    var trial = $(this).attr('data-src');
+   $(this).each(function(){
+    $(this).attr('src', trial);
+   });
+});
+  
+  
+ }, 2500);
+ 
+  });    
+  
+   </script>   
+ {% comment %}  
+   
+  {% assign instagramLite_token = section.settings.accesstoken_id %}
+
+<script>
+  $(document).ready(function(){
+  // Home page instagram feed
+$('.il-michaelynch').instagramLite({
+  accessToken: '5593239394.96af6d7.ec66784b760e4123b22cd6fbb5b5c99f',
+  urls: true,
+  limit:50,
+  captions: false,
+  likes: false,
+  comments_count: false,
+  success: function(data) {
+    console.log(data);
+
+
+      $('.il-michaelynch').slick({
+        dots: false,
+        speed: 700,
+        centerMode: false,
+        centerPadding: '24px',
+        slidesToShow: 7,
+        slidesToScroll:1,
+        initialSlide: 0.5,
+        autoplay: true,
+        arrows: false
+      });
+
+    
+
+    // $(".il-michaelynch li a" ).append( "<span>Test</span>" );
+
+  },
+  error: function(data) {
+    console.log(data);
+  }
+});
+  
+});  
+  
+   </script>
+{% endcomment %}  
+		
+  </div>
+</div>   
+
+
+
+{% schema %}
+  {
+    "name": "Instagram feed",
+    "class": "index-section fullwidth_img insta_section panel",
+    "settings": [
+	{
+        "type": "header",
+        "content": "Instagram Feed"
+      },
+	{
+        "type": "text",
+        "id": "instagram_at_title",
+        "label": "Heading"
+      },
+      
+      {
+        "type": "text",
+        "id": "instagram_at_text",
+        "label": "Instagram @"
+      },
+      {
+        "type": "text",
+        "id": "instagram_link",
+        "label": "Instagram Link"
+      },	
+	{
+        "type": "color",
+        "id": "large_border",
+        "label": "Background color",
+        "default": "#f6faff"
+      }	,
+
+	{
+        "type": "image_picker",
+        "id": "insta_icon",
+        "label": "Cloud image",
+	    "info": "Size: 505 x 158px"
+      },
+{
+        "type": "image_picker",
+        "id": "insta_icon_1",
+        "label": "Birds image",
+	    "info" : "Size: 300 x 76px"
+      }
+
+    ],
+"presets": [{
+      "name": "Instagram feed",
+      "category": "Image"
+      
+    }]
+  }
+{% endschema %}
+
+

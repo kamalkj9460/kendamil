@@ -1,0 +1,23 @@
+<div class="form_register_logo">
+         {%- if settings.reg_image_icon != blank -%}
+        <div class="icon_div">
+        <img src="{{ settings.reg_image_icon | img_url:'168x' }}" alt="" />
+        </div>
+         {%- endif -%} 
+</div>
+
+{%- if settings.reg_form_bkg != blank -%}
+<style>
+.register_form_div{
+  background-color:{{ settings.reg_form_bkg }};
+  position: relative;
+}
+  input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 35px {{ settings.reg_form_bkg }} inset !important;
+}
+</style> 
+{%- endif -%}
+

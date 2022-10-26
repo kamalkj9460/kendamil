@@ -1,0 +1,49 @@
+{{ 'stockists.css' | asset_url | stylesheet_tag }}	
+
+
+<div class="page-width full-width" id="wrapper-stockists">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths stockists-page">
+      <div class="section-header">
+        <h2 class="h3">{{ page.title }}</h2>
+      </div>
+
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+$(window).load(function() {
+  
+    setTimeout(function(){  
+      //alert('1');
+      $(".section-header").insertBefore(".stockist-search-form");         
+    }, 2100); 
+
+    setTimeout(function(){  
+      $('#wrapper-stockists').css('opacity', '1');
+    }, 2500); 
+  });
+    
+
+
+  
+</script>
+
+{% schema %}
+  {
+    "name": "Stock",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

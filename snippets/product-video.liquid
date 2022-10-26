@@ -1,0 +1,49 @@
+
+{% if product.metafields.video_upload.video_upload != blank %}
+	<div class="filmcontainer_product">
+        <video id="myVideo"  controls class="image-new-content-block__video_3">
+           <source src="{{ product.metafields.video_upload.video_upload }}" type="video/mp4">
+        </video>
+      
+      <div class="video_img">
+	<div class="feature-row__items feature-row">
+      {% if product.metafields.video_image.video_image != blank %}
+      {%- assign img_url_2 = product.metafields.video_image.video_image | replace: '_1x1.', '_{width}x.' -%}
+     {% include 'image-style', image: product.metafields.video_image.video_image, height: 545, wrapper_id: wrapper_id, img_id: img_id %} 
+  
+     
+            <img id="" class="feature-row_image lazyload"
+         src="{{ product.metafields.video_image.video_image }}"
+         data-src="{{ img_url_2 }}"
+         data-widths="[180, 360, 540, 720, 900, 1000, 1080, 1296, 1512, 1728, 1920, 2048]"
+         data-aspectratio="{{ product.metafields.video_image.video_image.aspect_ratio }}"
+         data-sizes="auto"
+         alt="{{ product.metafields.video_image.video_image.alt | escape }}">
+     {% endif %}
+    </div>
+  
+</div>
+      
+      <button onclick="playVid()" class="video_play" type="button">Play Video</button>
+    </div> 
+
+
+
+{% endif %}
+
+
+
+<script>
+  
+$(document).ready(function() {
+var vid = document.getElementById("myVideo"); 
+
+$('.video_play').click(function(e) {
+ // alert(123);
+  vid.play(); 
+  $(".filmcontainer_product video").css('opacity','1');
+  $(".video_play, .video_img").css('display','none');
+});
+  
+});  
+</script>

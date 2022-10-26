@@ -1,0 +1,475 @@
+<div class="blog_div">
+<div class="page-width">
+  <header class="section-header blog_header" style="margin-bottom:0;">
+    
+    {% for article in blog.articles limit: 1 %}
+    <div class="blog_featured__img">
+      <div class="article__grid-image-container blot_top_img" style="background-image:url({{ article.image | img_url: '900x900' }});">
+        <a href="{{ article.url }}" class="article__link_top"> </a>
+            
+        <img id=""
+                      class="article__grid-image lazyload mobile-show"
+                      src="{{ article.image | img_url: '761x509' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ article.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="">
+        
+      </div>
+    </div>   
+    <div class="blog_feature_content align_center">
+       <div class="w_350 ">
+              <span class="article_tag">
+                {% if article.tags.size > 0 %} 
+                
+                {% for tag in article.tags %}
+                <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>                
+                {% endfor %}
+                
+                
+                 {% else %}
+                    category
+                 {% endif %}
+              </span>
+         <h1><a href="{{ article.url }}">{{ article.title }}</a></h1>  
+              <p>{% if article.excerpt.size > 0 %}
+                    {{ article.excerpt | strip_html | truncate: 150 }}
+                  {% else %}
+                    {{ article.content | strip_html | truncate: 150 }}
+                  {% endif %}
+              </p> 
+      </div>
+    </div>
+    
+     
+    {% endfor %}
+    
+    {% comment %}
+    {% if blog.tags.size > 0 %}
+      <div class="blog-filter">
+        <div class="select-group">
+          <select id="BlogTagFilter" aria-describedby="a11y-refresh-page-message a11y-selection-message">
+            <option value="{{ blog.url }}">{{ 'blogs.article.all_topics' | t }}</option>
+            {% for tag in blog.all_tags %}
+              <option value="{{ blog.url }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+            {% endfor %}
+          </select>
+          {% include 'icon-chevron-down' %}
+        </div>
+        <ul>
+      {% for tag in blog.all_tags %}
+      <li class="{% if current_tags contains tag %}active{% endif %} icon_{{ tag }}">
+        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}">
+          <div class="tag_title">{{ tag }}</div><span></span>
+        </a>
+       </li>    
+        {% endfor %}
+      </ul>
+      </div>
+    {% endif %}
+    {% endcomment %}
+  </header>
+</div>
+  
+<div class="blog_filter_div">
+  <div class="page-width">
+    
+    {% for tag in blog.all_tags  %}
+    {% if forloop.first %}
+     {%- assign blogtag = current_tags -%}
+     {% endif %}  
+    {% endfor %}
+    
+   {% if blog.tags.size > 0 %}
+      <div class="blog_filter">
+          <ul>
+
+            {%- for link in linklists.main-menu.links -%}
+            {% if forloop.index == 3 %}            
+            {% for childlink in link.links  %}
+             {%- assign link_tag = childlink.title -%}
+            
+             {% if forloop.index == 1 %}  
+            <li id="read_all" class="{% if childlink.active %}filter_active{% endif %} icon_{{ childlink.handle }}">
+                <a href="{{ childlink.url }}">
+                 <div class="tag_title">{{ childlink.title }}</div><span></span>
+               </a>
+            </li>
+             {% else %}
+             <li class="{% if current_tags contains link_tag %}filter_active{% endif %} icon_{{ childlink.handle }}">
+                <a href="/blogs/blog/tagged/{{ childlink.handle | downcase }}">
+                 <div class="tag_title">{{ childlink.title }}</div><span></span>
+               </a>
+            </li>
+           
+            
+            {% endif %} 
+            
+            {% if current_tags contains link_tag %}
+              <script>
+                $('#read_all').removeClass('filter_active');
+           
+             </script>
+            {% endif %}
+            
+            {% endfor %}
+            {% endif %}  
+            {% endfor %}
+            
+            
+            
+            
+            {% comment %}
+              {% for tag in blog.all_tags %}
+              {% if current_tags contains tag %}
+              <script>
+                $('#read_all').removeClass('filter_active');
+              {% endif %}  
+             </script>
+              <li class="{% if current_tags contains tag %}filter_active{% endif %} icon_{{ tag }}">
+                <a href="{{ blog.url }}/tagged/{{ tag | handleize }}">
+                  <div class="tag_title">{{ tag }}</div><span></span>
+                </a>
+              </li>    
+              {% endfor %}
+            {% endcomment %}
+            
+            
+          </ul>
+      </div>
+    {% endif %}
+  </div>
+</div>
+  
+  
+  
+  
+  {% paginate blog.articles by 13 %}
+  
+  <div class="blog_all_div">
+  <div class="page-width">
+    <div class="grid grid--uniform grid--blog">
+      <div id="AjaxinateLoop" >
+        
+        {% if paginate.current_page == 1 %}
+    
+      {% for article in blog.articles  offset:1 %}
+<div class="grid__item medium-up--one-third box_box">
+          <article id="">
+          <a href="{{ article.url }}" class="article__link">
+            {% if article.image %}
+              {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+              {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+              {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+              {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+              <div id="" class="article__grid-image-wrapper js">
+               {% comment %} 
+                {% if article.tags.size > 0 %}
+                <div class="article__tags">
+                    {% for tag in article.tags %}
+                  	<div class="icon_{{ tag }} tag_icon">
+                       <div class="icon_box_svg">
+                         {% include 'mind-svg-icon' %}
+                         {% include 'wake-svg-icon' %}
+                         {% include 'sleep-svg-icon' %}
+                         {% include 'exercise-svg-icon' %}
+                      </div>{{ tag }}
+                  	</div>	
+                  {% endfor %}
+                </div>
+              {% endif %}
+                {% endcomment %}
+                
+                <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;">
+                  <img id=""
+                      class="article__grid-image lazyload"
+                      src="{{ article.image | img_url: '300x300' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ article.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="">
+                </div>
+              </div>
+              <noscript>
+                <div class="article__grid-image-wrapper">
+                  {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+                </div>
+              </noscript>
+            {% endif %}
+			<div class="blog_details">
+             {% if section.settings.blog_show_date %}
+                <span class="article__date">
+                {{ article.published_at | date: "%d %b %Y" }}
+              </span>
+              {% endif %}
+            
+             <span class="article_tag">{% if article.tags.size > 0 %} {{ article.tags }} {% else %}
+                  category
+                {% endif %}</span>
+             <h3 class="article_title heading_h3" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  {{ article.title }}
+                </h3>
+            </div>
+          </a>
+           {% if section.settings.blog_show_author %}
+                <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+              {% endif %}
+
+            <div class="article__grid-meta">
+              <div class="rte article__grid-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncate: 150 }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </div>              
+            </div>
+          </article>
+          <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
+            
+            
+          </div>
+        </div>
+        {% endfor %}
+    
+  {% else %}
+  {% assign off-set = paginate.current_offset %}
+  
+      {% for article in blog.articles limit:12 %}
+   
+        <div class="grid__item medium-up--one-third box_box">
+          <article id="">
+          <a href="{{ article.url }}" class="article__link">
+            {% if article.image %}
+              {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+              {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+              {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+              {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+              <div id="" class="article__grid-image-wrapper js">
+               {% comment %} 
+                {% if article.tags.size > 0 %}
+                <div class="article__tags">
+                    {% for tag in article.tags %}
+                  	<div class="icon_{{ tag }} tag_icon">
+                       <div class="icon_box_svg">
+                         {% include 'mind-svg-icon' %}
+                         {% include 'wake-svg-icon' %}
+                         {% include 'sleep-svg-icon' %}
+                         {% include 'exercise-svg-icon' %}
+                      </div>{{ tag }}
+                  	</div>	
+                  {% endfor %}
+                </div>
+              {% endif %}
+                {% endcomment %}
+                
+                <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;">
+                  <img id=""
+                      class="article__grid-image lazyload"
+                      src="{{ article.image | img_url: '300x300' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ article.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="">
+                </div>
+              </div>
+              <noscript>
+                <div class="article__grid-image-wrapper">
+                  {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+                </div>
+              </noscript>
+            {% endif %}
+			<div class="blog_details">
+             {% if section.settings.blog_show_date %}
+                <span class="article__date">
+                {{ article.published_at | date: "%d %b %Y" }}
+              </span>
+              {% endif %}
+            
+             <span class="article_tag">{% if article.tags.size > 0 %} {{ article.tags }} {% else %}
+                  category
+                {% endif %}</span>
+             <h3 class="article_title heading_h3" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  {{ article.title }}
+                </h3>
+            </div>
+          </a>
+           {% if section.settings.blog_show_author %}
+                <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+              {% endif %}
+
+            <div class="article__grid-meta">
+              <div class="rte article__grid-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncate: 150 }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </div>              
+            </div>
+          </article>
+          <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
+            
+            
+          </div>
+        </div>
+        
+        {% endfor %}
+   
+  {% endif %}
+        
+      
+       
+        </div>
+      <div id="AjaxinatePagination" class="text-center">
+        {% if paginate.next %}
+        <a class="btn" href="{{ paginate.next.url }}">Load more</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  </div>	
+  {% endpaginate %}
+
+
+   {% comment %}
+  
+  {% for tag in blog.tags %}
+    {% if tag contains 'pop-up' %}
+    {% endif %}
+ {% endfor %}
+   {{ blog.url }}/tagged/{{ tag | handle }}
+  {% endcomment %}
+  
+ 
+ 
+  
+  {% if handle contains settings.blog_category %}
+  
+   {% include 'blog-popup' %}   
+  
+  {% endif %}
+     
+  
+ 
+
+</div>
+<span class="botton_border"></span>
+<style>
+  #shopify-section-blog-template{
+    padding-top:0;
+    padding-bottom: 0px; 
+  }
+
+</style>
+{%comment%}
+
+{%- if paginate.pages > 1 -%}
+  {% include 'pagination', paginate: paginate %}
+{%- endif -%}
+
+{% endcomment %}
+
+
+
+
+<script src="{{ 'ajaxinate.min.js' | asset_url }}" defer="defer"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var endlessScroll = new Ajaxinate({
+    container: '#AjaxinateLoop',
+    pagination: '#AjaxinatePagination',
+    method: 'click'
+  });
+});
+</script>
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Blogsider",
+    "de": "Blogseiten",
+    "en": "Blog pages",
+    "es": "Páginas del blog",
+    "fi": "Blogisivut",
+    "fr": "Pages du blog",
+    "hi": "ब्लॉग पेज",
+    "it": "Pagine del blog",
+    "ja": "ブログページ",
+    "ko": "블로그 페이지",
+    "nb": "Bloggsider",
+    "nl": "Blogpagina's",
+    "pt-BR": "Páginas do blog",
+    "pt-PT": "Páginas do blogue",
+    "sv": "Bloggsidor",
+    "th": "หน้าบล็อก",
+    "zh-CN": "博客页面",
+    "zh-TW": "部落格頁面"
+  },
+  "settings": [
+   
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "hi": "लेखक दिखाएं",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "hi": "दिनांक दिखाएं",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": false
+    }
+	
+	
+  ]
+}
+{% endschema %}
+
+
+

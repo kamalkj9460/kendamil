@@ -1,0 +1,80 @@
+<style>
+  
+  
+</style> 
+<div class="pop-up-bk">
+
+<!--Creates the popup body-->
+<div class="popup-overlay">
+   <a href="javascript:void(0)" class="close-modal"><img src={{ 'close.png' | asset_url }}></a>
+     {%- if settings.cloud_image_icon1 != blank -%}
+          <div class="popup_icon cloud_icon">
+           <img src="{{ settings.cloud_image_icon1 | img_url:'135x' }}" alt="" />
+          </div>
+           {%- endif -%} 
+  <div class="popup-content">
+    <h2>{{ settings.popup_title }}</h2>
+    <div class="popup-desc">
+      {{ settings.popup_desc }}
+    </div>
+    <!--popup's close button-->
+    <div class="text-center">
+      <a href="javascript:void(0)" class="close btn btn--has-icon-after close-modal_2">Continue </a>
+    </div>    
+    <div class="text-center bk_link">
+      <a href="/" >I do not wish to continue</a> 
+    </div>
+  </div>
+</div>
+</div>
+<!--Content shown when popup is not displayed-->
+
+   
+<script>
+$(document).ready(function(){
+  	var product_isvisited_cbox = getCookie("product_isvisited_cbox");
+      if (product_isvisited_cbox == null || product_isvisited_cbox=='')  
+      {      
+     
+      
+     if (product_isvisited_cbox == null || product_isvisited_cbox=='')  
+     { 
+	 	 $(".popup-overlay, .popup-content").fadeIn();
+         $(".pop-up-bk").fadeIn();     
+	//	setCookie('isvisited_cbox','yes',365);
+       
+	  } 
+      
+      
+       
+     // setCookie('isvisited_cbox','yes',365);
+    //  $(".b-modal").hide();
+
+        
+        //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+$(".close-modal, .close-modal_2").on("click", function() {
+   setCookie('product_isvisited_cbox','yes',1);   
+  $(".popup-overlay, .popup-content").fadeOut();
+  $(".pop-up-bk").fadeOut();
+});
+      
+       
+    
+        
+        
+     setTimeout(function() {
+      setCookie('product_isvisited_cbox','yes',1);    
+  $(".popup-overlay, .popup-content").fadeIn();
+  $(".pop-up-bk").fadeIn();
+}, 1000);
+
+    
+    
+    }
+      
+  
+
+
+  
+ }); 
+</script>

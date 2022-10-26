@@ -1,0 +1,375 @@
+
+
+{%- assign social_icons = false -%}
+{%- assign inline_list = false -%}
+{%- assign locale_selector = false -%}
+{%- assign currency_selector = false -%}
+{%- assign show_payment_icons = false -%}
+{%- assign show_selectors = false -%}
+
+{%- if section.settings.show_currency_selector and shop.enabled_currencies.size > 1 -%}
+  {%- assign currency_selector = true -%}
+{%- endif -%}
+
+{%- if section.settings.show_locale_selector and shop.published_locales.size > 1 -%}
+  {%- assign locale_selector = true -%}
+{%- endif -%}
+
+{%- if section.settings.show_payment_icons -%}
+  {%- unless shop.enabled_payment_types == empty -%}
+    {%- assign show_payment_icons = true -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- if currency_selector or locale_selector -%}
+  {%- assign show_selectors = true -%}
+{%- endif -%}
+
+{%- if
+  settings.social_twitter_link != blank
+  or settings.social_facebook_link != blank
+  or settings.social_pinterest_link != blank
+  or settings.social_instagram_link != blank
+  or settings.social_tumblr_link != blank
+  or settings.social_snapchat_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+  or request.page_type == 'article'
+  or request.page_type == 'blog'
+-%}
+  {%- assign social_icons = true -%}
+{%- endif -%}
+
+{%- assign payment_width_class = "one-half" -%}
+{%- if show_selectors -%}
+  {%- unless social_icons -%}
+    {%- assign payment_width_class = "" -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- assign copyright_show_class = "medium-up--hide" -%}
+{%- if social_icons -%}
+  {%- unless show_selectors -%}
+    {%- assign copyright_show_class = "" -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- case section.blocks.size -%}
+  {%- when 1 -%}
+    {%- assign footer_item = 'site-footer__item--full-width' -%}
+    {%- assign inline_list = true -%}
+  {%- when 2 -%}
+    {%- assign footer_item = 'site-footer__item--one-half' -%}
+    {%- assign inline_list = true -%}
+  {%- when 3 -%}
+    {%- assign footer_item = 'site-footer__item--one-third' -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'newsletter' -%}
+        {%- assign footer_item = 'site-footer__item--one-quarter' -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- when 4 -%}
+    {%- assign footer_item = 'site-footer__item--one-quarter' -%}
+  {%- when 5 -%}
+    {%- assign footer_item = 'site-footer__item--one-fifth' -%}
+{%- endcase -%}
+
+{% comment %} Create an appropriate hover color based on text color and brightness {% endcomment %}
+{%- assign footer_text_color = section.settings.color_footer_text -%}
+{%- assign footer_text_color_brightness = section.settings.color_footer_text | color_brightness -%}
+{%- if footer_text_color_brightness <= 26 -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 25 -%}
+{%- elsif footer_text_color_brightness <= 65 -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 15 -%}
+{%- else -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_darken: 10 -%}
+{%- endif -%}
+
+<style>
+  .site-footer__hr {
+    border-bottom: 1px solid {{ section.settings.color_footer_bg | color_darken: 10 }};
+  }
+
+  .site-footer p,
+  .site-footer__linklist-item a,
+  .site-footer__rte a,
+  .site-footer h4,
+  .site-footer small,
+  .site-footer__copyright-content a,
+  .site-footer__newsletter-error,
+  .site-footer__social-icons .social-icons__link {
+    color: {{ section.settings.color_footer_text }};
+  }
+
+  .site-footer {
+    color: {{ section.settings.color_footer_text }};
+    background-color: {{ section.settings.color_footer_bg }};
+  }
+/*
+  .site-footer__rte a {
+    border-bottom: 1px solid {{ section.settings.color_footer_text }};
+  }
+
+  .site-footer__rte a:hover,
+  .site-footer__linklist-item a:hover,
+  .site-footer__copyright-content a:hover {
+    color: {{ footer_text_color_hover }};
+    border-bottom: 1px solid {{ footer_text_color_hover }};
+  }
+*/
+  .site-footer__social-icons .social-icons__link:hover {
+    color: {{ footer_text_color_hover }};
+  }
+</style>
+
+
+{%- comment -%}
+{%- capture payment_icon_markup -%}
+  {%- if show_payment_icons -%}
+    <div class="grid__item site-footer__payment-icons">
+      <span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
+      <ul class="payment-icons list--inline site-footer__icon-list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li class="payment-icon">
+            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+{%- endcomment -%}
+
+
+
+
+
+
+<footer class="site-footer" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer-section">
+  <div class="footer_border">
+  <span></span>
+</div>
+
+  <div class="page-width">
+    
+   <div class="footer_logo">
+     <div class="footer_info">
+     {% include 'logo-icon' %}
+       
+       {%- comment -%}
+        {% if section.settings.footer_logo != blank %}
+     {%- assign footerimg_url = section.settings.footer_logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.footer_logo, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+      <img id=""
+                 class="feature-rowimage lazyload"
+                 src="{{ section.settings.footer_logo | img_url: '177x177' }}"
+                 data-src="{{ footerimg_url }}"
+                 data-widths="[177, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.footer_logo.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.footer_logo.alt | escape }}">
+     
+     {% endif %}
+       {%- endcomment -%}
+     
+       {% if section.settings.footer_info != blank %}
+       <div class="footer_rte">
+         {{ section.settings.footer_info }}
+       </div>
+       {% endif %}
+     
+     {% if section.settings.footer_social_show != blank %}     
+     <div class="footer_social">
+        {% include 'social-link' %}
+     </div>
+     {% endif %}
+       
+       </div>
+     
+    </div>
+    
+      <div class="footer_menusection">
+         {% if section.settings.menu_1_title != blank %}    
+        <h4>{{ section.settings.menu_1_title }}</h4>
+        {% endif %}
+     <div class="footer_links">
+       <ul>
+         {%- for link in linklists[section.settings.footermenu].links -%}
+         <li class="site-footer__linklist-item">
+           <a href="{{ link.url }}"{% if link.current %} class="active"{% endif %}>
+             {{ link.title | escape }}
+           </a>
+         </li>
+         {%- endfor -%}
+       </ul>
+     </div>
+     
+     
+    </div> 
+    
+    <div class="footer_menusection">
+      {% if section.settings.menu_2_title != blank %}    
+        <h4>{{ section.settings.menu_2_title }}</h4>
+        {% endif %}
+     <div class="footer_links">
+       <ul>
+         {%- for link in linklists[section.settings.footermenu_2].links -%}
+         <li class="site-footer__linklist-item">
+           <a href="{{ link.url }}"{% if link.current %} class="active"{% endif %}>
+             {{ link.title | escape }}
+           </a>
+         </li>
+         {%- endfor -%}
+       </ul>
+     </div>
+
+     
+    </div> 
+    
+    
+    <div id="news_form">  
+      <div class="news_wrap">   
+      {% if section.settings.news_title != blank %}    
+      <h4>{{ section.settings.news_title }}</h4>
+      {% endif %}
+      {% if section.settings.news_info != blank %}    
+      <p>{{ section.settings.news_info }}</p>
+      {% endif %}      
+      
+      {% include 'newsletter-form' %}
+      <style>
+        #top-mc-form label.valid::after,
+        #inline-form label.valid::after {
+          content: "{{ section.settings.news_msg }}" !important;
+        }
+      </style>
+      </div>
+    </div>
+
+    
+   <div id="copyright">
+     
+     <div id="left_copyright">
+      
+       <span>&copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: routes.root_url }}</span>
+       <ul>
+         {%- for link in linklists.copyright.links -%}
+         <li class="site-footer_linklist-item">
+           <a href="{{ link.url }}">
+             {{ link.title | escape }}
+           </a>
+         </li>
+         {%- endfor -%}
+       </ul>
+     </div>
+     
+      {%- comment -%}
+     <div class="site_by">
+       site by <a href="https://dashcreative.co/" target="_blank">dash</a>
+     </div>
+     {%- endcomment -%}
+    </div>
+    
+
+  </div>
+
+</footer>
+
+
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "color_footer_bg",
+      "label": "Background",
+      "default": "#f6f6f6"
+    },
+  {
+      "type": "color",
+      "id": "color_footer_text",
+      "label": "Text",
+      "default": "#333232"
+    },
+
+	{
+      "type": "header",
+      "content": "About section"
+    },		
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo",
+      "info": "Size: 177 x 56px"
+    },
+
+   {
+      "type": "richtext",
+      "id": "footer_info",
+      "label": "info"
+    },
+	{
+      "type": "checkbox",
+      "id": "footer_social_show",
+      "label": "Social section show?"
+    },	
+	{
+      "type": "header",
+      "content": "First menu"
+    },
+	{
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Title"
+    },
+   {
+      "type":"link_list",
+      "id": "footermenu",
+      "label": "Select menu"
+    },
+{
+      "type": "header",
+      "content": "Second menu"
+    },
+	{
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "Title"
+    },
+   {
+      "type":"link_list",
+      "id": "footermenu_2",
+      "label": "Select menu"
+    },
+
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+      "type": "text",
+      "id": "news_title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "news_info",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "news_msg",
+      "label": "Submit massage"
+    }
+    
+    
+  ]
+}
+{% endschema %}

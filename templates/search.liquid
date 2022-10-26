@@ -1,0 +1,172 @@
+{% paginate search.results by 1000 %}
+
+<div class="page-width">
+  {% if search.performed == false %}
+    <div class="text-center">
+      <h1 class="h2">{{ 'general.search.title' | t }}</h1>
+  {% else %}
+    <div class="text-center search-header">
+      
+      <h1 class="h2">
+        <span>You Searched For</span>
+        {% comment %}<span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>{% endcomment %}
+        “{{ search.terms }}”
+      </h1>
+  {% endif %}
+      {% comment %}
+      <div class="grid">
+        <div class="grid__item medium-up--six-tenths medium-up--push-two-tenths">
+          {% if search.performed and search.results_count == 0 %}
+            <div class="rte search--no-results-found">
+              <p>{{ 'general.search.no_results' | t }}</p>
+            </div>
+          {% endif %}
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search-form search-page-form">
+            <div class="input-group input-group--nowrap">
+              <div class="input-group__field input-group__field--connected search-form__input-wrapper">
+                <input
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-owns="predictive-search-results"
+                  aria-expanded="false"
+                  aria-label="{{ 'general.search.placeholder' | t }}"
+                  aria-haspopup="listbox"
+                  class="search-form__input"
+                  data-search-page-predictive-search-input autofocus />
+
+                <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+
+                <button type="reset" class="search-form__clear-action" aria-label="{{ 'general.search.clear_search_term' | t }}" data-search-page-predictive-search-clear>
+                  {% include 'icon-close' %}
+                </button>
+
+                <div class="predictive-search-wrapper" data-predictive-search-mount="default"></div>
+              </div>
+
+              <button type="submit" class="search-form__connected-submit" aria-label="{{ 'general.search.submit' | t }}" data-search-page-predictive-search-submit>
+                {% include 'icon-search' %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% endcomment %}
+  </div>
+</div>
+
+
+{% if search.performed %}
+ 
+
+  <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+
+  <div class="page-width page-width-1400 list-view-items">
+    
+    {% for item in search.results limit:1 %}
+      {% if item.object_type == 'product' %}
+      <h3 class="search-sub-title">Products</h3>
+      {% endif %}
+     
+    {% endfor %}
+    
+     
+    
+    <div class="grid grid--uniform grid--view-items collection_row">
+    {% for item in search.results %}
+      
+        {% if item.object_type == 'product' %}
+      	<div class="grid__item grid__item--collection-template small--one-half medium-up--one-third product_box">
+          {% include 'product-card-list', product: item %}
+           </div>
+        {% endif %}
+     
+    {% endfor %}
+    </div>
+    
+      <h3 class="search-sub-title article-search-title">Articles</h3>
+    
+    <div class="grid grid--uniform grid--view-items collection_row"> 
+      {% for item in search.results %}
+        {% if item.object_type == 'article' %}
+      <div class="grid__item grid__item--collection-template small--one-half medium-up--one-third product_box article-search">
+        <div data-color="active-search" class="grid-view-item product-card">
+        <article id="">
+          <a href="{{ item.url }}" class="article__link">
+            {% if item.image %}
+            {% capture img_id %}ArticleImage-{{ item.image.id }}{% endcapture %}
+            {% capture img_wrapper_id %}ArticleImageWrapper-{{ item.image.id }}{% endcapture %}
+            {%- assign img_url = item.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {% include 'image-style', image: item.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+            <div id="" class="article__grid-image-wrapper js">
+
+              <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;">
+                <img id=""
+                     class="article__grid-image lazyload"
+                     src="{{ item.image | img_url: '300x300' }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ item.image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="">
+              </div>
+            </div>
+            <noscript>
+              <div class="article__grid-image-wrapper">
+                {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+              </div>
+            </noscript>
+            {% endif %}
+            <div class="blog_details">
+              <span class="article__date">
+                {{ item.published_at | date: "%d %b %Y" }}
+              </span>
+
+
+              <span class="article_tag">{% if item.tags.size > 0 %} {{ item.tags }} {% else %}
+                category
+                {% endif %}</span>
+              <h3 class="article_title heading_h3" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                {{ article.title }}
+              </h3>
+            </div>
+          </a>
+          {% if section.settings.blog_show_author %}
+          <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+          {% endif %}
+
+          <div class="article__grid-meta">
+            <div class="rte article__grid-excerpt">
+              {% if item.excerpt.size > 0 %}
+              {{ item.excerpt | strip_html | truncate: 150 }}
+              {% else %}
+              {{ item.content | strip_html | truncate: 150 }}
+              {% endif %}
+            </div>              
+          </div>
+        </article>
+        <div class="article__grid-meta{% if item.image %} article__grid-meta--has-image{% endif %}">
+        </div> 
+        </div> 
+        </div>
+        {% endif %}
+     
+    {% endfor %}
+      
+    </div>
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    {% include 'pagination', paginate: paginate %}
+  {%- endif -%}
+{% endif %}
+
+{% if search.results_count < 2  %}
+  <div class="search--less-than-2-results"></div>
+{% endif %}
+
+{% endpaginate %}

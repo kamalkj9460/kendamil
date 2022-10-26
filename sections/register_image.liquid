@@ -1,0 +1,31 @@
+   <div class="feature-row__item">
+      {% if settings.reg_image != blank %}
+        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+        {%- assign img_url = settings.reg_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: settings.reg_image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+        <div class="feature-row__image-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: settings.reg_image.aspect_ratio | times: 100}}%;">
+            <img class="feature-row__image lazyload"
+                 src="{{ settings.reg_image | img_url: '200x200' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ settings.reg_image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ settings.reg_image.alt | escape }}">
+          </div>
+        </div>
+
+        <noscript>
+          {{ settings.reg_image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
+        </noscript>
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+
+
+
+
+
+

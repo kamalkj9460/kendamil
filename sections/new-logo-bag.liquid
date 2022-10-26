@@ -1,0 +1,243 @@
+<div class="page-width page-width-1102">
+  
+   {% if section.settings.title != blank  %}
+     <h3 class="heading_h3">{{ section.settings.title }}</h3>
+      {% endif %}
+
+
+  {% if section.blocks.size > 0 %}
+    <div class="logo_thumb logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %} abt_mo_logo_slider">
+      {% for block in section.blocks %}
+        <div class="logo-bar__item{% if section.settings.title_enable %} logo-bar__item--large{% endif %}" {{ block.shopify_attributes }}>
+          <div class="logo_height new-logo-bag">
+            <div class="middle_align">
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="logo-bar__link">
+          {% endif %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | img_url: 'x100', scale: 2 | img_tag: block.settings.image.alt, 'award_logo__image' }}
+          {% else %}
+            {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+              
+              <div class="icon4_info">          
+          {% if block.settings.title != blank  %}
+          <span>{{ block.settings.title }}</span>
+          {% endif %}
+          
+           {% if block.settings.info != blank  %}
+          <p>{{ block.settings.info | newline_to_br }}</p>
+          {% endif %}
+        </div>
+              
+          {% if block.settings.link != blank %}
+            </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
+  
+  
+  {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}"
+          class="btn"
+          aria-label="{{ ariaLabel }}">
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {% endif %}
+  
+</div>
+
+<style>
+.new_press_section div.logo_height{opacity:{{section.settings.logo_opacity}};} 
+  
+  .press_section.new_press_section{
+    background-color:{{section.settings.logo_bg_color}};
+  }
+</style>
+
+<script>
+$(document).ready(function() {
+$('.abt_mo_logo_slider').slick({
+  slidesToShow: 5,
+  slidesToScroll: 1,     
+  arrows: true,
+  fade: false,
+  dots: false,
+  infinite: false,
+  responsive: [
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+         draggable: true,	
+      }
+    },
+     {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+         draggable: true,	
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+         draggable: true,	
+      }
+    }
+    
+  ]
+});
+
+
+  
+});
+</script>
+
+{% schema %}
+{
+  "name": {
+    "en": "New Logo list"
+  },
+
+  "class": "index-section press_section new_press_section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Logo-Liste",
+        "en": "Logo list",
+        "es": "Lista de logotipos",
+        "fr": "Liste de logos",
+        "it": "Elenco loghi",
+        "ja": "ロゴリスト",
+        "pt-BR": "Lista de logotipos"
+      }
+    },
+{
+      "type": "text",
+      "id": "logo_opacity",
+      "label": "Logo opacity",
+      "default": "0.2",
+      "info" : "0.1 to 1"
+    },
+	{
+      "type": "color",
+      "id": "logo_bg_color",
+      "label": "Background color",
+      "default": "#ffeff3"
+    },
+	{
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+ 
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": {
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logotipo",
+        "fr": "Logo",
+        "it": "Logo",
+        "ja": "ロゴ",
+        "pt-BR": "Logotipo"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "pt-BR": "Imagem"
+          },
+		"info": "size: auto x 300px"
+        },
+		 {
+      "type": "text",
+      "id": "title",
+      "label": "Logo Title"
+    },
+	{
+      "type": "textarea",
+      "id": "info",
+      "label": "info",
+	  "default": "Lorem ipsum dolor sit amet consectetur adipiscing elit."	
+    },
+	   {
+      "type": "text",
+      "id": "link",
+      "label": "Link",
+      "default": "#"
+    }
+		
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "New Logo list"
+      },
+      "category": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "pt-BR": "Imagem"
+      },
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

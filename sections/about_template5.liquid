@@ -1,0 +1,222 @@
+<div class="about_parallax-section">
+<div class="team-wrap" style="background:{{ section.settings.background_bar }}">
+<div class="team-feed">
+
+  <div class="section-header">
+    {% if section.settings.ex_title != blank %}
+    <h3>{{ section.settings.ex_title }}</h3>
+    {% endif %}
+    {% if section.settings.ex_info != blank %}
+    <div class="section-headerinfo">
+      {{ section.settings.ex_info }} 
+    </div>
+     {% endif %}
+  </div>
+  
+  
+<div class="team-box">
+  
+<div class="slider_box">
+  
+<div class="div_box_new">
+<div class="box_slider">
+  {% for block in section.blocks %}
+  <div>
+    <span>
+      {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      {% include 'image-style', image: block.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}   
+      <img id=""
+           class="feature-row__image lazyload"
+           src="{{ block.settings.image | img_url: '340x340' }}"
+           data-src="{{ img_url }}"
+           data-widths="[180, 340, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+           data-sizes="auto"
+           alt="{{ section.settings.image.alt | escape }}">
+
+    </span>
+   
+    
+    
+  </div>
+  {% endfor %}
+
+</div>
+</div>
+
+
+  
+  </div>
+  
+<div class="slider_content">
+<div class="page-width">
+      <div class="team_box">
+        
+           
+        
+        
+      <div class="box_slider2">
+      {% for block in section.blocks %}
+      <div>
+        
+        <div class="cap_10 w_300">
+          {% if block.settings.ex_name != blank %}
+          <h3 class="team_nm">{{ block.settings.ex_name }}</h3>
+          {% endif %} 
+          
+          {% if block.settings.ex_desig != blank %}
+          <h5 class="heading_h5 mb_40">{{ block.settings.ex_desig }}</h5>
+         
+          {% endif %} 
+          
+          {% if block.settings.ex_text != blank %}
+          <p class="team_talk">{{ block.settings.ex_text }}</p>
+          {% endif %}
+
+      
+        </div>
+        </div>
+        {% endfor %}
+      
+    </div>
+  </div>  
+  
+  
+  
+  </div>  
+  </div>  
+</div>
+
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+$('.box_slider').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,     
+  arrows: true,
+  fade: false,
+  dots: false,
+  //draggable: false,
+  infinite: true,
+  asNavFor: '.box_slider2',
+  swipe: true,
+  responsive: [
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+        
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    
+  ]
+});
+$('.box_slider2').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  asNavFor: '.box_slider',
+  dots: false,
+  arrows: false,
+  centerMode: false,
+  focusOnSelect: true,
+  infinite: true,
+  //draggable: false,
+  swipe: true
+});
+
+  
+ $(".div_box2 .slick-next, .div_box2 .slick-prev").click(function(){
+    //alert(1);   
+   $(".cap_10, .boxslider_product").css('opacity', '0');
+   $(".slick-active .cap_10, .slick-active .boxslider_product").css('opacity', '1');
+  }); 
+  
+});
+</script>
+
+
+{% schema %}
+  {
+    "name": "Team feed",
+	 "class": "index-section about_team_section",
+	"max_blocks": 20,
+    "settings": [
+	{
+      "type": "header",
+      "content": "Title"
+    },
+{
+      "type": "text",
+      "id": "ex_title",
+      "label": "Heading"
+    },
+	{
+      "type": "richtext",
+      "id": "ex_info",
+      "label": "Info"
+    },
+	{
+      "type": "header",
+      "content": "Bar Background color"
+    },
+   {
+      "type":"color",
+      "id": "background_bar",
+      "label": "Background color",
+	  "default": "#fff"
+    }
+ 
+],
+"blocks": [
+    {
+      "type": "ex_image",
+      "name": "Team photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+	      "info": "Size: 540 x 619px"
+        },
+		{
+          "type": "text",
+          "id": "ex_name",
+          "label": "Team name"
+        },
+        {
+          "type": "text",
+          "id": "ex_desig",
+          "label": "Team Designation"
+        },
+        
+		{
+          "type": "richtext",
+          "id": "ex_text",
+          "label": "Team text"
+        }
+	   
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

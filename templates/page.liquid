@@ -1,0 +1,25 @@
+{% if page.handle == "good-motherhood-podcast" or page.handle == "welcome-readers" or page.handle == "dunnes-stores" or page.handle == "ice-cream" or page.handle == "rtf" or page.handle == "rtfref" %}
+<style>
+  .section-header{
+  display: none !important;
+  }
+  .announcement-bar{
+  display: none !important;
+  }
+</style>
+{% endif %}
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="section-header text-center">
+        {% unless page.handle == "tesco" %}
+          <h1>{{ page.title }}</h1>
+        {% endunless %}
+      </div>
+
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>

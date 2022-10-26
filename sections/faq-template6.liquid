@@ -1,0 +1,61 @@
+
+  
+
+     
+    <div class="faq_tab">
+       
+       {% for block in section.blocks %}
+       <div class="accordion accordion-close">
+          {% if block.settings.title != blank %}
+           <i>{{ block.settings.title }}</i> <span></span>
+           {% endif %}
+        </div>
+         
+        <div class="content" style="display: none;">
+           {% if block.settings.info != blank %}
+           {{ block.settings.info }}
+           {% endif %}
+        </div>    
+       {% endfor %}
+        
+       
+      
+             
+      
+         
+     </div>
+  
+         
+     
+ 
+
+{% schema %}
+{
+    "name": "Diet / Relig Requirement",
+    "settings": [
+	{
+            "type": "header",
+            "content": "Dietary / Religious Requirement"
+    }
+	 	
+    ],
+    "blocks": [
+    {
+      "type": "faq_type",
+      "name": "faq",
+      "settings": [
+       {
+      "type": "text",
+      "id": "title",
+      "label":"Title"
+       },
+	   {
+      "type": "richtext",
+      "id": "info",
+      "label":"Content"
+       }
+      ]
+  }
+]
+}
+{% endschema %}

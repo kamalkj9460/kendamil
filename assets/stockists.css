@@ -1,0 +1,160 @@
+.stockists-page,
+.full-width{
+  	max-width: 100%;
+  width: 100%;
+}
+.stockists-page #stockist-widget .stockist-horizontal .stockist-side-panel {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 40%;
+    background: #f5f8f0;
+    padding-left: 120px;
+    padding-right: 60px;
+    padding-top: 96px;
+  	padding-bottom: 85px;
+  	float:left;
+  	
+}
+.stockists-page #stockist-widget .stockist-map {
+    position: fixed;
+    top: 0;
+    bottom:inherit;
+    left: inherit;
+    right: 0;
+  	width:60%;
+  	height:100vh;
+  	float:right;
+}
+.stockists-page h2.h3 {
+    font-size: 39px;
+    margin-bottom: 25px!important;
+}
+.stockists-page #stockist-widget .stockist-query-entry .stockist-search-field{
+  	background: transparent;
+    border: 2px solid #e3e6de;
+    padding: 18px 13px;
+    margin-bottom: 19px;
+  	font-size: 15px;
+	font-family: 'FaktPro-Normal';
+  	max-width: 100%;
+	line-height: 1.2;
+	height: auto;
+  	color:#13214b;
+}
+.stockists-page input::placeholder {
+    opacity: 1;
+    color: #13214b;
+  	font-size:15px;
+font-family: 'FaktPro-Normal';
+}
+.stockists-page input::-moz-placeholder {
+    opacity: 1;
+    color: #13214b;
+  	font-size:15px;
+font-family: 'FaktPro-Normal';
+}
+.stockists-page input::-webkit-input-placeholder {
+    opacity: 1;
+    color: #13214b;
+  	font-size:15px;
+  font-family: 'FaktPro-Normal';
+
+}
+.stockists-page #stockist-widget .stockist-query-entry {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stockists-page #stockist-widget .stockist-result-list ul > li {
+    border-top: none;
+    border-bottom: 2px solid #e3e6de;
+  	list-style:none;
+  	background: none;
+  	padding-top: 34px;
+	padding-bottom: 24px;
+  
+  font-family: 'FaktPro-Medium';
+  font-size: 13px;
+  	line-height:24px;
+}
+.stockists-page #stockist-widget .stockist-result > div {
+    margin-top: 0;
+}
+.stockists-page #stockist-widget .stockist-result .stockist-result-name {
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  	line-height: normal;
+    padding-left: 33px;
+  	font-family: 'FaktPro-Medium';
+}
+
+.stockists-page #stockist-widget .stockist-list-result .stockist-result-address {
+    padding-left: 33px;
+}
+
+.stockists-page #stockist-widget .stockist-list-result .stockist-result-address > div{
+    padding-left:0;
+}
+.stockists-page #stockist-widget .stockist-result-details {
+    padding-left: 33px !important;
+}
+.stockists-page #stockist-widget .leaflet-popup-content .stockist-result-details {
+    padding-left: 0 !important;
+}
+
+.stockists-page #stockist-widget .stockist-list-result .stockist-result-distance {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 28px;
+    left: 5px;
+    width: 20px;
+    text-align: left;
+    height: 30px;
+}
+#stockist-widget .stockist-icon-marker::before {
+    font-size: 0;
+	background: url(map_icon.png) no-repeat top left;
+    background-size: auto;
+    width: 100% !important;
+    height: 34px !important;
+    position: absolute;
+    background-size: 10px;
+    left: 0;
+    top: 0;
+}
+.stockists-page #stockist-widget .stockist-result-list{
+	height: auto !important;
+}
+.stockists-page #stockist-widget .stockist-powered-by-link, .stockists-page .stockist-powered-by-link a {
+    color: #999;
+    margin-bottom: 10px;
+    margin-top: 35px;
+  	color: #13214b;
+  	font-size:13px;
+  font-family: 'FaktPro-Normal';
+}
+.stockists-page #stockist-widget .stockist-query-entry .stockist-search-button button {
+    margin-left: 0;
+    padding: 18px 13px;
+    height: auto;
+    color: #fff;
+    border: 0;
+    min-width: 0;
+    min-height: auto;
+    width: 100%;
+}
+.stockists-page #stockist-widget .stockist-query-entry .stockist-search-button {
+    display: table-cell;
+    vertical-align: middle;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: auto;
+  	z-index: -1;
+}

@@ -1,0 +1,99 @@
+{{ 'home_2.css' | asset_url | stylesheet_tag }}
+<div class="trending_week"  style="background-color:{{ section.settings.i_bg }};">
+ <div class="page-width p-0">
+   
+   
+   <div class="section-header text-center">
+     {% if section.settings.title != blank %}
+     <h5 class="heading_h5">{{ section.settings.title }}</h5>
+     {% endif %}
+     
+     {% if section.settings.info != blank %}
+     <h3 class="heading_h3">{{ section.settings.info }}</h3>
+     {% endif %}
+     
+     
+   </div>
+   
+   
+   
+    
+   
+   <div class="wrapper page-width p-0">
+  <section class="MCItemCarousel MCItemCarousel--hasIntro MCItemCarousel--hasMinimumSpacing" data-component="MCItemCarousel" data-global-ref="ScrollRevealer-reveal">
+    <div class="MCItemCarousel-scrollable">
+      <div class="MCCarouselNav MCCarouselNav--prev" data-ref="carouselNavPrev">
+        <button class="MCCarouselNav-btn lt-left" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCCarouselNav MCCarouselNav--next" data-ref="carouselNavNext">
+        <button class="MCCarouselNav-btn lt-right" data-ref="carouselNavBtn"></button>
+      </div>
+      <div class="MCItemCarousel-viewport">
+        <div class="MCItemCarousel-productWrapper" data-ref="productWrapper">
+          
+          {% for product in collections[section.settings.collection].products %}
+          <div class="MCItemCarousel-Item">
+            <div class="grid__item pro_box">
+              {% include 'home-product-card-grid', max_height: max_height %}
+            </div>
+          </div>
+          {% endfor %} 
+          
+          
+          
+        </div>
+        <div class="MCCarouselScrollbar" data-ref="scrollbar-track">
+          <div class="MCCarouselScrollbar-bar" data-ref="scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+    
+   
+<script type="text/javascript" src="{{ 'vendornew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'commonnew.js' | asset_url }}"></script>
+<script type="text/javascript" src="{{ 'pagesnew.js' | asset_url }}"></script>
+   
+   
+   
+  </div> 
+</div>
+
+{% schema %}
+  {
+    "name": "Trending this week",
+	"class": "index-section home_trending_weeks",
+    "settings": [
+	{
+      "type": "color",
+      "id": "i_bg",
+      "label": "Background-color",
+	   "default": "#fdfbf9"
+    },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Titel",
+      "default": "Heading"
+    },
+	{
+      "type": "textarea",
+      "id": "info",
+      "label": "info"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    }
+],
+  "presets": [
+    {
+      "name": "Trending this week",
+      "category": "Collection"
+    }
+  ]
+  }
+{% endschema %}
+
